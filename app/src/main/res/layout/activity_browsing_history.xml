@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/default_main_cart_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:scrollbarStyle="insideOverlay"
+            />
+        <!--app:layout_progress="@layout/footerview"-->
+        <!--app:layout_empty="@layout/view_empty"-->
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            app:backgroundTint="@color/white"
+            app:rippleColor="#eeeeee"
+            app:elevation="6dp"
+            app:fabSize="mini"
+            app:pressedTranslationZ="12dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/up_arrow"
+            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom|end"/>
+    </RelativeLayout>
+
+</LinearLayout>
+

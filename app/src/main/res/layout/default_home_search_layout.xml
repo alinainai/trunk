@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_96"
+    android:background="#0000" >
+
+    <LinearLayout
+        android:id="@+id/ll_location"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dimen_10" >
+
+        <TextView
+            android:drawableStart="@mipmap/nav_locat"
+            android:drawablePadding="3dp"
+            android:id="@+id/home_tv_location"
+            style="@style/tv_color_white_size_28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:text="北京" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_70"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/dimen_20"
+        android:layout_marginEnd="@dimen/dimen_10"
+        android:layout_toStartOf="@+id/ll_right"
+        android:layout_toEndOf="@+id/ll_location"
+        android:background="@drawable/search_shape_layout"
+        android:padding="@dimen/dimen_0" >
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_alignTop="@+id/home_top_scBtn"
+            android:layout_alignBottom="@+id/home_top_scBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:src="@mipmap/icon_search" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/home_top_scBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_toLeftOf="@+id/clear"
+            android:layout_toRightOf="@+id/img_search"
+            android:background="#6fff"
+            android:gravity="center_vertical"
+            android:hint="商品名、服务名等..."
+            android:textColor="@color/black"
+            android:textColorHint="@color/base_search_hint_color"
+            android:textSize="@dimen/font_size_32" />
+
+        <ImageView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:src="@mipmap/icon_delete_login"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ll_right"
+        android:src="@drawable/nav_mess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/rl_center"
+        android:layout_alignBottom="@+id/rl_center"
+        android:orientation="horizontal"/>
+
+
+</RelativeLayout>

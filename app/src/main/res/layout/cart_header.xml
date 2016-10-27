@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:background="@color/white"
+     android:layout_marginTop="@dimen/dimen_20"
+    android:layout_height="@dimen/dimen_386" >
+
+    <TextView
+        android:id="@+id/cart_header_tv_null"
+        style="@style/tv_color_66_size_32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="你的购物车是空的" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cart_header_tv_null"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimen_46" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/tab_btn_buy" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+         style="@style/tv_color_white_size_38"
+        android:layout_width="@dimen/dimen_210"
+        android:layout_height="@dimen/dimen_70"
+        android:layout_below="@+id/cart_header_tv_null"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/bt_cart"
+        android:text="去购物" />
+
+</RelativeLayout>

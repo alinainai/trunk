@@ -1,0 +1,1 @@
+var urlIp="http://10.100.160.164:8080/gqcc_civilloan";

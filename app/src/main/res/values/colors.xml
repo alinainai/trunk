@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="sv_blue">#688fdb</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="base_background">#f9f9f9</color>
+    <color name="bottom_tab_text_color_pre">#83ae2b</color>
+    <color name="bottom_tab_text_color_nor">#999999</color>
+    <color name="white">#FFFFFF</color>
+    <color name="base_divider_color">#efefef</color>
+    <color name="splash_bg">#fed255</color>
+    <color name="alpha_color">#66000000</color>
+    <color name="login_background">#86b624</color>
+    <color name="base_text_info_color">#666666</color>
+    <color name="black">#000000</color>
+    <color name="base_text_color">#333333</color>
+    <color name="base_background_cai">#666666</color>
+    <color name="screen">#5c5f7a</color>
+    <color name="camera_color">#178ae2</color>
+    <color name="base_search_hint_color">#cccccc</color>
+    <color name="order_dialog_info_color">#88b625</color>
+    <color name="order_background">#f3f8e9</color>
+    <color name="money_color">#fe3a2e</color>
+    <color name="camera_order_color">#cb0000</color>
+    <color name="pink">#FFB6C1</color>
+    <color name="red">#ea5858</color>
+    <color name="text_color_red">#eb2626</color>
+    <color name="order_detail_price_color">#e90000</color>
+    <color name="blue">#046eb8</color>
+    <color name="product_dot_pre">#ff4f64</color>
+    <color name="cart_bottom_background">#f6f6f6</color>
+    <color name="details_bottom">#fba540</color>
+    <color name="sure_order_bottom">#4c4c4c</color>
+    <color name="d1">#d1d1d1</color>
+    <color name="tab_text_color_normal">#959595</color>
+    <color name="gray">#9c9c9c</color>
+    <color name="dimgray">#5b5b5b</color>
+    <color name="calendar_background">#e3eef4</color>
+    <color name="selection">#b1dce2ff</color>
+    <color name="calendar_zhe_day">#faedda</color>
+    <color name="event_center">#ff6bd697</color>
+    <color name="noMonth">#c0c0c0</color>
+    <color name="title_text_6">#FF529bd0</color>
+    <color name="title_text_7">#FFbc4445</color>
+    <color name="yellow">#FFF7D23E</color>
+    <color name="hintColor">#d7d7d7</color>
+    <color name="trans">#00000000</color>
+    <color name="alert_dialog_line">#c6c6c6</color>
+    <color name="action_sheet_blue">#037BFF</color>
+    <color name="action_sheet_red">#FD4A2E</color>
+    <color name="action_sheet_gray">#8F8F8F</color>
+    <color name="action_sheet_ed">#FF0000</color>
+    <color name="default_color">#9932CC</color>
+    <color name="pressBarBg">#f2f2f2</color>
+    <color name="mony_color">#fe3a2e</color>
+    <color name="lightBg">#fefefe</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <!-- topbar背景色 -->
+    <color name="bg_topbar">#fbfbfb</color>
+
+    <!-- 分隔条高度 -->
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_height_middle">0.5dp</dimen>
+
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/base_background"
+        android:orientation="vertical"
+        >
+
+    <!-- 标题 -->
+    <include layout="@layout/default_main_cart_title" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/order_dialog_info_color"
+        app:tabSelectedTextColor="@color/order_dialog_info_color"
+        app:tabTextColor="#c9c9c9" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/main_nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/view_nav_header"
+        app:itemIconTint="@color/order_dialog_info_color"
+        app:menu="@menu/menu_nav" />
+
+</android.support.v4.widget.DrawerLayout>

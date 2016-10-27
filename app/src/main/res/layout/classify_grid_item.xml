@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="@drawable/layout_selector_bg"
+    android:orientation="vertical">
+
+    <!-- 默认图片 -->
+    <ImageView
+        android:background="@mipmap/ic_launcher"
+        android:layout_width="@dimen/dimen_216"
+        android:layout_height="@dimen/dimen_140" />
+
+    <!-- 下面的字 -->
+    <TextView
+        android:id="@+id/class_grid_item_ttitle"
+        style="@style/tv_color_33_size_26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_14"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="组合式淋浴花洒安装服务" />
+</LinearLayout>

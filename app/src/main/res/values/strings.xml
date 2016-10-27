@@ -1,0 +1,436 @@
+<resources>
+    <string name="app_name">乐购</string>
+
+    <string name="button_login">Login</string>
+    <string name="button_signup">Sign Up</string>
+    <string name="button_confirm_login">Confirm Login</string>
+    <string name="button_cancel_login">Cancel Login</string>
+    <string name="button_confirm_signup">Confirm Sign Up</string>
+    <string name="button_cancel_signup">Cancel Sign Up</string>
+    <string name="edit_username">username</string>
+    <string name="edit_password">password</string>
+
+    <string name="try_again">重试</string>
+    <string name="goon">继续</string>
+    <string name="confirm">确认</string>
+
+    <string name="lockpattern_error">"手势密码不对"</string>
+    <string name="is_deverloping">is_deverloping</string>
+    <string name="is_loadding">is_loadding</string>
+    <string name="classify">分类</string>
+    <string name="shopping">购物车</string>
+    <string name="mine">我的</string>
+    <string name="my_account">我的账户</string>
+    <string name="login">登录</string>
+    <string name="pt_user">普通用户</string>
+    <string name="collect_service">收藏服务</string>
+    <string name="collect_shop">收藏商品</string>
+    <string name="look_history">浏览历史</string>
+    <string name="order">订单</string>
+    <string name="obligation">待付款</string>
+    <string name="service">待服务</string>
+    <string name="evaluate">待评价</string>
+    <string name="assist">辅助</string>
+    <string name="subscribe">预约</string>
+    <string name="coupons">优惠券</string>
+    <string name="sharemoney">分享赚钱</string>
+    <string name="collection">收藏</string>
+    <string name="message">消息</string>
+    <string name="setting">设置</string>
+    <string name="title">标题</string>
+    <string name="install_service_tv">配装服务</string>
+    <string name="basic_building_tv">基础建材</string>
+    <string name="house_service_tv">家政服务</string>
+    <string name="steward_service_tv">管家服务</string>
+    <string name="auxiliary_order">辅助下单</string>
+    <string name="classify_my_account">我的足迹</string>
+    <string name="service_classify_recommend">为你推荐</string>
+    <string name="service_classify_brand_recommend">品牌推荐</string>
+    <string name="setting_feedback">意见反馈</string>
+    <string name="setting_recommend_friends">推荐好友</string>
+    <string name="setting_service_terms">服务条款</string>
+    <string name="setting_about_us">关于我们</string>
+    <string name="setting_clear_cache">清除缓存</string>
+    <string name="setting_check_update">检查更新</string>
+    <string name="update_version_num">当前版本 V</string>
+    <string name="setting_exit_login">退出登录</string>
+    <string name="feed_back_type">反馈类型</string>
+    <string name="feed_function_opinion">功能意见</string>
+    <string name="feed_back_input_hint">请提出您宝贵的意见，我们将不断的优化</string>
+    <string name="feed_back_input_tv">*限100字</string>
+    <string name="feed_back_phone_input">请输入您的手机号/邮箱</string>
+    <string name="mine_head_pic">头像</string>
+    <string name="mine_nickname">昵称</string>
+    <string name="mine_username">用户名</string>
+    <string name="mine_sex">性别</string>
+    <string name="mine_birsty">出生日期</string>
+    <string name="band_phone">绑定手机</string>
+    <string name="mine_service_address">服务地址管理</string>
+    <string name="mine_city">所在城市</string>
+    <string name="choose_from_the_album">从相册中选择</string>
+    <string name="camera">拍照</string>
+    <string name="cart_people_look">大家都在看</string>
+    <string name="band_phone_info">绑定手机以后，可以用手机号登录</string>
+    <string name="input_phone_hint">请输入您的手机号</string>
+    <string name="input_code_hint">请输入验证码</string>
+    <string name="get_code">获取验证码</string>
+
+    <string name="share_title">冠易贷中小企业金融专家，企业借款就到冠易贷！</string>
+    <string name="share_content">冠易贷致力于为中小微实体企业提供多样性资金需求解决方案，深入研究调查中小微企业的发展现状，降低了中小微企业的资金成本压力。</string>
+    <string name="new_customer">新增客户通知</string>
+    <string name="new_customer_samll">新增客户</string>
+    <string name="new_order">新增出借通知</string>
+    <string name="new_order_small">新增出借</string>
+    <string name="about_to_expire">即将到期通知</string>
+    <string name="calling_card_info">说明：\n1、保存微名片：长按微名片，可将其保存到本地相册。\n2、分享微名片：通过社交平台分享微名片图片。（如：微信好友或朋友圈）\n3、分享注册链接：客户可通过此分享的页面注册，并享有冠e通平台当前用户注册奖励活动。</string>
+    <string name="about_to_expire_small">即将到期</string>
+    <string name="system_message_small">平台公告</string>
+    <string name="myCustomer">我的客户</string>
+    <string name="my_square">广场</string>
+    <string name="my_square_title">营销新闻</string>
+    <string name="business_card">微名片</string>
+    <string name="data_statistics">数据统计</string>
+    <string name="calling_card">微名片</string>
+    <string name="no_message">暂无消息</string>
+    <string name="name">姓名</string>
+    <string name="mobile">联系手机</string>
+    <string name="area">所在大区</string>
+    <string name="login_password">登录密码</string>
+    <string name="modify">修改</string>
+    <string name="cannotopencamera">无法打开相机,请检查是否授予摄像机权限</string>
+    <string name="cannotopenpicture">无法打开相册,请检查是否授予相册权限</string>
+    <string name="getimagefail">获取图片失败</string>
+    <string name="saveimagefail">获取图片失败</string>
+    <string name="cannotsaveimage">无法保存图片,请检查是否授予sd卡储存权限</string>
+    <string name="sessionout">登录状态已失效，请重新登录</string>
+    <string name="mysquare_achievementtitle">业绩排行榜（月）</string>
+    <string name="mysquare_newcustomertitle">新增客户排行榜（月）</string>
+    <string name="mysquare_customerrecommendationtitle">客户推荐排行榜（月）</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="bid">立即投标</string>
+    <string name="tag_bid">投标</string>
+    <string name="home">首页</string>
+    <string name="asset">账户</string>
+    <string name="customer">借款</string>
+    <string name="square">广场</string>
+    <string name="me">我</string>
+    <string name="my">我的</string>
+    <string name="callingcard_save">保存到本地</string>
+    <string name="callingcard_share">分享微名片</string>
+    <string name="callingcard_shareUrl">分享注册链接</string>
+    <string name="dealOne">已成功出借金额</string>
+    <string name="dealTwo">已赚取利息</string>
+    <string name="dealThree">我要借款</string>
+    <string name="loanproject">出借项目</string>
+    <string name="redeemproject">赎回项目</string>
+    <string name="back">返回</string>
+    <string name="details_title">投标详情</string>
+    <string name="setting_title">设置</string>
+    <string name="personal_information_title">个人信息</string>
+    <string name="recharge_title">充值</string>
+    <string name="withdrawals_title">提现</string>
+    <string name="project_title">产品介绍</string>
+    <string name="investment_records_title">投资记录</string>
+    <string name="details_redeem_title">赎回详情</string>
+    <string name="agreement">借款协议</string>
+    <string name="details_rate">年华利率</string>
+    <string name="details_money">总金额(元)</string>
+    <string name="details_term">还款期限</string>
+    <string name="details_security_one">信用贷款</string>
+    <string name="details_security_two">100%本金保障</string>
+    <string name="Hot">Hot</string>
+    <string name="Price">Price</string>
+    <string name="New">New</string>
+    <string name="bid_title">投标</string>
+    <string name="bid_money">账户可用金额（元）:</string>
+    <string name="prompt">提示：最小出借金额1000元，金额必须是1000的整数倍</string>
+    <string name="bidding_title">竞标</string>
+    <string name="amount_of_the_bond_d">债券总额(元)</string>
+    <string name="amount_of_the_bond">债券总额</string>
+    <string name="floor_price">竞标底价</string>
+    <string name="max_price">已出最高价</string>
+    <string name="bid_prompt">提示：点击按钮提示您将确认竞拍金额并同意支付</string>
+    <string name="xlistview_header_hint_normal">pull to refresh</string>
+    <string name="xlistview_header_hint_ready">lose to refresh</string>
+    <string name="xlistview_header_hint_loading">loading</string>
+    <string name="xlistview_header_last_time">last update time：</string>
+    <string name="xlistview_footer_hint_normal">load more</string>
+    <string name="xlistview_footer_hint_ready">lose load more</string>
+    <string name="phnoe_exclusive_title">手机专享</string>
+    <string name="earn_score_title">赚积分</string>
+    <string name="text">邀请好友 ,成功注册成为冠E通用户，即可获得冠通积分,每成功邀请一个用户即可获赠5分。快加入我们吧！</string>
+    <string name="colon">:</string>
+    <string name="borrow_money_title">我要借款</string>
+    <string name="login_title">登录</string>
+    <string name="register_title">注册</string>
+    <string name="verification_title">验证账户信息</string>
+    <string name="setpassword_title">设置交易密码</string>
+    <string name="start_msp">正在启动安全支付</string>
+    <string name="identity_verification_title">安全认证</string>
+    <string name="lockscreen_access_pattern_start">"开始绘制图案"</string>
+    <string name="lockscreen_access_pattern_cleared">"图案已清除"</string>
+    <string name="lockscreen_access_pattern_cell_added">"已添加单元格"</string>
+    <string name="lockscreen_access_pattern_detected">"图案绘制完成"</string>
+    <string name="lockpattern_retry_button_text">"重试"</string>
+    <string name="lockpattern_continue_button_text">"继续"</string>
+    <string name="lockpattern_confirm_button_text">"确认"</string>
+    <string name="lockpattern_recording_intro_header">"绘制解锁图案"</string>
+    <string name="lockpattern_settings_help_how_to_record">"如何绘制解锁图案"</string>
+    <string name="lockpattern_recording_incorrect_too_short">"至少连接4个点，请重试"</string>
+    <string name="lockpattern_pattern_entered_header">"图案已记录"</string>
+    <string name="lockpattern_need_to_confirm">"请再次绘制解锁图案"</string>
+    <string name="lockpattern_need_to_unlock_wrong">"与上次输入不一致，请重试"</string>
+    <string name="lockpattern_pattern_confirmed_header">"确认保存新解锁图案"</string>
+    <string name="lockpattern_recording_inprogress">"完成后松开手指"</string>
+    <string name="gesture_password_guide_text">你可以创建一个解锁图案，这样他人在借用你的手机时，将无法打开应用。</string>
+    <string name="gesture_password_guide_creat_btn">创建手势密码</string>
+    <string name="retrieve_login_password">登录密码找回</string>
+    <string name="reset_login_password">重置登录密码</string>
+    <string name="setting_touxiang">请先拍照</string>
+    <string name="paypassword_next">下一步</string>
+    <string name="cancle">取消</string>
+    <string name="sure">确定</string>
+    <string name="sure_big">确  定</string>
+    <string name="paypassword_enterpassword">请输入支付密码</string>
+    <string name="paypassword_settingpassword">设置支付密码</string>
+    <string name="more_dashuju">冠e通大数据</string>
+    <string name="more_safe">安全保障</string>
+    <string name="more_baozhang">风控保障</string>
+    <string name="more_question">常见问题</string>
+    <string name="more_aboutus">关于我们</string>
+    <string name="more_riskassessment">风险自评</string>
+    <string name="more_yijian">意见反馈</string>
+    <string name="more_gengxin">版本更新</string>
+    <string name="star">*</string>
+    <string name="payresult_sucess">出借成功</string>
+    <string name="payresult_tomylend">查看出借</string>
+    <string name="payresult_continue">继续浏览</string>
+    <string name="verification_enter">请输入验证码</string>
+    <string name="estabaccount_hintname">请输入您的真实姓名</string>
+    <string name="estabaccount_hintidnumber">请输入您的身份证号码</string>
+    <string name="estabaccount_branch">开户银行:</string>
+    <string name="estabaccount_hintbranch">请选择您的开户银行</string>
+    <string name="estabaccount_hintbankcard">请输入您的银行卡号</string>
+    <string name="estabaccount_province">开户地区:</string>
+    <string name="estabaccount_hintprovince">请选择您的银行卡开户地区</string>
+    <string name="drawcashdetail_title">提现申请已提交，预计下一个工作日到账</string>
+    <string name="drawcashdetail_bank">银行卡</string>
+    <string name="drawcashdetail_drawcashmoney">提现金额</string>
+    <string name="drawcashdetail_finish">完    成</string>
+    <string name="hongbao">发红包，能赚钱!\n冠e通送您2016元红包基金</string>
+    <string name="login_enterphonenumber">请输入登录账号</string>
+    <string name="login_enterpassword">请输入登录密码</string>
+    <string name="login_forgetpassword">忘记密码 ?</string>
+    <string name="login_login">登录</string>
+    <string name="login_register">注册账号</string>
+    <string name="login_out">退  出</string>
+    <string name="passwordchange">修  改</string>
+    <string name="originalpassword">请输入原登录密码</string>
+    <string name="firstchangepassword">请输入新登录密码(8-12位数字+字符)</string>
+    <string name="secondchangepassword">请确认新登录密码</string>
+    <string-array name="passwordTypeArr">
+        <item>numberPassword</item>
+        <item>textPassword</item>
+        <item>textVisiblePassword</item>
+        <item>textWebPassword</item>
+    </string-array>
+    <!-- 极光推送   -->
+    <string name="hello">Hello World, JPush!</string>
+    <string name="tag_hint">Tag为大小写字母，数字，下划线,中文， 多个用以逗号分隔</string>
+    <string name="alias_hint">Alias为大小写字母，数字，下划线</string>
+    <string name="style_hint">style为数字</string>
+    <string name="error_style_empty">style不能为空</string>
+    <string name="error_alias_empty">alias不能为空</string>
+    <string name="error_tag_empty">tag不能为空</string>
+    <string name="error_tag_gs_empty">格式不对</string>
+    <string name="error_network">网络连接异常,初始化失败 请检查网络！</string>
+    <string name="logining">程序在后台执行, 请查看日志！</string>
+    <string name="setting_su">设置成功</string>
+
+    <string name="tv_uthentication">已认证</string>
+    <string name="the_lender">出借人</string>
+    <string name="loan_amount">出借金额</string>
+    <string name="loan_period">出借时间</string>
+    <string name="loan_state">状态</string>
+    <string name="submit_an_application">在线提交借款申请</string>
+    <string name="loading"></string>
+    <string name="submit_an_details">您已经提交借款申请，我们的销售人员将会与您联系，请您在此期间准备好申请材料.</string>
+    <string name="introduction_01">\t\t冠群驰骋投资管理（北京）有限公司是国内知名的互联网民间资本出借与借款咨询服务平台，平台为资金出借客户提供借款客户的资质评估、风险指数评级、借款用途、还款管理、法律咨询等全方位服务，通过资金出借实现财富稳健增值，为借款客户提供有闲置资金的出借客户群体，并为借款企业和个人提供经营中所需的长期、中期和短期的低成本资金解决方案。</string>
+    <string name="introduction_02">\t\t冠群驰骋以国内市场经济高速发展的前提为依托，凭借强大的互联网信息平台，实现了高速的发展，目前在全国建立了512家以上分支机构，拥有超过10000人的专业化团队，服务网络遍布全国主要地区。冠群驰骋始终坚守“专心、专注、专业”的服务承诺，凭借着“责任、担当、激情、创新”的服务理念，综合实际国情和中小微实体企业特性，制定出符合实际需求的冠群信用风险控制模式，实现了资金风险控制、便捷、高效的完美统一，取得了两端客户的一致认可和好评。</string>
+    <string name="honor_details">\t\t冠群驰骋在服务中小企业方面做出了突出的贡献，为青年创业者提供资金支持，支持农民创业，支持高科技企业和环保企业发展，扶持小微企业成长，努力做到让符合条件的客户都能得到有力支持，得到了社会各界和政府的高度赞誉。</string>
+    <string name="reloadmsg">error,click to reload </string>
+    <string name="errormsg">error,please try later </string>
+    <string name="request_prompt">我已经阅读并同意 </string>
+    <string name="register_phone">请输入中国大陆手机号码</string>
+    <string name="regist_password">请输入6-20位登录密码</string>
+    <string name="regist_repassword">请确认登录密码</string>
+    <string name="regist_phone_validate">请输入短信验证码</string>
+    <string name="register_referee">请输入邀请码或渠道码(选填)</string>
+    <string name="register_text">注册</string>
+    <string name="register_protocal">《注册协议》</string>
+    <string name="swap_detail">《债权转让协议》</string>
+    <string name="obtain_validate">获取验证码</string>
+    <string name="unlogin">请先登录！</string>
+    <string name="unOpenAccount">请先绑定银行卡！</string>
+    <string name="noSwap">您没有勾选同意《债权转让协议》!</string>
+    <string name="unargument">请先签约！</string>
+    <string name="bidmoneyisnotenogh"></string>
+    <string name="message_read_state">全部已读</string>
+    <string name="not_enough_money">您的账户余额不足，请先充值！</string>
+    <string name="product">产品</string>
+    <string name="more">更多</string>
+    <string name="all">全部</string>
+    <string name="neterror">网络无法连接，请稍后重试！</string>
+    <string name="bank">1、该银行卡为您在冠e通平台的提现、回款默认银行卡\n2、如需更换银行卡，请访问冠e通官方网站进行换卡操作，或联系冠e通平台客服，客服热线:400-652-6818；服务时间：9：00-21：00（周一至周日）</string>
+    <string name="estabaccount">资金通过第三方账户存管,享受资金安全保障！</string>
+    <string name="sign">账户资金通过第三方机构存管，让您享受资金安全。\n账户签约委托扣款，充值、提现操作更便捷。</string>
+    <string name="recharge">  账户资金通过第三方机构存管，资金更安全。\n如有疑问请拨打客服电话: 400-652-6818</string>
+    <string name="verification">为确保账户资金安全，请输入188****8888收到的验证码</string>
+    <string name="paypassword">为确保账户资金安全，请设置8-20位字母和数字组合的支付密码</string>
+    <string name="drawcash">1. 提现金额最低2元/笔，最高1000000元/笔。\n2. 每用户每月享有3笔免费提现权益，当月提现超过3笔和充值后未经出借直接提现的资金，按2元/笔收费。\n3. 普通提现，T+1个工作日到账，节假日顺延。\n4. 请确保您输入的提现金额，以及绑定的银行卡号信息准确无误。\n5. 如果您填写的提现信息不正确可能会导致提现失败，由此产生的提现费用将不予返还。\n6. 平台禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用。\n如有疑问请拨打客服电话：400-652-6818</string>
+
+    <string-array name="home_desa">
+        <item>最高收益12%</item>
+        <item>冠e通大数据</item>
+        <item>安全保障</item>
+        <item>风控保障</item>
+        <item>关于我们</item>
+    </string-array>
+    <string-array name="home_desb">
+        <item>客户至上  用心服务  收益稳健  安全放心</item>
+        <item>注册量已达数十万  出借资金已达千万</item>
+        <item>数据安全  隐私安全  政策法规</item>
+        <item>资金安全  风险控制  风险备用金  法律安全</item>
+        <item>冠群驰骋核心价值观"信用创造优质生活"</item>
+    </string-array>
+    <string-array name="lend_state">
+        <item>全部</item>
+        <item>已满标</item>
+        <item>还款中</item>
+        <item>已完成</item>
+        <item>流标</item>
+    </string-array>
+
+    <!-- 产品列表 -->
+    <string name="product_list_prehot">预 热</string>
+
+    <!--chat-->
+    <string name="tel">呼叫</string>
+    <string name="cancel">取消</string>
+    <string name="savelocal">保存到本地</string>
+    <string name="send_again">重新发送</string>
+    <!--借款信息-->
+    <string name="lend_introduce1">冠易贷主要面向中小企业及私营业主，提供50万以上</string>
+    <string name="lend_introduce2">金额金额借款。</string>
+    <string name="lend_money_count">借款金额</string>
+    <string name="lend_money_count_max">50万以上金额</string>
+    <string name="lend_money_peopelinfo">借款人信息</string>
+    <string name="lend_money_moneyinfo">资金信息</string>
+    <string name="lend_money_companyinfo">企业信息</string>
+    <!--借款-->
+    <string name="fast_lend_money">快速信用借款</string>
+    <string name="fast_lend_money_info">借款者无需提供抵押和担保就能贷款</string>
+    <string name="pledge_lend_money">抵押借款</string>
+    <string name="pledge_lend_money_info">贷款额度高、利率低、周期长</string>
+    <string name="blend_lend_money">混合借款</string>
+    <string name="blend_lend_money_info">良好信用+实物抵押，混合贷款门槛低</string>
+    <string name="debt_stock_combination">债股结合</string>
+    <string name="debt_stock_combination_info">以服务入股具有潜质的中小型企业，同呼吸共命运</string>
+    <string name="public_notice">22-55周岁的中国公民、企业、个体经营业主适合年龄25周岁及以上，必须经营2年以上并且最近一年为盈利\n经营地区必须为该申请人户籍所在地或在经营地区有房产</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string name="title_activity_recycler_view_load">RecyclerViewLoadActivity</string>
+</resources>
+
+
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item  android:state_pressed="true" >
+        <shape>
+            <corners android:radius="3dp" />
+            <solid android:color="#dedede" />
+        </shape>
+    </item>
+    <item android:state_enabled="false">
+        <shape>
+            <corners android:radius="3dp" />
+            <solid android:color="#dedede" />
+        </shape>
+    </item>
+    <!-- 选中 -->
+    <item android:state_selected="true">
+
+        <shape
+            >
+            <corners android:radius="3dp"/>
+            <solid android:color="#dedede"></solid>
+
+        </shape>
+
+    </item>
+    <item >
+        <shape>
+            <corners android:radius="3dp" />
+            <solid android:color="#88b625" />
+        </shape>
+    </item>
+</selector>
+

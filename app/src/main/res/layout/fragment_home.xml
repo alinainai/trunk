@@ -1,0 +1,82 @@
+<in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rotate_header_view_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    app:ptr_duration_to_close="200"
+    app:ptr_duration_to_close_header="1000"
+    app:ptr_keep_header_when_refresh="true"
+    app:ptr_pull_to_fresh="false"
+    app:ptr_ratio_of_header_height_to_refresh="1.0"
+    app:ptr_resistance="2.0">
+    <RelativeLayout
+        android:id="@+id/rl_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+   <anjuyi.cc.edeco.view.ObservableScrollView
+            android:id="@+id/home_scv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.jude.rollviewpager.RollPagerView
+                    android:id="@+id/home_viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/px_400"
+                    app:rollviewpager_play_delay="3000"
+                    app:rollviewpager_hint_paddingLeft="6dp"
+                    app:rollviewpager_hint_paddingRight="6dp"
+                    app:rollviewpager_hint_paddingBottom="6dp"
+                    />
+                <!--app:rollviewpager_play_delay="3000" 播放间隔时间，单位ms。填0则不播放。默认为0 app:rollviewpager_hint_gravity="center" 指示器位置,提供left,center,right。默认center-->
+                <!--app:rollviewpager_hint_color="#7c7c7c" 指示器背景颜色.默认黑色-->
+                <!--app:rollviewpager_hint_alpha="80" 指示器背景透明度。0全透明，255不透明。默认0.-->
+                <!--app:rollviewpager_hint_paddingLeft="16dp" 指示器左边距-->
+                <!--app:rollviewpager_hint_paddingRight="16dp" 指示器右边距-->
+                <!--app:rollviewpager_hint_paddingTop="16dp" 指示器上边距-->
+                <!--app:rollviewpager_hint_paddingBottom="16dp" 指示器下边距-->
+
+                <anjuyi.cc.edeco.view.ScrollTopView
+                    android:id="@+id/toutiao"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/px_80"
+                    android:layout_marginLeft="@dimen/dimen_20"
+                    android:layout_marginRight="@dimen/dimen_30"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical" />
+       <TextView
+           android:background="#4f00"
+           android:layout_width="match_parent"
+           android:layout_height="2000dp"
+           />
+            </LinearLayout>
+        </anjuyi.cc.edeco.view.ObservableScrollView>
+        <include layout="@layout/default_home_search_layout"
+            />
+
+        <ImageView
+            android:visibility="gone"
+            android:background="@drawable/selector_text_arrow_top"
+            android:scaleType="center"
+            android:src="@mipmap/arrow_top"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/img_top"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            />
+
+    </RelativeLayout>
+
+</in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+
+

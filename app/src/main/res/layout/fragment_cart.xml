@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_background" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_normal"
+        android:background="@color/base_background"
+        android:orientation="vertical" >
+
+        <include layout="@layout/default_main_cart_title" />
+
+        <include layout="@layout/base_line" />
+
+        <!-- 购物车有东西的布局 -->
+
+        <anjuyi.cc.edeco.view.PinnedSectionListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/white"
+            android:dividerHeight="0dp"
+            />
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <include layout="@layout/cart_header" />
+                <TextView
+                    style="@style/tv_color_black_size_34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_20"
+                    android:layout_marginTop="@dimen/dimen_40"
+                    android:text="@string/cart_people_look" />
+
+                <anjuyi.cc.edeco.view.GridViewForScrollView
+                    android:id="@+id/cart_gv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_20"
+                    android:layout_marginRight="@dimen/dimen_20"
+                    android:layout_marginTop="@dimen/dimen_36"
+                    android:horizontalSpacing="@dimen/dimen_20"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="2"
+                    android:verticalSpacing="@dimen/dimen_20" >
+                </anjuyi.cc.edeco.view.GridViewForScrollView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@id/rl_normal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100"
+        android:layout_alignParentBottom="true"
+        android:background="#7f7f7f"
+        android:paddingLeft="@dimen/dimen_30"
+        android:paddingRight="@dimen/dimen_30" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/goToPay"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计 : ¥ "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_32" />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00.00"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_32" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_man_jian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:textColor="@color/order_detail_price_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/goToPay"
+            android:layout_width="@dimen/dimen_140"
+            android:layout_height="@dimen/dimen_60"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/cart_pay_shape_btn"
+            android:gravity="center"
+            android:text="去结算"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_32" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_edit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100"
+        android:layout_alignParentBottom="true"
+        android:background="@color/cart_bottom_background"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/share_btn"
+            android:layout_width="@dimen/dimen_140"
+            android:layout_height="@dimen/dimen_60"
+            android:layout_marginRight="@dimen/dimen_14"
+            android:background="#a5a5a5"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="分享"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_32" />
+
+        <TextView
+            android:id="@+id/addCollect"
+            android:layout_width="@dimen/dimen_200"
+            android:layout_height="@dimen/dimen_60"
+            android:layout_marginRight="@dimen/dimen_14"
+            android:background="#fba540"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="加入收藏"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_32" />
+
+        <TextView
+            android:id="@+id/del"
+            android:layout_width="@dimen/dimen_140"
+            android:layout_height="@dimen/dimen_60"
+            android:layout_marginRight="@dimen/dimen_30"
+            android:background="#ff4f64"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_32" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    
+    <!-- 按下 -->
+    <item  android:state_pressed="true" android:drawable="@color/action_sheet_ed"/>
+    
+    <!-- 默认 -->
+    <item android:state_enabled="false" android:drawable="@color/action_sheet_gray"/>
+    
+    <!-- 选中 -->
+    <item android:state_selected="true" android:drawable="@color/action_sheet_ed"/>
+    
+
+</selector>
