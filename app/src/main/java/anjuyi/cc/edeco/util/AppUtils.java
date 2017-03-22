@@ -8,12 +8,13 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Base64;
+import android.view.View;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
-
-import Decoder.BASE64Encoder;
 
 /**
  * Created by ly on 2016/5/26 17:37.
@@ -36,6 +37,31 @@ public class AppUtils {
     public static List<String> stringArrayToList(Context context, int arrayId) {
         return Arrays.asList(context.getResources().getStringArray(arrayId));
     }
+
+    /**
+     * 格式化double类型，使其保留2位小数
+     * @param number
+     * @return
+     */
+    public static String formatNumber2(double number) {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return df.format(number);
+    }
+    /**
+     * 格式化double类型，不保留小数
+     * @param number
+     * @return
+     */
+    public static String formatNumber(double number) {
+        DecimalFormat df = new DecimalFormat("#,##0");
+        return df.format(number);
+    }
+
+
+    /**
+     * 手机验证码
+     */
+    public static final String ISCODE = "^\\d{6}$";
 
     /**
      * 手机号校验
@@ -111,14 +137,27 @@ public class AppUtils {
             return tm.getDeviceId();
     }
 
+
     /**
      * base64加密
-     * @param s
-     * @return
      */
-    public static String getBASE64(String s) {
-        if (s == null) return null;
-        return (new BASE64Encoder()).encode(s.getBytes());
+    public static String base64Encode(String number) {
+
+        if(TextUtils.isEmpty(number)){
+            return "";
+        }
+        return Base64.encodeToString(number.getBytes(), Base64.DEFAULT);
+    }
+
+    /**
+     * base64解密
+     */
+    public static String base64Decode(String number) {
+
+        if(TextUtils.isEmpty(number)){
+            return "";
+        }
+        return new String( Base64.decode(number.getBytes(), Base64.DEFAULT));
     }
 
     /**
@@ -161,6 +200,50 @@ public class AppUtils {
         }
         return data;
     }
+
+
+    //添加蒙版
+    public interface OnMbClickListener{
+        void OnMbClick(View arg0);
+    }
+//    public  static void addmbImg(Activity activity,int resId,final OnMbClickListener listener){
+//
+//        final WindowManager windowManager = activity.getWindowManager();
+//        // 动态初始化图层
+//        final ImageView  img = new ImageView(activity);
+//        img.setLayoutParams(new WindowManager.LayoutParams(
+//                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+//                android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+//        img.setScaleType(ImageView.ScaleType.FIT_XY);
+//        img.setImageResource(resId);
+//        // 设置LayoutParams参数
+//        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+//        // 设置显示的类型，TYPE_PHONE指的是来电话的时候会被覆盖，其他时候会在最前端，显示位置在stateBar下面，其他更多的值请查阅文档
+//        params.type = WindowManager.LayoutParams.TYPE_PHONE;
+//        // 设置显示格式
+//        params.format = PixelFormat.RGBA_8888;
+//        // 设置对齐方式
+//        params.gravity = Gravity.LEFT | Gravity.TOP;
+//        // 设置宽高
+//        params.width = windowManager.getDefaultDisplay()
+//                .getWidth();
+//
+//        params.height = windowManager.getDefaultDisplay()
+//                .getHeight() - getStatusHeight(context);
+//        // 添加到当前的窗口上
+//        windowManager.addView(img, params);
+//        // 点击图层之后，将图层移除
+//        img.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//                windowManager.removeView(img);
+//                listener.OnMbClick(arg0);
+//            }
+//        });
+//
+//    }
+
+
 
 
 

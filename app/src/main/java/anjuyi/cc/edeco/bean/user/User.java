@@ -7,24 +7,42 @@ import java.io.Serializable;
  */
 public class User implements Serializable{
 
-    private Integer id;
-    private String username;
-    private String password;
-    private Integer age;
-    private String userId; //用户ID
-    private String token;
-    private String isCertInfo; //是否填写身份信息 0未填写
-    private String isAcceptInfo; //是否接收消息  0不接收
-    private String referralCode; //推荐吗
-    private boolean loanStatus;
+    private String uid;  //用户id
+    private String username;  //用户名
+    private String password;  //密码
+    private Integer age;  //年龄
+    private String token; //入口令牌
+    private String iconImg; //头像url
+    private String sex;//0男 1女
+    private String nickname; //昵称
+    private String birthday; //生日
 
-
-    public Integer getId() {
-        return id;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    private String phone;  //绑定手机号
+    private String createTime;
+    private String weight;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getUsername() {
@@ -51,38 +69,6 @@ public class User implements Serializable{
         this.age = age;
     }
 
-    public String getIsCertInfo() {
-        return isCertInfo;
-    }
-
-    public void setIsCertInfo(String isCertInfo) {
-        this.isCertInfo = isCertInfo;
-    }
-
-    public String getIsAcceptInfo() {
-        return isAcceptInfo;
-    }
-
-    public void setIsAcceptInfo(String isAcceptInfo) {
-        this.isAcceptInfo = isAcceptInfo;
-    }
-
-    public String getReferralCode() {
-        return referralCode;
-    }
-
-    public void setReferralCode(String referralCode) {
-        this.referralCode = referralCode;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getToken() {
         return token;
     }
@@ -91,27 +77,43 @@ public class User implements Serializable{
         this.token = token;
     }
 
-    public boolean isLoanStatus() {
-        return loanStatus;
+    public String getIconImg() {
+        return iconImg;
     }
 
-    public void setLoanStatus(boolean loanStatus) {
-        this.loanStatus = loanStatus;
+    public void setIconImg(String iconImg) {
+        this.iconImg = iconImg;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", age=" + age +
-                ", userId='" + userId + '\'' +
-                ", token='" + token + '\'' +
-                ", isCertInfo='" + isCertInfo + '\'' +
-                ", isAcceptInfo='" + isAcceptInfo + '\'' +
-                ", referralCode='" + referralCode + '\'' +
-                ", loanStatus=" + loanStatus +
-                '}';
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -25,7 +25,7 @@ public class Loading {
 
     public static void show() {
         if (loading == null) {
-            loading = new AlertDialog.Builder(mContext,custom_dialog).create();
+            loading = new AlertDialog.Builder(mContext,R.style.custom_dialog).create();
             loading.setCanceledOnTouchOutside(false);
             Window w = loading.getWindow();
             w.setWindowAnimations(R.style.DialogBottom); // 添加动画

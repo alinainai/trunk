@@ -33,18 +33,15 @@ public abstract class BaseMvpFragment<V, P extends BasePresenter<V>> extends Bas
         super.onActivityCreated(savedInstanceState);
         mPresenter = initPresenter();
         mPresenter.attach((V) this);
-
         mIsViewInitiated = true;
         initFetchData();
     }
-
     protected void initFetchData() {
         if (mIsVisibleToUser && mIsViewInitiated && !mIsDataInitiated) {
             fetchData();
             mIsDataInitiated = true;
         }
     }
-
     @Override
     public void onDestroy() {
         mPresenter.detach();

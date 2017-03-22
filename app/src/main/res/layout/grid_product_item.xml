@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/item_icon"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_210"
-        android:layout_margin="@dimen/dimen_10"
+        android:layout_height="@dimen/px_210"
+        android:layout_margin="@dimen/px_10"
         android:src="@mipmap/loading_image"
         android:scaleType="centerCrop"
          />
@@ -19,9 +19,9 @@
         android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_10"
-        android:layout_marginTop="@dimen/dimen_18"
-        android:padding="@dimen/dimen_10"
+        android:layout_marginBottom="@dimen/px_10"
+        android:layout_marginTop="@dimen/px_18"
+        android:padding="@dimen/px_10"
         android:singleLine="false"
         android:maxLines="2"
         android:ellipsize="end"
@@ -34,9 +34,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60"
-        android:layout_marginLeft="@dimen/dimen_10"
-        android:layout_marginRight="@dimen/dimen_10" >
+        android:layout_height="@dimen/px_60"
+        android:layout_marginLeft="@dimen/px_10"
+        android:layout_marginRight="@dimen/px_10" >
 
         <TextView
             android:id="@+id/item_price"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/dimen_10"
+            android:layout_marginEnd="@dimen/px_10"
             android:text="已售224件"
             android:textColor="@color/base_text_info_color"
             android:textSize="@dimen/font_size_26" />
@@ -65,7 +65,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:visibility="gone"
-            android:layout_marginEnd="@dimen/dimen_10"
+            android:layout_marginEnd="@dimen/px_10"
             android:src="@drawable/collect_selector" />
     </RelativeLayout>
 </LinearLayout>

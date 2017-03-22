@@ -742,5 +742,6 @@
     <dimen name="text_size_72_px">36.0sp</dimen>
     <dimen name="text_size_80_px">40.0sp</dimen>
     <dimen name="text_size_86_px">43.0sp</dimen>
-
+    <dimen name="text_size_90_px">45.0sp</dimen>
+    <dimen name="text_size_110_px">55.0sp</dimen>
 </resources>

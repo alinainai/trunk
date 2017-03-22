@@ -4,8 +4,6 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
-import anjuyi.cc.edeco.util.Colors;
-
 /**
  * 作者：Mr.Lee on 2016-8-2 11:40
  * 邮箱：569932357@qq.com
@@ -65,7 +63,7 @@ public class TimeCount  extends AsyncTask<Void, Void, Void> {
 
             if(mButton !=null){
                 mButton.setText(String.format("%ds", time));
-                mButton.setTextColor(Color.rgb(0xff,0xb6,0xc1));
+                mButton.setTextColor(Color.rgb(0x17,0x8a,0xe2));
                 if(mButton.isEnabled()){
                     mButton.setEnabled(false);
                 }
@@ -86,7 +84,7 @@ public class TimeCount  extends AsyncTask<Void, Void, Void> {
         public void end(){
             if(mButton!=null){
                 mButton.setEnabled(true);
-                mButton.setTextColor(Colors.WHITE);
+                mButton.setTextColor(Color.WHITE);
                 mButton.setText("获取验证码");
             }
             cancel();

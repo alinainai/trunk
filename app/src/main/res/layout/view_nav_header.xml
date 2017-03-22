@@ -10,9 +10,9 @@
 
     <anjuyi.cc.edeco.view.CircleImageView
         android:id="@+id/mine_user_icon_img"
-        android:layout_width="@dimen/dimen_160"
-        android:layout_height="@dimen/dimen_160"
-        android:layout_marginStart="@dimen/dimen_30"
+        android:layout_width="@dimen/px_160"
+        android:layout_height="@dimen/px_160"
+        android:layout_marginStart="@dimen/px_30"
         android:src="@mipmap/user_icon"
         app:civ_border_color="@color/white"
         app:civ_border_width="1dp" />

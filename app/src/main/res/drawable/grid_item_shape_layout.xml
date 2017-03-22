@@ -4,7 +4,7 @@
     <solid android:color="@color/white" />
 
     <stroke
-        android:width="@dimen/dimen_1"
+        android:width="@dimen/px_1"
         android:color="@color/base_divider_color" />
 
 </shape>

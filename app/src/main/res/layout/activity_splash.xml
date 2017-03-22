@@ -2,12 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/base_background"
     android:layout_height="match_parent">
 
     <!-- 欢迎页面 -->
     <ImageView
+        android:id="@+id/img_src"
+        android:scaleType="centerInside"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash" />
+        android:src="@mipmap/splash_picture"
+         />
+
+    <RelativeLayout
+        android:id="@+id/rl_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/px_40"
+        android:layout_marginTop="@dimen/px_55"
+        android:background="@mipmap/bg_circle"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跳过  "
+                android:textColor="#ccc"
+                android:textSize="@dimen/text_size_28_px" />
+
+            <TextView
+                android:id="@+id/tv_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#d53535"
+                android:textSize="@dimen/text_size_28_px" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:visibility="gone"
+        android:id="@+id/vp_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/btn_go"
+        android:layout_margin="@dimen/px_20"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_80"
+        android:text="立即体验"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:background="@drawable/select_btn_login"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/px_24" />
+
+
 
 </RelativeLayout>

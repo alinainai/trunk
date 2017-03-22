@@ -15,33 +15,33 @@
             android:layout_height="wrap_content"
             android:background="@color/base_background"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/dimen_50">
+            android:paddingBottom="@dimen/px_100">
             <!-- 头像和标签开始 -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_430"
+                android:layout_height="@dimen/px_430"
                 android:background="@drawable/main_dt">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_160"
+                    android:layout_height="@dimen/px_160"
                     android:layout_above="@+id/mine_title_bar_rl"
-                    android:layout_marginBottom="@dimen/dimen_20">
+                    android:layout_marginBottom="@dimen/px_20">
 
                     <LinearLayout
                         android:id="@+id/mine_detail_ll"
-                        android:layout_width="@dimen/dimen_200"
-                        android:layout_height="@dimen/dimen_40"
+                        android:layout_width="@dimen/px_200"
+                        android:layout_height="@dimen/px_40"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:background="@drawable/mine_account_shape_layout"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/dimen_0">
+                        android:padding="0dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_30"
+                            android:layout_marginLeft="@dimen/px_30"
                             android:text="@string/my_account"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_size_26" />
@@ -50,20 +50,20 @@
                     <LinearLayout
                         android:id="@+id/ll_detail"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimen_84"
+                        android:layout_height="@dimen/px_84"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dimen_170"
+                        android:layout_marginLeft="@dimen/px_170"
                         android:background="@drawable/mine_shape_layout"
                         android:gravity="center_vertical"
                         android:orientation="vertical"
-                        android:padding="@dimen/dimen_0">
+                        android:padding="0dp">
 
                         <TextView
                             android:id="@+id/mine_nickName_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_30"
-                            android:layout_marginRight="@dimen/dimen_20"
+                            android:layout_marginLeft="@dimen/px_30"
+                            android:layout_marginRight="@dimen/px_20"
                             android:text="@string/login"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_size_32" />
@@ -72,8 +72,8 @@
                             android:id="@+id/mine_nameType_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_30"
-                            android:layout_marginRight="@dimen/dimen_20"
+                            android:layout_marginLeft="@dimen/px_30"
+                            android:layout_marginRight="@dimen/px_20"
                             android:text="@string/pt_user"
                             android:textColor="#ffd200"
                             android:textSize="@dimen/font_size_24" />
@@ -81,9 +81,9 @@
 
                     <anjuyi.cc.edeco.view.CircleImageView
                         android:id="@+id/mine_user_icon_img"
-                        android:layout_width="@dimen/dimen_160"
-                        android:layout_height="@dimen/dimen_160"
-                        android:layout_marginStart="@dimen/dimen_30"
+                        android:layout_width="@dimen/px_160"
+                        android:layout_height="@dimen/px_160"
+                        android:layout_marginStart="@dimen/px_30"
                         android:src="@mipmap/user_icon"
                         app:civ_border_color="@color/white"
                         app:civ_border_width="1dp" />
@@ -92,7 +92,7 @@
                 <LinearLayout
                     android:id="@+id/mine_title_bar_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_80"
+                    android:layout_height="@dimen/px_80"
                     android:layout_alignParentBottom="true"
                     android:orientation="horizontal">
 
@@ -103,7 +103,7 @@
                         android:layout_weight="1"
                         android:background="@color/alpha_color"
                         android:gravity="center"
-                        android:text="@string/collect_service"
+                        android:text="版块一"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_30" />
 
@@ -111,11 +111,11 @@
                         android:id="@+id/mine_collection_shop_tv"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/dimen_1"
+                        android:layout_marginLeft="@dimen/px_1"
                         android:layout_weight="1"
                         android:background="@color/alpha_color"
                         android:gravity="center"
-                        android:text="@string/collect_shop"
+                        android:text="版块二"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_30" />
 
@@ -123,11 +123,11 @@
                         android:id="@+id/mine_browse_history_tv"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/dimen_1"
+                        android:layout_marginLeft="@dimen/px_1"
                         android:layout_weight="1"
                         android:background="@color/alpha_color"
                         android:gravity="center"
-                        android:text="@string/look_history"
+                        android:text="版块三"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_30" />
                 </LinearLayout>
@@ -138,14 +138,14 @@
             <TextView
                 android:id="@+id/mine_order_tv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_80"
+                android:layout_height="@dimen/px_80"
                 android:background="@drawable/layout_selector_bg"
                 android:drawableLeft="@drawable/main_icon_dd_a"
-                android:drawablePadding="@dimen/dimen_20"
+                android:drawablePadding="@dimen/px_20"
                 android:drawableRight="@drawable/con_btn_right"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20"
+                android:paddingLeft="@dimen/px_20"
                 android:text="@string/order"
                 android:textColor="@color/base_text_info_color"
                 android:textSize="@dimen/font_size_32" />
@@ -156,11 +156,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100"
+                android:layout_height="@dimen/px_100"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/dimen_5"
-                android:paddingTop="@dimen/dimen_5">
+                android:paddingBottom="@dimen/px_5"
+                android:paddingTop="@dimen/px_5">
                 <!-- 待付款 -->
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -176,14 +176,14 @@
                         android:drawableTop="@drawable/main_icon_fk"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="@string/obligation"
+                        android:text="模块一"
                         android:textColor="@color/base_text_info_color"
                         android:textSize="@dimen/font_size_30" />
 
                     <TextView
                         android:id="@+id/obligation_num"
-                        android:layout_width="@dimen/dimen_32"
-                        android:layout_height="@dimen/dimen_32"
+                        android:layout_width="@dimen/px_32"
+                        android:layout_height="@dimen/px_32"
                         android:layout_alignRight="@+id/mine_obligation_tv"
                         android:layout_alignTop="@+id/mine_obligation_tv"
                         android:background="@drawable/shape_text"
@@ -209,14 +209,14 @@
                         android:drawableTop="@drawable/main_icon_fw"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="@string/service"
+                        android:text="模块二"
                         android:textColor="@color/base_text_info_color"
                         android:textSize="@dimen/font_size_30" />
 
                     <TextView
                         android:id="@+id/service_num"
-                        android:layout_width="@dimen/dimen_32"
-                        android:layout_height="@dimen/dimen_32"
+                        android:layout_width="@dimen/px_32"
+                        android:layout_height="@dimen/px_32"
                         android:layout_alignRight="@+id/mine_service_tv"
                         android:layout_alignTop="@+id/mine_service_tv"
                         android:background="@drawable/shape_text"
@@ -242,14 +242,14 @@
                         android:drawableTop="@drawable/main_icon_pj"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="@string/evaluate"
+                        android:text="模块三"
                         android:textColor="@color/base_text_info_color"
                         android:textSize="@dimen/font_size_30" />
 
                     <TextView
                         android:id="@+id/evaluate_num"
-                        android:layout_width="@dimen/dimen_32"
-                        android:layout_height="@dimen/dimen_32"
+                        android:layout_width="@dimen/px_32"
+                        android:layout_height="@dimen/px_32"
                         android:layout_alignRight="@+id/mine_evaluate_tv"
                         android:layout_alignTop="@+id/mine_evaluate_tv"
                         android:background="@drawable/shape_text"
@@ -281,8 +281,8 @@
 
                     <TextView
                         android:id="@+id/assist_num"
-                        android:layout_width="@dimen/dimen_32"
-                        android:layout_height="@dimen/dimen_32"
+                        android:layout_width="@dimen/px_32"
+                        android:layout_height="@dimen/px_32"
                         android:layout_alignRight="@+id/mine_assist_tv"
                         android:layout_alignTop="@+id/mine_assist_tv"
                         android:background="@drawable/shape_text"
@@ -298,16 +298,16 @@
             <TextView
                 android:id="@+id/mine_subscribe_tv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100"
-                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_height="@dimen/px_100"
+                android:layout_marginTop="@dimen/px_20"
                 android:background="@drawable/layout_selector_bg"
                 android:drawableLeft="@drawable/main_icon_time_a"
-                android:drawablePadding="@dimen/dimen_20"
+                android:drawablePadding="@dimen/px_20"
                 android:drawableRight="@drawable/con_btn_right"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20"
-                android:text="@string/subscribe"
+                android:paddingLeft="@dimen/px_20"
+                android:text="条目一"
                 android:textColor="@color/base_text_info_color"
                 android:textSize="@dimen/font_size_32" />
 
@@ -315,16 +315,16 @@
             <TextView
                 android:id="@+id/mine_coupons_tv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100"
-                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_height="@dimen/px_100"
+                android:layout_marginTop="@dimen/px_20"
                 android:background="@drawable/layout_selector_bg"
                 android:drawableLeft="@drawable/main_icon_quan_a"
-                android:drawablePadding="@dimen/dimen_20"
+                android:drawablePadding="@dimen/px_20"
                 android:drawableRight="@drawable/con_btn_right"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20"
-                android:text="@string/coupons"
+                android:paddingLeft="@dimen/px_20"
+                android:text="条目二"
                 android:textColor="@color/base_text_info_color"
                 android:textSize="@dimen/font_size_32" />
 
@@ -332,16 +332,16 @@
             <TextView
                 android:id="@+id/mine_sharemoney_tv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100"
-                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_height="@dimen/px_100"
+                android:layout_marginTop="@dimen/px_20"
                 android:background="@drawable/layout_selector_bg"
                 android:drawableLeft="@drawable/share_z"
-                android:drawablePadding="@dimen/dimen_20"
+                android:drawablePadding="@dimen/px_20"
                 android:drawableRight="@drawable/con_btn_right"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20"
-                android:text="@string/sharemoney"
+                android:paddingLeft="@dimen/px_20"
+                android:text="分享"
                 android:textColor="@color/base_text_info_color"
                 android:textSize="@dimen/font_size_32"
                 android:visibility="visible" />
@@ -350,16 +350,16 @@
             <TextView
                 android:id="@+id/mine_collection_tv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100"
-                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_height="@dimen/px_100"
+                android:layout_marginTop="@dimen/px_20"
                 android:background="@drawable/layout_selector_bg"
                 android:drawableLeft="@drawable/main_icon_sc_a"
-                android:drawablePadding="@dimen/dimen_20"
+                android:drawablePadding="@dimen/px_20"
                 android:drawableRight="@drawable/con_btn_right"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20"
-                android:text="@string/collection"
+                android:paddingLeft="@dimen/px_20"
+                android:text="反馈"
                 android:textColor="@color/base_text_info_color"
                 android:textSize="@dimen/font_size_32" />
 
@@ -367,15 +367,15 @@
             <TextView
                 android:id="@+id/mine_message_tv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100"
-                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_height="@dimen/px_100"
+                android:layout_marginTop="@dimen/px_20"
                 android:background="@drawable/layout_selector_bg"
                 android:drawableLeft="@drawable/main_icon_mess_a"
-                android:drawablePadding="@dimen/dimen_20"
+                android:drawablePadding="@dimen/px_20"
                 android:drawableRight="@drawable/con_btn_right"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20"
+                android:paddingLeft="@dimen/px_20"
                 android:text="@string/message"
                 android:textColor="@color/base_text_info_color"
                 android:textSize="@dimen/font_size_32" />
@@ -384,22 +384,52 @@
             <TextView
                 android:id="@+id/mine_setting_tv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100"
-                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_height="@dimen/px_100"
+                android:layout_marginTop="@dimen/px_20"
                 android:background="@drawable/layout_selector_bg"
                 android:drawableLeft="@drawable/main_icon_set"
-                android:drawablePadding="@dimen/dimen_20"
+                android:drawablePadding="@dimen/px_20"
                 android:drawableRight="@drawable/con_btn_right"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20"
+                android:paddingLeft="@dimen/px_20"
                 android:text="@string/setting"
                 android:textColor="@color/base_text_info_color"
                 android:textSize="@dimen/font_size_32" />
         </LinearLayout>
     </ScrollView>
 
-    <include layout="@layout/layout_alpha" />
+    <View
+        android:id="@+id/status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#0F000000" />
 
-    <include layout="@layout/default_main_title" />
+    <RelativeLayout
+        android:layout_below="@+id/status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#0F000000"
+        android:padding="0dp">
+
+        <TextView
+            android:id="@+id/main_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title"
+            android:textColor="#fff"
+            android:textSize="@dimen/font_size_38" />
+
+        <ImageView
+            android:id="@+id/main_right_img"
+            android:padding="10dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/px_30"
+            android:src="@drawable/nav_mess" />
+
+    </RelativeLayout>
 </RelativeLayout>

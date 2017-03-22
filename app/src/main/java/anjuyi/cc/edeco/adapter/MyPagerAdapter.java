@@ -6,16 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 
 import java.util.ArrayList;
 
 import anjuyi.cc.edeco.R;
-import anjuyi.cc.edeco.util.GlideUtils;
 
 /**
- * Created by 葛晶晶 on 2016-7-25.
  * 广告轮播图的适配器
  * loopviewpager
  */
@@ -38,7 +38,7 @@ public class MyPagerAdapter extends LoopPagerAdapter {
     @Override
     public View getView(ViewGroup container, int position) {
         ImageView img = new ImageView(context);
-        GlideUtils.getInstance().LoadContextBitmap(context, imgs.get(position), img, R.mipmap.loading_image,R.mipmap.loading_image, null);
+        Glide.with(context).load(imgs.get(position)).centerCrop().placeholder(R.mipmap.loading_image).error(R.mipmap.loading_image).diskCacheStrategy(DiskCacheStrategy.NONE).into(img);
         ViewPager.LayoutParams lp = new ViewPager.LayoutParams();
         lp.width=ViewPager.LayoutParams.MATCH_PARENT;
         lp.height=ViewPager.LayoutParams.MATCH_PARENT;

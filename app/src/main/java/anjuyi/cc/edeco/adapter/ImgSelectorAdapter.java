@@ -1,6 +1,5 @@
 package anjuyi.cc.edeco.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 
 import anjuyi.cc.edeco.R;
-import anjuyi.cc.edeco.util.GlideUtils;
 
 /**
  * 作者：Mr.Lee on 2016-7-26 16:52
@@ -68,7 +69,7 @@ public abstract class ImgSelectorAdapter extends RecyclerView.Adapter<ImgSelecto
                 });
             }else{
                 holder.mDelete.setVisibility(View.VISIBLE);
-                GlideUtils.getInstance().displayImage((Activity) context,mDatas.get(position), holder.mImg);
+                Glide.with(context).load(mDatas.get(position)).centerCrop().diskCacheStrategy(DiskCacheStrategy.NONE).into( holder.mImg);
                 holder.mDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -86,7 +87,7 @@ public abstract class ImgSelectorAdapter extends RecyclerView.Adapter<ImgSelecto
 
         } else {
             holder.mDelete.setVisibility(View.VISIBLE);
-            GlideUtils.getInstance().displayImage((Activity) context,mDatas.get(position), holder.mImg);
+            Glide.with(context).load(mDatas.get(position)).centerCrop().diskCacheStrategy(DiskCacheStrategy.NONE).into( holder.mImg);
             holder.mDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

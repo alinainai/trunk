@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/px_80"
-    android:padding="@dimen/dimen_20"
+    android:padding="@dimen/px_20"
     android:background="#e1fee2"
 
     >
     <ImageView
         android:id="@+id/icon"
-        android:layout_marginEnd="@dimen/dimen_20"
+        android:layout_marginEnd="@dimen/px_20"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@mipmap/icon_logo"

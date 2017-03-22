@@ -9,16 +9,16 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="@dimen/dimen_160"
-        android:layout_height="@dimen/dimen_130"
+        android:layout_width="@dimen/px_160"
+        android:layout_height="@dimen/px_130"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20"
+        android:layout_marginTop="@dimen/px_20"
         android:text="塑铜线"
         android:textColor="@color/base_text_color"
-        android:textSize="@dimen/dimen_26" />
+        android:textSize="@dimen/px_26" />
 
 </LinearLayout>

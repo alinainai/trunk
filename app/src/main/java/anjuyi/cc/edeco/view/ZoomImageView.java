@@ -26,9 +26,9 @@ import android.graphics.Matrix.ScaleToFit;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -38,11 +38,10 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.OverScroller;
 import android.widget.Scroller;
 
-public class ZoomImageView extends ImageView implements View.OnTouchListener,
+public class ZoomImageView extends AppCompatImageView implements View.OnTouchListener,
         ViewTreeObserver.OnGlobalLayoutListener {
 
     /**

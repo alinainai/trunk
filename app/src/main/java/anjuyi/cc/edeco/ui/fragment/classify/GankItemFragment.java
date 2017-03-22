@@ -24,8 +24,7 @@ import butterknife.BindView;
  */
 public class GankItemFragment extends BaseMvpFragment<GankItemView, GankItemPresenter> implements GankItemView, SwipeRefreshLayout.OnRefreshListener {
 
-  private int PAGE_COUNT = 1;//页数
-
+    private int PAGE_COUNT = 1;//页数
     private String mSubtype;//分类
     private int mTempPageCount = 2;
     private GankItemAdapter mGankItemAdapter;//适配器
@@ -33,7 +32,6 @@ public class GankItemFragment extends BaseMvpFragment<GankItemView, GankItemPres
 
     @BindView(R.id.type_item_recyclerview)
     RecyclerView mRecyclerView;
-
     @BindView(R.id.type_item_swipfreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;//进度条
 
@@ -42,6 +40,9 @@ public class GankItemFragment extends BaseMvpFragment<GankItemView, GankItemPres
         return new GankItemPresenter();
     }
 
+    /**
+     * 加载数据
+     */
     @Override
     protected void fetchData() {
         mPresenter.getGankItemData("data/" + mSubtype + "/10/" + PAGE_COUNT);

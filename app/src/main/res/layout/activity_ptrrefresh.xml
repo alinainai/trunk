@@ -18,16 +18,16 @@
         cube_ptr:ptr_resistance="1.7">
 
         <ListView
-            android:id="@+id/rotate_header_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:fadingEdge="none"
-            android:listSelector="@android:color/transparent"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:scrollbarStyle="outsideOverlay"
-            android:choiceMode="singleChoice" />
+        android:id="@+id/rotate_header_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:fadingEdge="none"
+        android:listSelector="@android:color/transparent"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:choiceMode="singleChoice" />
 
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 </RelativeLayout>

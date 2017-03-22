@@ -3,7 +3,7 @@
 
     <solid android:color="@color/login_background" />
 
-    <corners android:radius="@dimen/dimen_10" >
+    <corners android:radius="@dimen/px_10" >
     </corners>
 
 </shape>

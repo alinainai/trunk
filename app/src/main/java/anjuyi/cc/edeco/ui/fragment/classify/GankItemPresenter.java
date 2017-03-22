@@ -4,8 +4,9 @@ package anjuyi.cc.edeco.ui.fragment.classify;
 import java.util.List;
 
 import anjuyi.cc.edeco.base.mvp.BasePresenter;
+import anjuyi.cc.edeco.https.HttpResult;
 import anjuyi.cc.edeco.https.rx.RxManager;
-import anjuyi.cc.edeco.https.rx.RxSubscriber;
+import rx.Subscriber;
 
 /**
  * Author: Othershe
@@ -19,15 +20,20 @@ public class GankItemPresenter extends BasePresenter<GankItemView> {
     }
 
     public void getGankItemData(String suburl) {
-        mSubscription = RxManager.getInstance().doSubscribe1(mModel.getGankItemData(suburl), new RxSubscriber<List<GankItemData>>(false) {
+        mSubscription = RxManager.getInstance().doSubscribe(mModel.getGankItemData(suburl), new Subscriber<HttpResult<List<GankItemData>>>() {
+
             @Override
-            protected void _onNext(List<GankItemData> gankItemData) {
-                mView.onSuccess(gankItemData);
+            public void onCompleted() {
+
+            }
+            @Override
+            public void onError(Throwable e) {
+                mView.onError();
             }
 
             @Override
-            protected void _onError() {
-                mView.onError();
+            public void onNext(HttpResult<List<GankItemData>> gankItemDatas) {
+                mView.onSuccess(gankItemDatas.getResults());
             }
         });
     }

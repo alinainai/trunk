@@ -2,19 +2,18 @@ package anjuyi.cc.edeco.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -22,11 +21,10 @@ import java.util.TimerTask;
 
 import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseActivity;
-import anjuyi.cc.edeco.base.BaseApplication;
-import anjuyi.cc.edeco.bean.message.CensusPhone;
+import anjuyi.cc.edeco.ui.fragment.AccountFragment;
+import anjuyi.cc.edeco.ui.fragment.BlankFragment;
 import anjuyi.cc.edeco.ui.fragment.CartFragment;
 import anjuyi.cc.edeco.ui.fragment.ClassifyFragment;
-import anjuyi.cc.edeco.ui.fragment.HomeFragment;
 import anjuyi.cc.edeco.ui.fragment.MineFragment;
 import anjuyi.cc.edeco.util.ToastUtils;
 import butterknife.BindView;
@@ -37,6 +35,8 @@ import butterknife.BindView;
  */
 @SuppressLint("UseSparseArrays")
 public class MainActivity extends BaseActivity  {
+
+
     @BindView(R.id.home_btn)
     RadioButton homeBtn;//首页
     @BindView(R.id.classify_btn)
@@ -47,13 +47,13 @@ public class MainActivity extends BaseActivity  {
     RadioButton mineBtn;//我的
     @BindView(R.id.rg_radio)
     RadioGroup rg_radio;
-
-
     //container
     private FragmentManager mFragManager;//fragment管理器
-    private HomeFragment mHomeFragment;//首页的fragment
     private ClassifyFragment mClassifyFragment;//分类的fragment
     private CartFragment mShoppingFragment;//购物车的fragment
+    private AccountFragment mAccountFragment;//我的账户
+
+    private BlankFragment mHomeFragment;//首页的fragment
     private MineFragment mMineFragment;//我的fragment
 
     public static boolean content = false;
@@ -61,25 +61,48 @@ public class MainActivity extends BaseActivity  {
     // 当前fragment的index
     public int currentTabIndex;
 
+    private void setStatusColor(int color){
 
-    //初始化intent
-   // private Intent init_intent=new Intent(this, InitService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0 全透明状态栏
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+         //   getWindow().setStatusBarColor(Color.rgb(0x8f,0xc4,0x50));
+           getWindow().setStatusBarColor(getResources().getColor(color));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4 全透明状态栏
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+
+    }
 
     private static final Map<Integer, String> FRAGMENS = new HashMap<Integer, String>() {
         {
-            put(0, HomeFragment.TAG);
+            put(0, BlankFragment.TAG);
             put(1, ClassifyFragment.TAG);
-            put(2, CartFragment.TAG);
-            put(3, MineFragment.TAG);
+            put(2, AccountFragment.TAG);
+            put(3, CartFragment.TAG);
+            put(4, MineFragment.TAG);
         }
     };
 
     @Override
     public void initView(Bundle savedInstanceState) {
         //可以将一下代码加到你的MainActivity中，或者在任意一个需要调用分享功能的activity当中
-        String[] mPermissionList = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS};
+        String[] mPermissionList = new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW,
+                Manifest.permission.GET_ACCOUNTS};
         ActivityCompat.requestPermissions(MainActivity.this,mPermissionList, 100);
         mFragManager = getSupportFragmentManager();
+        setStatusColor(R.color.money_color);
+
     }
 
     @Override
@@ -92,15 +115,23 @@ public class MainActivity extends BaseActivity  {
                 switch (i) {
                     case R.id.home_btn:
                         index = 0;
+                        setStatusColor(R.color.money_color);
                         break;
                     case R.id.classify_btn:
                         index = 1;
+                        setStatusColor(R.color.colorPrimary);
+                        break;
+                    case R.id.account_btn:
+                        index = 2;
+                        setStatusColor(R.color.money_color);
                         break;
                     case R.id.shopping_btn:
-                        index = 2;
+                        index = 3;
+                        setStatusColor(R.color.action_sheet_ed);
                         break;
                     case R.id.mine_btn:
-                        index = 3;
+                        index = 4;
+                        setStatusColor(R.color.trans);
                         break;
                 }
                 changeFragment(currentTabIndex, index);
@@ -126,7 +157,8 @@ public class MainActivity extends BaseActivity  {
 
     public void changeFragment(int from, int to) {
         FragmentTransaction transaction = mFragManager.beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        //Fragment切换时的动画
+        //transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         Fragment tofragment = mFragManager.findFragmentByTag(FRAGMENS.get(to));
 
         if (tofragment == null) {
@@ -143,9 +175,9 @@ public class MainActivity extends BaseActivity  {
     }
 
     private Fragment getFragmentFromFactory(String tag) {
-        if (HomeFragment.TAG.equals(tag)) {
+        if (BlankFragment.TAG.equals(tag)) {
             if (mHomeFragment == null) {
-                mHomeFragment = HomeFragment.newInstance();
+                mHomeFragment = BlankFragment.newInstance();
             }
             return mHomeFragment;
         }
@@ -168,7 +200,12 @@ public class MainActivity extends BaseActivity  {
             }
             return mMineFragment;
         }
-
+        if (AccountFragment.TAG.equals(tag)) {
+            if (mAccountFragment == null) {
+                mAccountFragment = AccountFragment.newInstance();
+            }
+            return mAccountFragment;
+        }
         return null;
     }
 
@@ -214,40 +251,5 @@ public class MainActivity extends BaseActivity  {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
-    @Override
-    protected void onResume() {
-
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        File file_log=new File(BaseApplication.AJYFILE,BaseApplication.AJYFILE_LOG_TXT);
-        if(file_log.exists()){
-            FileOutputStream fos = null;
-            CensusPhone censusPhone=new CensusPhone();
-            censusPhone.setActivityName("Main");
-            censusPhone.setCensusDate("2015-8-7");
-            censusPhone.setDuration("5000");
-            censusPhone.setMethodName("123456");
-            censusPhone.setTimeStamp(System.currentTimeMillis());
-            try {
-                fos = new FileOutputStream(file_log,true);
-                fos.write(censusPhone.toString().getBytes());
-                fos.close();
-            }catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-
-            }
-        }
-        super.onPause();
-    }
 }

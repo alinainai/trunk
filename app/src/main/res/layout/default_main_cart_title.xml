@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_title"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_96"
-    android:background="@color/base_background"
-    android:padding="@dimen/dimen_0" >
+    android:layout_height="@dimen/px_96"
+    android:background="@color/trans"
+    android:padding="0dp" >
 
     <View
+        android:visibility="gone"
         style="@style/divider"
         android:layout_alignParentBottom="true" />
 
@@ -15,14 +17,14 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dimen_10"
+        android:paddingLeft="@dimen/px_10"
         android:visibility="visible" >
 
         <ImageView
             android:scaleType="center"
             android:id="@+id/img_back"
-            android:layout_width="@dimen/dimen_96"
-            android:layout_height="@dimen/dimen_96"
+            android:layout_width="@dimen/px_96"
+            android:layout_height="@dimen/px_96"
             android:src="@mipmap/nav_back" />
     </LinearLayout>
 
@@ -32,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="标题"
-        android:textColor="#666"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_size_38" />
 
     <TextView
@@ -41,8 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dimen_30"
-        android:padding="@dimen/dimen_10"
+        android:layout_marginRight="@dimen/px_30"
+        android:padding="@dimen/px_10"
         android:textColor="@color/bottom_tab_text_color_pre"
         android:textSize="@dimen/font_size_32" />
 
@@ -52,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dimen_30"
+        android:layout_marginRight="@dimen/px_30"
         android:src="@drawable/main_nav_mess"
         android:visibility="gone" />
 

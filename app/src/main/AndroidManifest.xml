@@ -21,6 +21,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
+    <!-- 三星角标 -->
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+    <!-- 索尼角标 -->
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+
     <!-- Optional. Required for location feature -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -75,15 +81,35 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="078e0e832669a5368ddf858a774b1603"/>
+        <service android:name="com.amap.api.location.APSService"></service>
+
         <!-- 框架搭建MainActivity -->
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".mathro.NaviActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+
+        <!-- 框架搭建MainActivity -->
+        <activity
+            android:name=".mathro.BlankActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <!-- 欢迎界面 -->
         <activity
-            android:name=".ui.activity.splash.SplashActivity"
+            android:name=".ui.activity.login.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoStatus">
             <intent-filter>
@@ -92,9 +118,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.splash.AdvertisingActivity"
-            android:screenOrientation="portrait" />
         <!-- 消息中心 -->
         <activity
             android:name=".ui.activity.mine.MessageCenterActivity"
@@ -108,25 +131,14 @@
             android:name=".ui.activity.order.OrderPayActivity"
             android:screenOrientation="portrait" />
 
-        <!-- ===========================================================  Mr.Lee  ====================================================== -->
-
-
         <!-- 商品详情 -->
         <activity
             android:name=".ui.activity.order.OrderManagerActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.mine.BrowsingHistoryActivity"
             android:screenOrientation="portrait" />
         <!-- 优惠券界面 -->
         <activity
             android:name=".ui.activity.extra.CouponActivity"
             android:screenOrientation="portrait" />
-        <!-- 分享赚钱 -->
-        <activity
-            android:name=".ui.activity.extra.ShareForMoneyActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <!-- 确认订单 -->
         <activity
             android:name=".ui.activity.order.OrderSureActivity"
@@ -142,7 +154,7 @@
             android:screenOrientation="portrait" />
         <!-- 配装服务,基础建材ServiceClassifyActivity -->
         <activity
-            android:name=".ui.activity.classify.ServiceClassifyActivity"
+            android:name=".ui.activity.classify.ClassifyActivity"
             android:screenOrientation="portrait" />
         <!-- 设置SettingActivity -->
         <activity
@@ -161,32 +173,30 @@
         <activity
             android:name=".ui.activity.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <!-- 注册界面 -->
         <activity
             android:name=".ui.activity.login.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <!-- 手势设置界面 -->
-
-
-        <!-- 手势解锁界面 -->
+        <!-- 修改密码界面 -->
+        <activity
+            android:name=".ui.activity.login.ResetPwdActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <!-- 图展示界面 -->
         <activity
             android:name=".ui.activity.utils.ImageZoomActivity"
             android:screenOrientation="portrait" />
-        <!-- 头像剪切界面 -->
-        <activity
-            android:name=".ui.activity.mine.ClipHeaderActivity"
-            android:screenOrientation="portrait" />
+
         <!-- 图片选择界面 -->
         <activity
             android:name=".ui.activity.utils.ImageSelectorActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.login.GuesterSetActivity"
-            android:screenOrientation="portrait" />
-
+            android:name=".ui.activity.login.GuesterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoStatus" />
         <!-- 图片选择界面 -->
         <service
             android:name=".service.DownLoadService"
@@ -196,51 +206,23 @@
             </intent-filter>
         </service>
 
-        <!-- 初始化程序的服务 -->
-        <service
-            android:name=".service.InitService"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="com.lsoft.service.init" />
-            </intent-filter>
-        </service>
-
-        <!-- 测试界面 -->
-        <activity
-            android:name=".ui.activity.test.TestActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT" />
-            </intent-filter>
-        </activity>
-
-        <!-- 测试界面 -->
-        <activity
-            android:name=".ui.activity.test.PtrTestActivity"
-            android:screenOrientation="portrait" />
-
-        <!-- 测试界面 -->
-
-
-        <!-- 测试界面 -->
+        <!--&lt;!&ndash; 测试界面 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name=".ui.activity.test.TestActivity"-->
+            <!--android:screenOrientation="portrait">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.CREATE_SHORTCUT" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
         <activity
             android:name=".ui.activity.utils.WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.test.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".ui.activity.test.RecyclerViewLoadActivity"
-            android:label="@string/title_activity_recycler_view_load"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ui.activity.test.DownLoadActivity" />
+        <!--<activity-->
+            <!--android:name=".ui.activity.test.RecyclerViewLoadActivity"-->
+            <!--android:label="@string/title_activity_recycler_view_load"-->
+            <!--android:theme="@style/AppTheme" />-->
+        <!--<activity android:name=".ui.activity.test.DownLoadActivity" />-->
         <activity android:name=".ui.activity.address.AddressActivity" />
-        <activity
-            android:name=".ui.activity.splash.IndicatorActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoStatus" />
-        <activity android:name=".ui.activity.test.RXTestActivity" />
 
         <!-- Required SDK 核心功能 -->
         <!-- option since 2.0.5 可配置PushService，DaemonService,PushReceiver,AlarmReceiver的android:process参数 将JPush相关组件设置为一个独立进程 -->
@@ -346,7 +328,7 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="ea621d67179fdf2bf5e2ef8a" />
+            android:value="d8cfefeb8b2a1c5c07a064bd" />
 
         <!-- 友盟的社会化分享 -->
         <activity
@@ -384,9 +366,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <service
-            android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false" />
+
         <!-- QQ、Qzone -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -406,31 +386,15 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name=".ui.activity.test.ExpendableLvActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.test.commonadaptertest.ListViewTestActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.test.HRecyclerViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.test.UberActivity"
+            android:name=".ui.activity.mine.MessageItemActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoStatus" />
-        <activity android:name=".ui.activity.test.path.PathActivity" />
-        <activity android:name=".ui.activity.test.path.IosListViewActivity" />
-        <activity android:name=".ui.activity.test.jiemiandonghua.TransitionsAnimActivity" />
-        <activity android:name=".ui.activity.test.jiemiandonghua.ImageActivity" />
-        <activity android:name=".ui.activity.test.jiemiandonghua.ImageDetailActivity" />
-        <activity android:name=".ui.activity.test.jiemiandonghua.RecyclerViewActivity" />
-        <activity android:name=".ui.activity.test.jiemiandonghua.SlideActivity" />
-        <activity android:name=".ui.activity.test.jiemiandonghua.FadeActivity" />
-        <activity android:name=".ui.activity.test.jiemiandonghua.ExplodeActivity" />
-        <activity android:name=".ui.activity.test.collection.NodeActivity" />
-        <activity android:name=".ui.activity.test.drawerlayout.ViewTestActivity" />
-        <activity android:name=".ui.activity.test.mpchart.MpchartActivity" />
-        <activity android:name=".ui.activity.mine.MessageItemActivity"></activity>
+        <activity
+            android:name=".ui.activity.address.SetAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoStatus" />
+
+
     </application>
 
 </manifest>

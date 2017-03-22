@@ -16,7 +16,7 @@
         <!-- 基础建材 -->
         <TextView
             android:id="@+id/service_classify_fixed_tv"
-            android:layout_width="@dimen/dimen_140"
+            android:layout_width="@dimen/px_140"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="5dp"
@@ -27,11 +27,11 @@
         <!-- 左侧ListView -->
         <ListView
             android:id="@+id/service_classify_left_mListView"
-            android:layout_width="@dimen/dimen_140"
+            android:layout_width="@dimen/px_140"
             android:layout_height="match_parent"
             android:layout_below="@+id/service_classify_fixed_tv"
             android:divider="@color/base_divider_color"
-            android:dividerHeight="@dimen/dimen_1"
+            android:dividerHeight="@dimen/px_1"
             android:listSelector="@android:color/transparent"
             android:scrollbars="none" >
         </ListView>
@@ -47,20 +47,20 @@
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:padding="@dimen/dimen_20" >
+                android:padding="@dimen/px_20" >
                 
                 <!-- 最上面的图片 -->
                 <ImageView
                     android:src="@mipmap/ic_launcher"
                     android:id="@+id/service_classify_top_img"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_200" />
+                    android:layout_height="@dimen/px_200" />
 
                 <!-- 为你推荐的字 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_34"
+                    android:layout_marginTop="@dimen/px_34"
                     android:text="@string/service_classify_recommend"
                     android:textColor="@color/base_text_info_color"
                     android:textSize="@dimen/font_size_18" />
@@ -70,12 +70,12 @@
                     android:id="@+id/service_classify_you_recommend_mGridView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dimen_24"
+                    android:layout_marginTop="@dimen/px_24"
                     android:listSelector="@android:color/transparent"
                     android:numColumns="3"
                     android:scrollbars="none"
-                    android:horizontalSpacing="@dimen/dimen_5"
-                    android:verticalSpacing="@dimen/dimen_40">
+                    android:horizontalSpacing="@dimen/px_5"
+                    android:verticalSpacing="@dimen/px_40">
                 </anjuyi.cc.edeco.view.GridViewForScrollView>
 
             <!-- 整个品牌推荐-->
@@ -90,7 +90,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_34"
+                    android:layout_marginTop="@dimen/px_34"
                     android:text="@string/service_classify_brand_recommend"
                     android:textColor="@color/base_text_info_color"
                     android:textSize="@dimen/font_size_18" />
@@ -100,12 +100,12 @@
                     android:id="@+id/service_classify_brand_recommend_mGridViews"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dimen_24"
+                    android:layout_marginTop="@dimen/px_24"
                     android:listSelector="@android:color/transparent"
                     android:numColumns="3"
                     android:scrollbars="none"
-                    android:horizontalSpacing="@dimen/dimen_5"
-                    android:verticalSpacing="@dimen/dimen_40">
+                    android:horizontalSpacing="@dimen/px_5"
+                    android:verticalSpacing="@dimen/px_40">
                 </anjuyi.cc.edeco.view.GridViewForScrollView>
 
             </LinearLayout>

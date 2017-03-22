@@ -46,8 +46,8 @@
                     android:id="@+id/toutiao"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_80"
-                    android:layout_marginLeft="@dimen/dimen_20"
-                    android:layout_marginRight="@dimen/dimen_30"
+                    android:layout_marginLeft="@dimen/px_20"
+                    android:layout_marginRight="@dimen/px_30"
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical" />
        <TextView

@@ -36,9 +36,6 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
 
         cancelLoading();
         //统一处理请求异常的情况
-
-
-
         if (e instanceof SocketTimeoutException) {
             Toast.makeText(context, "网络连接超时，请稍后再试", Toast.LENGTH_SHORT).show();
         } else if (e instanceof ConnectException) {
@@ -49,7 +46,6 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
             e.printStackTrace();
         }
         _onError();
-
     }
 
     @Override

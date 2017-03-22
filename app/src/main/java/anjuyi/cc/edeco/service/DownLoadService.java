@@ -145,29 +145,6 @@ public class DownLoadService extends Service {
         return builder.build();
     }
 
-//    private FileCallBack f = new FileCallBack(BaseApplication.AJYFILE, FIlENAME) {
-//
-//
-//        @Override
-//        public void inProgress(float progress, long total, int id) {
-//            super.inProgress(progress, total, id);
-//            updateNotification((int)(progress * 100) );
-//        }
-//
-//        @Override
-//        public void onError(Call call, Exception e, int id) {
-//
-//            downloadfailure();
-//        }
-//
-//
-//        @Override
-//        public void onResponse(File response, int id) {
-//            cancelNotification();
-//           installApk(response);
-//        }
-//    };
-
     /**
      * 初始化Notification通知
      */

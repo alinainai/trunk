@@ -8,45 +8,35 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adorkable.iosdialog.ActionSheetDialog;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseActivity;
 import anjuyi.cc.edeco.base.BaseApplication;
+import anjuyi.cc.edeco.bean.user.User;
+import anjuyi.cc.edeco.https.AppHttpApi;
 import anjuyi.cc.edeco.https.HttpResult;
+import anjuyi.cc.edeco.https.net.NetManager;
+import anjuyi.cc.edeco.https.rx.RxManager;
 import anjuyi.cc.edeco.ui.activity.utils.ImageZoomActivity;
-import anjuyi.cc.edeco.util.GlideUtils;
 import anjuyi.cc.edeco.util.Loading;
 import anjuyi.cc.edeco.util.NetUtils;
-import anjuyi.cc.edeco.util.ToastUtils;
 import anjuyi.cc.edeco.view.CircleImageView;
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
+import rx.Subscriber;
 
 /**
  * Created by ly on 2016/6/24.
@@ -67,41 +57,40 @@ public class MineDetailActivity extends BaseActivity {
     @BindView(R.id.detail_headIcon_rl)
     RelativeLayout detailHeadIconRl;//头像选择
     @BindView(R.id.detail_nickName_tv)
-    TextView detailNickNameTv;
-    @BindView(R.id.img1)
-    ImageView img1;
+    TextView detailNickNameTv;  //昵称
     @BindView(R.id.detail_nickName_rl)
     RelativeLayout detailNickNameRl;
     @BindView(R.id.userName)
-    TextView userName;
-    @BindView(R.id.img7)
-    ImageView img7;
+    TextView userName;  //用户名
     @BindView(R.id.detail_userName_rl)
     RelativeLayout detailUserNameRl;
     @BindView(R.id.detail_sex_tv)
-    TextView detailSexTv;
-    @BindView(R.id.img2)
-    ImageView img2;
+    TextView detailSexTv; //性别
     @BindView(R.id.detail_sex_rl)
     RelativeLayout detailSexRl;
     @BindView(R.id.detail_birthday_tv)
-    TextView detailBirthdayTv;
-    @BindView(R.id.img3)
-    ImageView img3;
+    TextView detailBirthdayTv; //生日
     @BindView(R.id.detail_birthday_rl)
     RelativeLayout detailBirthdayRl;
     @BindView(R.id.detail_phone_tv)
-    TextView detailPhoneTv;
-    @BindView(R.id.img4)
-    ImageView img4;
+    TextView detailPhoneTv; //手机号
     @BindView(R.id.detail_band_phone_rl)
     RelativeLayout detailBandPhoneRl;
-    @BindView(R.id.img6)
-    ImageView img6;
     @BindView(R.id.detail_service_address_rl)
     RelativeLayout detailServiceAddressRl;
+
+
+    private User user;
+
     private File tempFile;//图片文件
-    private String url = "http://10.100.24.108:8080/mvc/statics/image/banner_2.jpg";
+
+
+    //测试数据
+    private String banner_1="http://pic65.nipic.com/file/20150419/8684504_205612692746_2.jpg";
+    private String banner_2="http://img5.imgtn.bdimg.com/it/u=1002453751,940470370&fm=21&gp=0.jpg";
+    private String banner_3="http://img3.imgtn.bdimg.com/it/u=1530315978,2251709607&fm=21&gp=0.jpg";
+    private String banner_4="http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=185a9dbd3f01213fcf6646d861d71ae7/3c6d55fbb2fb4316f868d31e26a4462309f7d35b.jpg";
+    private String banner_5="http://img.52fuqing.com/upload/editor/2016-11-7/201611713521203du0j0.jpg";
 
     /**
      * @param dirPath
@@ -133,7 +122,6 @@ public class MineDetailActivity extends BaseActivity {
             tempFile = new File(checkDirPath(BaseApplication.AJYFILE_IMG),
                     "icon" + ".jpg");
         }
-
     }
 
     @Override
@@ -144,6 +132,12 @@ public class MineDetailActivity extends BaseActivity {
     @Override
     public void initData() {
 
+        user=BaseApplication.instance.getUser();
+        detailNickNameTv.setText(TextUtils.isEmpty(user.getNickname())?"未设置":user.getNickname());
+        userName.setText(TextUtils.isEmpty(user.getUsername())?"未设置":user.getUsername());
+        detailSexTv.setText(TextUtils.isEmpty(user.getSex())?"未设置":user.getSex());
+        detailPhoneTv.setText(TextUtils.isEmpty(user.getPhone())?"未设置":user.getPhone());
+        detailBirthdayTv.setText(TextUtils.isEmpty(user.getBirthday())?"未设置":user.getBirthday());
 
     }
 
@@ -157,7 +151,11 @@ public class MineDetailActivity extends BaseActivity {
                 Intent intent = new Intent(context, ImageZoomActivity.class);
                 ArrayList<String> urls = new ArrayList<>();
                 //测试数据   --------------------------
-                urls.add(url);
+                urls.add(banner_1);
+                urls.add(banner_2);
+                urls.add(banner_3);
+                urls.add(banner_4);
+                urls.add(banner_5);
                 intent.putStringArrayListExtra("imgpath", urls);
                 startActivity(intent);
                 break;
@@ -227,11 +225,6 @@ public class MineDetailActivity extends BaseActivity {
 
                 if (resultCode == RESULT_OK) {
                     if (intent != null) {
-                      /*  Uri uri = intent.getData();
-                        if (uri == null) {
-                            return;
-                        }
-                        mineUserIconImg.setImageURI(uri);*/
                         setImageToHeadView(intent, tempFile);
                     }
                 }
@@ -240,7 +233,6 @@ public class MineDetailActivity extends BaseActivity {
                 break;
         }
     }
-
     /**
      * 裁剪原始的图片
      */
@@ -258,24 +250,6 @@ public class MineDetailActivity extends BaseActivity {
         intent.putExtra("return-data", true);
         startActivityForResult(intent, CROP_PHOTO);
     }
-
-
-    /**
-     * 打开截图界面
-     * @param uri 原图的Uri
-     *//*
-    public void starCropPhoto(Uri uri) {
-
-        if (uri == null) {
-            return;
-        }
-        Intent intent = new Intent();
-        intent.setClass(this, ClipHeaderActivity.class);
-        intent.setData(uri);
-        intent.putExtra("side_length", 200);//裁剪图片宽高
-        startActivityForResult(intent, CROP_PHOTO);
-    }*/
-
     /**
      * 提取保存裁剪之后的图片数据，并设置头像部分的View
      */
@@ -290,74 +264,28 @@ public class MineDetailActivity extends BaseActivity {
                 out.flush();
                 out.close();
                 if (NetUtils.isConnected(context)) {
+                    Loading.show();
                     RequestBody imgbody = RequestBody.create(MediaType.parse("multipart/form-data"), f);
                     RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "123456");
-//                    RxManager.getInstance().doSubscribe1(NetManager.getInstance().create(AppHttpApi.uploadIcon.class).
-//                                    getIconUrl(imgbody, name),
-//                            new RxSubscriber<String>(true) {
-//                                @Override
-//                                protected void _onNext(String url) {
-//                                    f.delete();
-//                                    GlideUtils.getInstance().displayImage(context, url, mineUserIconImg);
-//                                    Loading.destroy();
-//                                }
-//                                @Override
-//                                protected void _onError() {
-//                                    ToastUtils.show(context, "请求失败", 0);
-//                                }
-//                            });
-
-                    Loading.show();
-                    MultipartBody.Builder builder = new MultipartBody.Builder();
-                    //设置类型
-                    builder.setType(MultipartBody.FORM);
-                    //追加参数
-                    builder.addFormDataPart("username", "123456");
-                    builder.addFormDataPart("attach", "icon.jpg", imgbody);
-                    //创建RequestBody
-                    RequestBody body = builder.build();
-                    //创建Request
-                     Request request = new Request.Builder().url("http://10.100.24.108:8080/mvc/user/updateicon.do").post(body).build();
-                     Call call = new OkHttpClient().newBuilder().writeTimeout(15, TimeUnit.SECONDS).build().newCall(request);
-                    call.enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            Loading.destroy();
-                            Log.e(TAG, e.toString());
-                            if (e instanceof SocketTimeoutException) {
-                                Toast.makeText(context, "网络连接超时，请稍后再试", Toast.LENGTH_SHORT).show();
-                            } else if (e instanceof ConnectException) {
-                                Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
-                            } else if (e instanceof IOException) {
-                                Toast.makeText(context, "网络链接异常...", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-
-                            Loading.destroy();
-                            if (response.isSuccessful()) {
-                                String string = response.body().string();
-                              final  HttpResult bean= new Gson().fromJson( string, HttpResult.class);
-                                if(bean.getCode()==1000){
-                                    mineUserIconImg.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            GlideUtils.getInstance().displayImage(context,(String) bean.getResults(), mineUserIconImg);
-                                        }
-                                    });
+                    RxManager.getInstance().doSubscribe(NetManager.getInstance().create(AppHttpApi.uploadIcon.class).
+                                    getIconUrl(imgbody, name),
+                            new Subscriber<HttpResult<String>>() {
+                                @Override
+                                public void onCompleted() {
+                                    Loading.destroy();
                                 }
-                                Log.e(TAG, "response ----->" + string);
-                            } else {
-                                ToastUtils.show(context, "参数异常，上传头像失败", 0);
-                            }
-                        }
-                    });
 
-                } else {
-                    ToastUtils.show(context, "网络状态异常", 0);
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.e("TAG",e.toString());
+                                    Loading.destroy();
+                                }
+
+                                @Override
+                                public void onNext(HttpResult<String> s) {
+                                    Log.e("TAG",s.toString());
+                                }
+                            });
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -365,6 +293,5 @@ public class MineDetailActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
-
     }
 }

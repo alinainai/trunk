@@ -10,7 +10,7 @@
     <!-- 反馈类型 -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_80"
+        android:layout_height="@dimen/px_80"
         android:background="@drawable/layout_selector_bg">
 
         <!-- 反馈类型的字 -->
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginLeft="@dimen/px_30"
             android:text="@string/feed_back_type"
             android:textColor="@color/base_text_color"
             android:textSize="@dimen/font_size_30" />
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginLeft="@dimen/px_30"
             android:layout_toLeftOf="@+id/feed_back_right_img"
             android:text="@string/feed_function_opinion"
             android:textColor="@color/base_text_info_color"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_marginRight="@dimen/px_20"
             android:src="@drawable/con_btn_right" />
     </RelativeLayout>
 
@@ -49,11 +49,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20"
+        android:layout_marginTop="@dimen/px_20"
         android:background="@color/white"
-        android:minHeight="@dimen/dimen_350"
+        android:minHeight="@dimen/px_350"
         android:orientation="vertical"
-        android:padding="@dimen/dimen_20">
+        android:padding="@dimen/px_20">
 
         <EditText
             android:id="@+id/feed_back_input_ed"
@@ -63,7 +63,7 @@
             android:gravity="top"
             android:hint="@string/feed_back_input_hint"
             android:maxLines="100"
-            android:minHeight="@dimen/dimen_260"
+            android:minHeight="@dimen/px_260"
             android:textColor="@color/base_text_color"
             android:textColorHint="@color/base_search_hint_color"
             android:textSize="@dimen/font_size_28" />
@@ -71,7 +71,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_14"
+            android:layout_marginTop="@dimen/px_14"
             android:gravity="right"
             android:maxLength="100"
             android:text="@string/feed_back_input_tv"
@@ -83,11 +83,11 @@
     <EditText
         android:id="@+id/feed_back_phone_input_ed"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_80"
-        android:layout_marginTop="@dimen/dimen_20"
+        android:layout_height="@dimen/px_80"
+        android:layout_marginTop="@dimen/px_20"
         android:background="@color/white"
         android:hint="@string/feed_back_phone_input"
-        android:paddingLeft="@dimen/dimen_30"
+        android:paddingLeft="@dimen/px_30"
         android:textColor="@color/base_text_color"
         android:textColorHint="@color/base_search_hint_color"
         android:textSize="@dimen/font_size_28" />
@@ -95,12 +95,11 @@
     <!-- 提交按钮 -->
     <Button
         android:id="@+id/feed_back_submit_btn"
-        android:layout_width="@dimen/dimen_480"
-        android:layout_height="@dimen/dimen_80"
+        android:layout_width="@dimen/px_480"
+        android:layout_height="@dimen/px_80"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dimen_120"
-        android:background="@mipmap/main_btn_qt"
-        android:padding="@dimen/dimen_0"
+        android:layout_marginTop="@dimen/px_120"
+        android:padding="0dp"
         android:text="提交"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_32" />

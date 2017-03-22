@@ -12,6 +12,7 @@ import anjuyi.cc.edeco.base.BaseActivity;
 import butterknife.BindView;
 
 /**
+ * 产品详情页
  * Created by li on 2016/6/20.
  */
 public class ProductDetailsActivity extends BaseActivity {

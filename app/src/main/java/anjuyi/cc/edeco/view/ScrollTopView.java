@@ -54,7 +54,6 @@ public class ScrollTopView extends LinearLayout {
         this.articleList = articleList;
         if (articleList != null) {
             removeAllViews();
-            //Log.i("tag", articleList.size() + "");
             int size = articleList.size(); //> 1 ? 4 : articleList.size();
             for (int i = 0; i < size; i++) {
                 addContentView(i);
@@ -64,7 +63,7 @@ public class ScrollTopView extends LinearLayout {
                 // 滚动
                 cancelAuto();
                 mHandler.sendEmptyMessageDelayed(0, DURING_TIME);
-                smoothScrollBy(0, DensityUtils.dp2px(context, distance));
+                smoothScrollBy(0, distance);
             }
         }
     }
@@ -135,7 +134,7 @@ public class ScrollTopView extends LinearLayout {
         public void handleMessage(android.os.Message msg) {
             mHandler.removeMessages(0);
             mHandler.sendEmptyMessageDelayed(0, DURING_TIME);
-            smoothScrollBy(0, DensityUtils.dp2px(context, distance));
+            smoothScrollBy(0, distance);
             resetView();
         };
     };

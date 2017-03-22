@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_110" >
+        android:layout_height="@dimen/px_110" >
 
         <View
             style="@style/divider"
@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/dimen_10"
+            android:paddingLeft="@dimen/px_10"
             android:visibility="visible" >
 
             <ImageView
@@ -30,8 +30,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="@dimen/dimen_260"
-            android:layout_height="@dimen/dimen_60"
+            android:layout_width="@dimen/px_260"
+            android:layout_height="@dimen/px_60"
             android:layout_centerInParent="true"
             android:orientation="horizontal" >
 
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dimen_30"
+            android:layout_marginEnd="@dimen/px_30"
             android:src="@mipmap/icon_search"
             android:visibility="invisible" />
     </RelativeLayout>
@@ -72,13 +72,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <com.jude.easyrecyclerview.EasyRecyclerView
+    <RecyclerView
         android:paddingTop="8dp"
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:scrollbarStyle="insideOverlay"
-
         />
         <!--app:layout_progress="@layout/footerview"-->
         <!--app:layout_empty="@layout/view_empty"-->

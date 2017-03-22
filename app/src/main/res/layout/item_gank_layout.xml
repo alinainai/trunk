@@ -31,6 +31,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:maxLines="2"
                 android:id="@+id/gank_item_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

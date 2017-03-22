@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="anjuyi.cc.edeco.ui.activity.test.DownLoadActivity">
+    >
 
     <Button
         android:layout_width="match_parent"
@@ -32,6 +32,15 @@
         android:id="@+id/btn2"
         android:text="下载"
         />
+    <com.zhy.view.flowlayout.TagFlowLayout
+        app:gravity="right"
+        android:id="@+id/id_flowlayout"
+        app:max_select="-1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+
+
 
 
 </LinearLayout>

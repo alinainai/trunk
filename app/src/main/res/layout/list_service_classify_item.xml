@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_100"
+    android:layout_height="@dimen/px_100"
     android:orientation="horizontal" >
 
     <View
         android:id="@+id/line"
-        android:layout_width="@dimen/dimen_10"
+        android:layout_width="@dimen/px_10"
         android:layout_height="match_parent"
         android:background="@color/order_dialog_info_color" />
 
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/service_classify_item_background"
         android:gravity="center"
-        android:padding="@dimen/dimen_0"
+        android:padding="0dp"
         android:textSize="@dimen/font_size_24" />
 
 </LinearLayout>

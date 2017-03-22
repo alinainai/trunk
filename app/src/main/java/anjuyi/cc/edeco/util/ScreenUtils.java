@@ -40,6 +40,7 @@ public class ScreenUtils {
         return outMetrics.heightPixels;
     }
 
+
     /**
      * 获得状态栏的高度
      */

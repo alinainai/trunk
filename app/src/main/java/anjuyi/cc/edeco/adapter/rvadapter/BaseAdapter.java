@@ -16,6 +16,8 @@ import java.util.List;
 /**
  * Author: Othershe
  * Time: 2016/8/29 09:46
+ * 上拉加载的recyclerview的适配器
+ *
  */
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TYPE_COMMON_VIEW = 100001;

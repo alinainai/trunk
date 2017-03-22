@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+
     <declare-styleable name="Lock9View">
         <attr name="nodeSrc" format="color|reference" />
         <attr name="nodeOnSrc" format="color|reference" />
@@ -51,4 +53,38 @@
         <!--下划线跳动的速度，从1-10-->
         <attr name="lineSpeed" format="integer"/>
     </declare-styleable>
+
+
+    <declare-styleable name="WheelView">
+        <attr name="unitHeight" format="dimension" />
+        <attr name="itemNumber" format="integer"/>
+
+        <attr name="normalTextColor" format="color" />
+        <attr name="normalTextSize" format="dimension" />
+        <attr name="selectedTextColor" format="color" />
+        <attr name="selectedTextSize" format="dimension" />
+
+        <attr name="lineColor_w" format="color" />
+        <attr name="lineHeight" format="dimension" />
+
+        <attr name="maskHeight" format="dimension"/>
+        <attr name="noEmpty" format="boolean"/>
+        <attr name="isEnable" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="RingView">
+        <!--环形比例图的尺寸-->
+        <attr name="ringSize" format="dimension" />
+        <!--环形的宽度-->
+        <attr name="ring_strokeWidth" format="dimension" />
+        <!--环形的对齐方式-->
+        <attr name="align" format="enum">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="center_horizontal" value="3" />
+            <enum name="center_vertical" value="4" />
+        </attr>
+    </declare-styleable>
+
 </resources>

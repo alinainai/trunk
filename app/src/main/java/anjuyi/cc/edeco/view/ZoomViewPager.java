@@ -48,7 +48,7 @@ public class ZoomViewPager extends ViewPager {
     public boolean onInterceptTouchEvent(MotionEvent event) {
         try {
             return super.onInterceptTouchEvent(event);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return false;
         }
     }

@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
 
-import anjuyi.cc.edeco.ui.activity.test.TestActivity;
+import anjuyi.cc.edeco.bean.message.BannerBean;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -33,7 +35,28 @@ public class JpushLtdService extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-            processCustomMessage(context, bundle);
+
+            BannerBean bean= new Gson().fromJson( bundle.getString(JPushInterface.EXTRA_MESSAGE), BannerBean.class);
+
+         //   BadgeUtil.setBadgeCount(bean.getTitle(),bean.getInfo(),context,Integer.valueOf(bean.getExtra()));
+
+//            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+//                    .setSmallIcon(R.mipmap.ic_launcher)
+//                    .setContentTitle(bean.getTitle())
+//                    .setContentText(bean.getInfo());
+//            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
+//
+//            Notification notification = builder.build();
+//            try {
+//                Field field = notification.getClass().getDeclaredField("extraNotification");
+//                Object extraNotification = field.get(notification);
+//                Method method = extraNotification.getClass().getDeclaredMethod("setMessageCount", int.class);
+//                method.invoke(extraNotification,Integer.valueOf(bean.getExtra()));
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            managerCompat.notify(0, notification);
+         //   processCustomMessage(context, bundle);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
@@ -43,10 +66,10 @@ public class JpushLtdService extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
-            Intent i = new Intent(context, TestActivity.class);
-            i.putExtras(bundle);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            context.startActivity(i);
+//            Intent i = new Intent(context, TestActivity.class);
+//            i.putExtras(bundle);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            context.startActivity(i);
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
@@ -92,6 +115,10 @@ public class JpushLtdService extends BroadcastReceiver {
         }
         return sb.toString();
     }
+
+
+
+
 
     //send msg to MpchartActivity
     private void processCustomMessage(Context context, Bundle bundle) {

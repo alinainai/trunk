@@ -38,6 +38,8 @@ public class RxManager {
                 .map(new Func1<HttpResult<T>, T>() {
                     @Override
                     public T call(HttpResult<T> httpResult) {
+
+                        //如果
                         if (httpResult.getCode()!=0000) {
 
 

@@ -24,6 +24,7 @@ import anjuyi.cc.edeco.base.BaseFragment;
 import anjuyi.cc.edeco.base.mvp.BaseMvpFragment;
 import anjuyi.cc.edeco.ui.fragment.classify.GankItemFragment;
 import anjuyi.cc.edeco.util.AppUtils;
+import anjuyi.cc.edeco.util.ScreenUtils;
 import anjuyi.cc.edeco.view.CircleImageView;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,10 +41,6 @@ public class ClassifyFragment extends BaseFragment {
     LinearLayout llBack;
     @BindView(R.id.main_cart_title)
     TextView mainCartTitle;
-    @BindView(R.id.tvRight)
-    TextView tvRight;
-    @BindView(R.id.img_cart_right)
-    ImageView imgCartRight;
     @BindView(R.id.tablayout)
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
@@ -52,13 +49,12 @@ public class ClassifyFragment extends BaseFragment {
     NavigationView mNavView;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-
-    private View view;
+    @BindView(R.id.status_bar)
+    View mStatusBar;
 
     private List<BaseMvpFragment> mFragments;
     private List<String> mTitles= new ArrayList<>();
     private TypePageAdapter mTypeAdapter;
-
 
     public static ClassifyFragment newInstance() {
         return new ClassifyFragment();
@@ -79,6 +75,14 @@ public class ClassifyFragment extends BaseFragment {
         for (String subtype : mTitles) {
             mFragments.add(GankItemFragment.newInstance(subtype));
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mStatusBar.setVisibility(View.VISIBLE);
+            mStatusBar.getLayoutParams().height = ScreenUtils.getStatusHeight(context);
+            mStatusBar.setLayoutParams(mStatusBar.getLayoutParams());
+        } else {
+            mStatusBar.setVisibility(View.GONE);
+        }
+
         initNavigationView();
         mTypeAdapter = new TypePageAdapter(getChildFragmentManager());
         mTypeAdapter.setData(mFragments, mTitles);
@@ -131,16 +135,13 @@ public class ClassifyFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.ll_back, R.id.img_cart_right})
+    @OnClick({R.id.ll_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_back:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.img_cart_right:
 
-
-                break;
         }
     }
     public class TypePageAdapter extends FragmentPagerAdapter {
