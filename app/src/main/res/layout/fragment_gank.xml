@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/money_color" />
+
+        <include
+            layout="@layout/default_main_cart_title" />
+
+        <in.srain.cube.views.ptr.PtrClassicFrameLayout
+            android:id="@+id/rotate_header_view_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            app:ptr_duration_to_close="1000"
+            app:ptr_duration_to_close_header="1000"
+            app:ptr_keep_header_when_refresh="true"
+            app:ptr_pull_to_fresh="false"
+            app:ptr_ratio_of_header_height_to_refresh="1.0"
+            app:ptr_resistance="2.0">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_margin="3dp"
+                android:id="@+id/rl_gank"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_refresh"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/ic_refresh_normal"
+        android:background="@mipmap/circle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        />
+
+
+</RelativeLayout>
