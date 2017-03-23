@@ -24,7 +24,7 @@ import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.adapter.ViewPaperAdapter;
 import anjuyi.cc.edeco.base.BaseActivity;
 import anjuyi.cc.edeco.base.Const;
-import anjuyi.cc.edeco.mathro.BlankActivity;
+import anjuyi.cc.edeco.ui.MainActivity;
 import anjuyi.cc.edeco.ui.activity.utils.DepthPageTransformer;
 import anjuyi.cc.edeco.util.AppUtils;
 import anjuyi.cc.edeco.util.SPUtils;
@@ -164,7 +164,7 @@ public class SplashActivity extends BaseActivity {
                     TIME_COUNT--;
                     if(TIME_COUNT <1){
                         timer.cancel();
-                        Intent intent = new Intent(context, BlankActivity.class);
+                        Intent intent = new Intent(context, MainActivity.class);
                         startActivity(intent);
                         finish();
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -220,14 +220,14 @@ public class SplashActivity extends BaseActivity {
             case R.id.btn_go:
                 SPUtils.saveString(context, Const.APP_VERSION, AppUtils.getVersionName(context));
                 SPUtils.saveBoolean(context, Const.FIRST_LOGIN, false);
-                Intent intent_main = new Intent(this, BlankActivity.class);
+                Intent intent_main = new Intent(this, MainActivity.class);
                 startActivity(intent_main);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 finish();
                 break;
             case R.id.rl_skip:
                 timer.cancel();
-                Intent intent = new Intent(context, BlankActivity.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseActivity;
-import anjuyi.cc.edeco.mathro.BlankActivity;
+import anjuyi.cc.edeco.ui.MainActivity;
 import anjuyi.cc.edeco.util.ToastUtils;
 import anjuyi.cc.edeco.view.Lock9View;
 import butterknife.BindView;
@@ -121,7 +121,7 @@ public class GuesterActivity extends BaseActivity {
                 if (lock_key.equals(password)) {
                   //  SPUtils.getInstance().putString(userMobile + Const.LOCK_KEEP_KEY, lock_key);
                     ToastUtils.showShort(context, "手势密码设置成功");
-                    startActivity(new Intent(GuesterActivity.this, BlankActivity.class));
+                    startActivity(new Intent(GuesterActivity.this, MainActivity.class));
                     finish();
                     overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
                 } else {
@@ -138,7 +138,7 @@ public class GuesterActivity extends BaseActivity {
                 finish();
                 overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
                 if ("TestActivity".equals(from)) {//表示由splash界面挑来的
-                    startActivity(new Intent(GuesterActivity.this, BlankActivity.class));
+                    startActivity(new Intent(GuesterActivity.this, MainActivity.class));
                     finish();
                     overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
                 } else {//表示由推出登陆界面进来的

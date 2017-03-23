@@ -14,8 +14,7 @@ import java.util.List;
  *
  * Created by mrsimple on 25/9/15.
  */
-public abstract class RecyclerAdapter<D>
-        extends RecyclerView.Adapter<RecyclerViewHolder> {
+public abstract class RecyclerAdapter<D> extends RecyclerView.Adapter<RecyclerViewHolder> {
     /**
      * 数据集
      */
@@ -203,7 +202,6 @@ public abstract class RecyclerAdapter<D>
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
-
 
     /**
      * 点击事件Listener

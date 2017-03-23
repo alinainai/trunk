@@ -93,19 +93,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".mathro.NaviActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-
-
-        <!-- 框架搭建MainActivity -->
-        <activity
-            android:name=".mathro.BlankActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
 
         <!-- 欢迎界面 -->
         <activity
@@ -190,9 +177,6 @@
             android:screenOrientation="portrait" />
 
         <!-- 图片选择界面 -->
-        <activity
-            android:name=".ui.activity.utils.ImageSelectorActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.login.GuesterActivity"
             android:screenOrientation="portrait"

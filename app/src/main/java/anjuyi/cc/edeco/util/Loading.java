@@ -4,14 +4,10 @@ package anjuyi.cc.edeco.util;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import anjuyi.cc.edeco.R;
-
-import static anjuyi.cc.edeco.R.style.custom_dialog;
 
 
 public class Loading {
@@ -32,11 +28,11 @@ public class Loading {
             w.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
             loading.show();
             w.setContentView(R.layout.activity_loading);
-           //   自定义动画
-            	ImageView proImageView=(ImageView) w.findViewById(R.id.progressBar);
-            	proImageView.setBackgroundResource(R.drawable.loading);
-            	AnimationDrawable animation = (AnimationDrawable) proImageView.getBackground();
-            	animation.start();
+//           //   自定义动画
+//            	ImageView proImageView=(ImageView) w.findViewById(R.id.progressBar);
+//            	proImageView.setBackgroundResource(R.drawable.loading);
+//            	AnimationDrawable animation = (AnimationDrawable) proImageView.getBackground();
+//            	animation.start();
         }
         loading.show();
     }

@@ -101,7 +101,7 @@ public class ScrollTopView extends LinearLayout {
         ViewHolder mHolder;
         if (position >= getChildCount()) {
             mHolder = new ViewHolder();
-            View v = View.inflate(getContext(), R.layout.view_banner_item, null);
+            View v = View.inflate(getContext(), R.layout.activity_address, null);
             mHolder.title = (TextView) v.findViewById(R.id.title);
             mHolder.info = (TextView) v.findViewById(R.id.info);
             mHolder.img = (ImageView) v.findViewById(R.id.icon);

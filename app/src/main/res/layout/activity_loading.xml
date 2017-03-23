@@ -5,15 +5,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@drawable/shape_loading"
     android:alpha="0.8"
      >
       <!--  android:background="@drawable/shape_loading"-->
 
 
-        <ImageView
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!--<ImageView-->
+            <!--android:id="@+id/progressBar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
 
 
 
@@ -26,11 +27,11 @@
         app:matProg_barColor="@color/base_background"
         app:matProg_progressIndeterminate="true" />-->
 
-    <!--<android.support.v4.widget.ContentLoadingProgressBar-->
-        <!--android:id="@+id/progressbar"-->
-        <!--style="?android:attr/progressBarStyleSmall"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="10dp" />-->
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

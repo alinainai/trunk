@@ -1,11 +1,9 @@
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:id="@+id/coordinator_layout"
-    android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <include layout="@layout/default_main_cart_title" />
@@ -18,13 +16,12 @@ android:layout_height="match_parent">
         android:background="@color/white"
         app:tabIndicatorColor="@color/order_dialog_info_color"
         app:tabSelectedTextColor="@color/order_dialog_info_color"
-        app:tabTextColor="#666"
-        />
+        app:tabTextColor="#666" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        />
+        android:layout_height="fill_parent" />
     <!--android:flipInterval="30"-->
     <!--android:persistentDrawingCache="animation"-->
 </LinearLayout>
