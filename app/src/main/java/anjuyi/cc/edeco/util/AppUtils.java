@@ -57,7 +57,6 @@ public class AppUtils {
         return df.format(number);
     }
 
-
     /**
      * 手机验证码
      */
@@ -136,8 +135,6 @@ public class AppUtils {
                     .getSystemService(Context.TELEPHONY_SERVICE);
             return tm.getDeviceId();
     }
-
-
     /**
      * base64加密
      */

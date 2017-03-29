@@ -93,18 +93,21 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-
         <!-- 欢迎界面 -->
         <activity
             android:name=".ui.activity.login.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoStatus">
+            android:theme="@style/startpage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 广告界面 -->
+        <activity
+            android:name=".ui.activity.login.AdActivity"
+            android:screenOrientation="portrait"
+            />
         <!-- 消息中心 -->
         <activity
             android:name=".ui.activity.mine.MessageCenterActivity"
@@ -159,8 +162,10 @@
         <!-- 登陆界面 -->
         <activity
             android:name=".ui.activity.login.LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
         <!-- 注册界面 -->
         <activity
             android:name=".ui.activity.login.RegisterActivity"

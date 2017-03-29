@@ -2,6 +2,7 @@ package anjuyi.cc.edeco.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,10 +17,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import anjuyi.cc.edeco.bean.user.User;
+import anjuyi.cc.edeco.ui.activity.login.GuesterActivity;
 import anjuyi.cc.edeco.util.Loading;
 import anjuyi.cc.edeco.util.SDCardUtils;
 import anjuyi.cc.edeco.util.SPUtils;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by ly on 2016/5/27 11:39.
@@ -37,10 +38,8 @@ public class BaseApplication extends MultiDexApplication {
     public static final String DATABASE= BaseApplication.AJYFILE + "/" + "address.sqlite";     //日志文件夹
     public static final String AJYFILE_LOG_TXT= "file_log_txt.txt";     //日志文件
 
-
     private int activityCount;//activity的count数
     public boolean isBackGround=false;//是否在前台
-
 
     @Override
     public void onCreate() {
@@ -84,8 +83,8 @@ public class BaseApplication extends MultiDexApplication {
         instance = this;//初始化appliacation
         Loading.init(this);//封装loading
         //极光推送
-        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);     		// 初始化 JPush
+      //  JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+       // JPushInterface.init(this);     		// 初始化 JPush
         //微信 appid appsecret
         PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
         //新浪微博 appkey appsecret
@@ -107,18 +106,18 @@ public class BaseApplication extends MultiDexApplication {
                 if(isBackGround){
                     if( System.currentTimeMillis()- SPUtils.loadLong(BaseApplication.this,"locktime",0)>1000*10){
 
-//                        if(!"TestActivity".equals(activity.getClass().getSimpleName()) &&
-//                                !"SplashActivity".equals(activity.getClass().getSimpleName()) &&
-//                                !"LoginActivity".equals(activity.getClass().getSimpleName()) &&
-//                                !"RegisterActivity".equals(activity.getClass().getSimpleName()) &&
-//                                !"MineDetailActivity".equals(activity.getClass().getSimpleName()) &&
-//                                !"GuesterActivity".equals(activity.getClass().getSimpleName())
-//                                ){
-//                            Intent intent = new Intent(activity, GuesterActivity.class);
-//                            intent.putExtra("from",activity.getClass().getSimpleName());
-//                            activity.startActivity(intent);
-//                            activity.overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
-//                        }
+                        if(!"TestActivity".equals(activity.getClass().getSimpleName()) &&
+                                !"SplashActivity".equals(activity.getClass().getSimpleName()) &&
+                                !"LoginActivity".equals(activity.getClass().getSimpleName()) &&
+                                !"RegisterActivity".equals(activity.getClass().getSimpleName()) &&
+                                !"MineDetailActivity".equals(activity.getClass().getSimpleName()) &&
+                                !"GuesterActivity".equals(activity.getClass().getSimpleName())
+                                ){
+                            Intent intent = new Intent(activity, GuesterActivity.class);
+                            intent.putExtra("from",activity.getClass().getSimpleName());
+                            activity.startActivity(intent);
+                            activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                        }
                     }
                 }
                 activityCount++;

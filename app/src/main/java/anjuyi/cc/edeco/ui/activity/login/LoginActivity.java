@@ -218,15 +218,15 @@ public class LoginActivity extends BaseActivity {
 
             case R.id.back_to_login:
                 finish();
-                overridePendingTransition(R.anim.anim_show,R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.logup_phone:
                 startActivity(new Intent(context,RegisterActivity.class));
-                overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.forget_pwd:
                 startActivity(new Intent(context,ResetPwdActivity.class));
-                overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 finish();
                 break;
             case R.id.btn_login:
@@ -239,7 +239,7 @@ public class LoginActivity extends BaseActivity {
                 SPUtils.saveString(context, Const.USER_INFO,new Gson().toJson(user),toString());
                 SPUtils.saveBoolean(context, Const.LOGIN_STATE,true);
                 finish();
-                overridePendingTransition(R.anim.anim_show,R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
 //                Loading.show();
 //                RxManager.getInstance().doSubscribe(NetManager.getInstance().create(AppHttpApi.UserApi.class).
@@ -282,6 +282,6 @@ public class LoginActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        overridePendingTransition(R.anim.anim_show,R.anim.anim_dismiss);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 }

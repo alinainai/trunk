@@ -52,7 +52,7 @@ public class AccountFragment extends BaseFragment {
             mStatusBar.setVisibility(View.GONE);
         }
 
-        rl_title.setBackgroundColor(getResources().getColor(R.color.money_color));
+        rl_title.setBackgroundColor(getResources().getColor(R.color.cff3e19));
         mainCartTitle.setText("导航界面");
         imgBack.setVisibility(View.GONE);
 

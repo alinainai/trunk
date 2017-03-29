@@ -2,15 +2,11 @@ package anjuyi.cc.edeco.ui.fragment;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,9 +21,7 @@ import anjuyi.cc.edeco.base.mvp.BaseMvpFragment;
 import anjuyi.cc.edeco.ui.fragment.classify.GankItemFragment;
 import anjuyi.cc.edeco.util.AppUtils;
 import anjuyi.cc.edeco.util.ScreenUtils;
-import anjuyi.cc.edeco.view.CircleImageView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by ly on 2016/5/30 11:05.
@@ -45,10 +39,6 @@ public class ClassifyFragment extends BaseFragment {
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
-    @BindView(R.id.main_nav_view)
-    NavigationView mNavView;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
     @BindView(R.id.status_bar)
     View mStatusBar;
 
@@ -69,7 +59,7 @@ public class ClassifyFragment extends BaseFragment {
     @Override
     public void initView() {
         mainCartTitle.setText("分类");
-        imgBack.setImageResource(R.mipmap.menue);
+        llBack.setVisibility(View.GONE);
         mTitles= AppUtils.stringArrayToList(context, R.array.gank);
         mFragments = new ArrayList<>();
         for (String subtype : mTitles) {
@@ -82,8 +72,6 @@ public class ClassifyFragment extends BaseFragment {
         } else {
             mStatusBar.setVisibility(View.GONE);
         }
-
-        initNavigationView();
         mTypeAdapter = new TypePageAdapter(getChildFragmentManager());
         mTypeAdapter.setData(mFragments, mTitles);
         mViewPager.setAdapter(mTypeAdapter);
@@ -102,48 +90,6 @@ public class ClassifyFragment extends BaseFragment {
 
     }
 
-    private void initNavigationView() {
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //将侧边栏顶部延伸至status bar
-            mDrawerLayout.setFitsSystemWindows(true);
-            //将主页面顶部延伸至status bar
-            mDrawerLayout.setClipToPadding(false);
-        }
-        CircleImageView icon = (CircleImageView) mNavView.getHeaderView(0).findViewById(R.id.mine_user_icon_img);
-        TextView name = (TextView) mNavView.getHeaderView(0).findViewById(R.id.nav_head_name);
-        name.setText(R.string.app_name);
-        mNavView.setCheckedItem(R.id.nav_gank);//设置默认选中
-        //设置NavigationView对应menu item的点击事情
-        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_gank:
-                        break;
-                    case R.id.nav_girl:
-                        break;
-                    case R.id.nav_set:
-                        break;
-                    case R.id.nav_about:
-                        break;
-                }
-                //隐藏NavigationView
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
-    }
-
-    @OnClick({R.id.ll_back})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_back:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                break;
-
-        }
-    }
     public class TypePageAdapter extends FragmentPagerAdapter {
         private List<BaseMvpFragment> fragments;
         private List<String> titles;

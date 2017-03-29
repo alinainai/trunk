@@ -3,8 +3,9 @@
     android:id="@+id/rl_title"
     android:layout_width="match_parent"
     android:layout_height="@dimen/px_96"
-    android:background="@color/trans"
-    android:padding="0dp" >
+    android:background="@color/cff3e19"
+    android:padding="0dp"
+    android:transitionName="share">
 
     <View
         android:visibility="gone"
@@ -45,7 +46,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/px_30"
         android:padding="@dimen/px_10"
-        android:textColor="@color/bottom_tab_text_color_pre"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_size_32" />
 
     <ImageView

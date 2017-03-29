@@ -1,1 +1,1 @@
-include ':app', ':ios-style-dialog-library', ':rollviewpager', ':daoexamplegenerator', ':ijkplayerlibrary', ':superplayerlibrary', ':badgeviewlib'
+include ':app', ':ios-style-dialog-library', ':rollviewpager', ':daoexamplegenerator'

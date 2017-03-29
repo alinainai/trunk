@@ -9,7 +9,7 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@color/camera_color" />
+        android:background="@color/cff3e19" />
 
     <!-- 标题 -->
     <include layout="@layout/default_main_cart_title" />
@@ -174,7 +174,7 @@
         android:layout_marginLeft="@dimen/px_30"
         android:layout_marginRight="@dimen/px_30"
         android:layout_marginTop="@dimen/px_20"
-        android:background="@drawable/setting_btn_shape_layout"
+        android:background="@drawable/select_btn_login"
         android:padding="0dp"
         android:text="@string/setting_exit_login"
         android:textColor="@color/white"

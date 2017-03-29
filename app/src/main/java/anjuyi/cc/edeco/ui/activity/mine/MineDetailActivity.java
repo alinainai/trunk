@@ -85,13 +85,6 @@ public class MineDetailActivity extends BaseActivity {
     private File tempFile;//图片文件
 
 
-    //测试数据
-    private String banner_1="http://pic65.nipic.com/file/20150419/8684504_205612692746_2.jpg";
-    private String banner_2="http://img5.imgtn.bdimg.com/it/u=1002453751,940470370&fm=21&gp=0.jpg";
-    private String banner_3="http://img3.imgtn.bdimg.com/it/u=1530315978,2251709607&fm=21&gp=0.jpg";
-    private String banner_4="http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=185a9dbd3f01213fcf6646d861d71ae7/3c6d55fbb2fb4316f868d31e26a4462309f7d35b.jpg";
-    private String banner_5="http://img.52fuqing.com/upload/editor/2016-11-7/201611713521203du0j0.jpg";
-
     /**
      * @param dirPath
      * @return
@@ -141,21 +134,44 @@ public class MineDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ll_back, R.id.mine_user_icon_img, R.id.detail_headIcon_rl, R.id.detail_nickName_rl, R.id.detail_userName_rl, R.id.detail_sex_tv, R.id.detail_sex_rl, R.id.detail_birthday_rl, R.id.detail_band_phone_rl, R.id.detail_service_address_rl})
+    @OnClick({R.id.ll_back, R.id.mine_user_icon_img,
+            R.id.detail_headIcon_rl, R.id.detail_nickName_rl,
+            R.id.detail_userName_rl, R.id.detail_sex_tv, R.id.detail_sex_rl,
+            R.id.detail_birthday_rl, R.id.detail_band_phone_rl,
+            R.id.detail_service_address_rl})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_back:
                 finish();
                 break;
             case R.id.mine_user_icon_img:
+                if(TextUtils.isEmpty(user.getIconImg())){
+                    new ActionSheetDialog(MineDetailActivity.this)
+                            .builder()
+                            .setCancelable(true)
+                            .setCanceledOnTouchOutside(true)
+                            .addSheetItem("从手机相册中选择", ActionSheetDialog.SheetItemColor.Blue,
+                                    new ActionSheetDialog.OnSheetItemClickListener() {
+                                        @Override
+                                        public void onClick(int which) {
+                                            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                            startActivityForResult(Intent.createChooser(intent, "请选择图片"), RESULT_PICK);
+
+                                        }
+                                    })
+                            .addSheetItem("通过相机选择", ActionSheetDialog.SheetItemColor.Blue,
+                                    new ActionSheetDialog.OnSheetItemClickListener() {
+                                        @Override
+                                        public void onClick(int which) {
+                                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+                                            startActivityForResult(intent, RESULT_CAPTURE);
+                                        }
+                                    }).show();
+                    return;
+                }
                 Intent intent = new Intent(context, ImageZoomActivity.class);
                 ArrayList<String> urls = new ArrayList<>();
-                //测试数据   --------------------------
-                urls.add(banner_1);
-                urls.add(banner_2);
-                urls.add(banner_3);
-                urls.add(banner_4);
-                urls.add(banner_5);
                 intent.putStringArrayListExtra("imgpath", urls);
                 startActivity(intent);
                 break;

@@ -87,4 +87,10 @@
         </attr>
     </declare-styleable>
 
+    <!--上下滚动消息属性-->
+    <declare-styleable name="JDAdverView">
+        <attr name="gap" format="integer" />
+        <attr name="animDuration" format="integer" />
+    </declare-styleable>
+
 </resources>

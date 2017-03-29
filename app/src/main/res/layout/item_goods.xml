@@ -8,6 +8,7 @@
     >
 
     <ImageView
+        android:transitionName="share"
         android:id="@+id/img_goods"
         android:scaleType="center"
         android:layout_width="match_parent"

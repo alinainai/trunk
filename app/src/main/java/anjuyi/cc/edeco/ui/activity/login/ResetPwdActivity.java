@@ -209,7 +209,7 @@ public class ResetPwdActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 
     @OnClick({R.id.ll_back, R.id.verification_btn, R.id.btn_register})
@@ -217,7 +217,7 @@ public class ResetPwdActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.ll_back:
                 finish();
-                overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.verification_btn:
                 //点击按钮后开始计时

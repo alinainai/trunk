@@ -1,8 +1,8 @@
 <resources>
 
-    <style name="ImageTranslucentTheme" parent="AppTheme">
-        <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
-    </style>
+    <!--<style name="ImageTranslucentTheme" parent="AppTheme">-->
+        <!--&lt;!&ndash;在Android 4.4之前的版本上运行，直接跟随系统主题&ndash;&gt;-->
+    <!--</style>-->
     <!--<style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">-->
     <!--&lt;!&ndash; toolbar（actionbar）颜色 &ndash;&gt;-->
     <!--<item name="colorPrimary">#000000</item>-->
@@ -27,18 +27,21 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#8fc450</item>
-        <item name="colorPrimaryDark">#8fc450</item>
+        <item name="colorPrimary">@color/cff3e19</item>
+        <item name="colorPrimaryDark">@color/cff3e19</item>
         <item name="colorAccent">#eee</item>
-        <item name="colorButtonNormal">#8fc450</item>
+        <item name="colorButtonNormal">@color/cff3e19</item>
         <item name="colorControlHighlight">#eee</item>
         <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
+    </style>
+    <style name="startpage" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@mipmap/splash_bg</item>
     </style>
 
     <!--设置dialogbutton颜色-->
     <style name="Theme.AppCompat.Light.Dialog.Alert.Self" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <!--修改AlertDialog按钮的颜色-->
-        <item name="colorAccent">#66aa01</item>
+        <item name="colorAccent">@color/cff3e19</item>
     </style>
 
     <style name="AppThemeNoStatus" parent="AppTheme">
@@ -64,24 +67,6 @@
         <item name="android:maxHeight">@dimen/px_26</item>
     </style>
 
-    <!-- 标题栏 -->
-
-    <style name="tv_color_66_size_32">
-        <item name="android:textSize">@dimen/font_size_32</item>
-        <item name="android:textColor">@color/base_text_info_color</item>
-    </style>
-
-    <style name="tv_color_white_size_38">
-        <item name="android:textSize">@dimen/font_size_38</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="tv_color_black_size_34">
-        <item name="android:textSize">@dimen/font_size_34</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
     <!-- 底部弹出框 -->
     <style name="transparentFrameWindowStyle" parent="android:style/Theme.Dialog">
         <!-- 边框 -->
@@ -91,31 +76,6 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
-
-    <style name="tv_color_black_size_26">
-        <item name="android:textSize">@dimen/font_size_26</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="tv_color_33_size_28">
-        <item name="android:textSize">@dimen/font_size_28</item>
-        <item name="android:textColor">@color/base_text_color</item>
-    </style>
-
-    <style name="tv_color_white_size_28">
-        <item name="android:textSize">@dimen/font_size_28</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="tv_color_red_size_28">
-        <item name="android:textSize">@dimen/font_size_28</item>
-        <item name="android:textColor">@color/red</item>
-    </style>
-
-    <style name="tv_color_cc_size_24">
-        <item name="android:textSize">@dimen/font_size_24</item>
-        <item name="android:textColor">@color/base_search_hint_color</item>
     </style>
 
 

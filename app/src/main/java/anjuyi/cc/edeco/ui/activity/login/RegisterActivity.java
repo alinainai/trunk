@@ -172,11 +172,11 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(new Intent(context, LoginActivity.class));
                 finish();
                 //第一个activity进入时的动画，另外一个参数则是第二个activity退出时的动画
-                overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.close://返回
                 finish();
-                overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.verification_btn://发送验证码
                 //点击按钮后开始计时
@@ -212,7 +212,7 @@ public class RegisterActivity extends BaseActivity {
                 SPUtils.saveString(context, Const.USER_INFO,new Gson().toJson(user),toString());
                 SPUtils.saveBoolean(context, Const.LOGIN_STATE,true);
                 finish();
-                overridePendingTransition(R.anim.anim_show,R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
 
 //                Loading.show();

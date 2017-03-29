@@ -123,7 +123,7 @@ public class GuesterActivity extends BaseActivity {
                     ToastUtils.showShort(context, "手势密码设置成功");
                     startActivity(new Intent(GuesterActivity.this, MainActivity.class));
                     finish();
-                    overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 } else {
                     tv_lock_Remind.setText("两次输入的不一样,请从新设置手势密码");
                     tv_lock_Remind.setTextColor(Color.RED);
@@ -136,14 +136,14 @@ public class GuesterActivity extends BaseActivity {
 
             if (lock_keep_key.equals(password)) {
                 finish();
-                overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 if ("TestActivity".equals(from)) {//表示由splash界面挑来的
                     startActivity(new Intent(GuesterActivity.this, MainActivity.class));
                     finish();
-                    overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 } else {//表示由推出登陆界面进来的
                     finish();
-                    overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 }
             } else {
                 Log.e("手势密码", "有密码密码不正确" + input_num);

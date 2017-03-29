@@ -83,7 +83,7 @@ public class SettingActivity extends BaseActivity  {
         } else {
             mStatusBar.setVisibility(View.GONE);
         }
-        rlTitle.setBackgroundResource(R.color.camera_color);
+        rlTitle.setBackgroundResource(R.color.cff3e19);
         mainCartTitle.setText("设置");
 
 
@@ -172,7 +172,7 @@ public class SettingActivity extends BaseActivity  {
                 break;
             case R.id.ll_back://返回
                 finish();
-                overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.setting_clear_cache_rl://清除缓存
 

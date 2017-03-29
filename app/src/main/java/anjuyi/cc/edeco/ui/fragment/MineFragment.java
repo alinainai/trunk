@@ -19,15 +19,16 @@ import anjuyi.cc.edeco.base.Const;
 import anjuyi.cc.edeco.bean.user.User;
 import anjuyi.cc.edeco.ui.activity.extra.CollectionActivity;
 import anjuyi.cc.edeco.ui.activity.extra.CouponActivity;
+import anjuyi.cc.edeco.ui.activity.login.GuesterActivity;
 import anjuyi.cc.edeco.ui.activity.login.LoginActivity;
 import anjuyi.cc.edeco.ui.activity.mine.MessageCenterActivity;
 import anjuyi.cc.edeco.ui.activity.mine.MineDetailActivity;
 import anjuyi.cc.edeco.ui.activity.mine.SettingActivity;
 import anjuyi.cc.edeco.ui.activity.order.OrderManagerActivity;
 import anjuyi.cc.edeco.util.SPUtils;
+import anjuyi.cc.edeco.view.badgeview.QBadgeView;
 import butterknife.BindView;
 import butterknife.OnClick;
-import q.rorbin.badgeview.QBadgeView;
 
 /**
  * Created by ly on 2016/5/30 11:07.
@@ -173,13 +174,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 }else{
                     intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.anim_show, R.anim.anim_dismiss);
+                    getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 }
                 break;
             case R.id.mine_collection_service_tv://收藏服务
                 intent = new Intent(getActivity(), CollectionActivity.class);
                 intent.putExtra("collection_type",0);
                 startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.mine_collection_shop_tv://收藏商品
 
@@ -190,6 +192,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mine_order_tv://我的订单
                 intent = new Intent(getActivity(), OrderManagerActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.mine_obligation_tv:
                 break;
@@ -200,23 +203,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mine_evaluate_tv:
                 break;
             case R.id.mine_assist_tv://进入测试界面
-
+                intent = new Intent(getActivity(), GuesterActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.mine_subscribe_tv:
                 break;
             case R.id.mine_coupons_tv://优惠券
                 intent = new Intent(getActivity(), CouponActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.mine_sharemoney_tv://分享赚钱
-
-
 
                 break;
             case R.id.mine_message_tv://我的消息
             case R.id.main_right_img:
                 intent = new Intent(getActivity(), MessageCenterActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.mine_collection_tv:
 

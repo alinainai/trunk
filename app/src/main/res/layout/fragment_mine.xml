@@ -313,6 +313,7 @@
 
             <!-- 优惠券 -->
             <TextView
+                android:transitionName="share"
                 android:id="@+id/mine_coupons_tv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_100"

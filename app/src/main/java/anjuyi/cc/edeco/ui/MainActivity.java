@@ -47,12 +47,11 @@ public class MainActivity extends BaseActivity  {
     RadioButton mineBtn;//我的
     @BindView(R.id.rg_radio)
     RadioGroup rg_radio;
-    //container
+     //container
     private FragmentManager mFragManager;//fragment管理器
     private ClassifyFragment mClassifyFragment;//分类的fragment
     private CartFragment mShoppingFragment;//购物车的fragment
     private AccountFragment mAccountFragment;//我的账户
-
     private BlankFragment mHomeFragment;//首页的fragment
     private MineFragment mMineFragment;//我的fragment
 
@@ -115,19 +114,19 @@ public class MainActivity extends BaseActivity  {
                 switch (i) {
                     case R.id.home_btn:
                         index = 0;
-                        setStatusColor(R.color.money_color);
+                        setStatusColor(R.color.cff3e19);
                         break;
                     case R.id.classify_btn:
                         index = 1;
-                        setStatusColor(R.color.colorPrimary);
+                        setStatusColor(R.color.cff3e19);
                         break;
                     case R.id.account_btn:
                         index = 2;
-                        setStatusColor(R.color.money_color);
+                        setStatusColor(R.color.cff3e19);
                         break;
                     case R.id.shopping_btn:
                         index = 3;
-                        setStatusColor(R.color.action_sheet_ed);
+                        setStatusColor(R.color.cff3e19);
                         break;
                     case R.id.mine_btn:
                         index = 4;

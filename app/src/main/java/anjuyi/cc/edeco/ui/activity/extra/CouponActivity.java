@@ -9,7 +9,6 @@ import android.widget.TextView;
 import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseActivity;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -44,6 +43,7 @@ public class CouponActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+
         mainCartTitle.setText("优惠券");
         tvRight.setVisibility(View.VISIBLE);
         tvRight.setText("兑换优惠券");

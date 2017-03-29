@@ -1,5 +1,6 @@
 package anjuyi.cc.edeco.ui.fragment.classify;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -63,7 +64,8 @@ public class GankItemFragment extends BaseMvpFragment<GankItemView, GankItemPres
             public void onItemClick(ViewHolder viewHolder, GankItemData gankItemData, int position) {
                 Intent intent = new Intent(context, WebViewActivity.class);
                 intent.putExtra("url", gankItemData.getUrl());
-               startActivity(intent);
+                startActivity(intent);
+                ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 

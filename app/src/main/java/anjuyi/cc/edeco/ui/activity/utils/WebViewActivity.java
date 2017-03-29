@@ -12,7 +12,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,8 +27,6 @@ public class WebViewActivity extends BaseActivity {
 
     @BindView(R.id.img_back)
     ImageView imgBack;
-    @BindView(R.id.ll_back)
-    LinearLayout llBack;
     @BindView(R.id.main_cart_title)
     TextView mainCartTitle;
     @BindView(R.id.progressbar)
@@ -68,11 +65,12 @@ public class WebViewActivity extends BaseActivity {
                 if (progress == 100) {
                     bar.setVisibility(View.GONE);
                 } else {
-
-                    if (View.INVISIBLE == bar.getVisibility()) {
+                    try{
                         bar.setVisibility(View.VISIBLE);
+                        bar.setProgress(progress);
+                    }catch (NullPointerException e){
+
                     }
-                    bar.setProgress(progress);
                 }
                 super.onProgressChanged(view, progress);
             }
@@ -145,6 +143,12 @@ public class WebViewActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
 
     @Override
     protected void onDestroy() {
@@ -155,13 +159,11 @@ public class WebViewActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.img_back, R.id.ll_back, R.id.main_cart_title})
+    @OnClick({R.id.img_back,R.id.main_cart_title})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
                 finish();
-                break;
-            case R.id.ll_back:
                 break;
             case R.id.main_cart_title:
                 break;

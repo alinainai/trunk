@@ -149,7 +149,7 @@
                 android:layout_height="@dimen/px_80"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
-                android:background="@color/white"
+                android:background="@drawable/button_login"
                 android:enabled="false"
                 android:gravity="center"
                 android:text="登入"
@@ -160,7 +160,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/px_80"
-            android:layout_marginBottom="@dimen/px_100"
+            android:layout_marginBottom="@dimen/px_400"
             android:layout_marginTop="@dimen/px_60"
             android:gravity="center"
             android:orientation="horizontal">
