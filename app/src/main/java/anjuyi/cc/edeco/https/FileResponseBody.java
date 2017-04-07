@@ -2,7 +2,7 @@ package anjuyi.cc.edeco.https;
 
 import java.io.IOException;
 
-import anjuyi.cc.edeco.bean.rxmessage.RxBus;
+import anjuyi.cc.edeco.base.rxmessage.RxBus;
 import okhttp3.MediaType;
 import okhttp3.Response;
 import okhttp3.ResponseBody;

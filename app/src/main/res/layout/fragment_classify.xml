@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/cff3e19"
-        app:tabIndicatorColor="#0f0"
+        app:tabIndicatorColor="@color/white"
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="#efefef" />
 

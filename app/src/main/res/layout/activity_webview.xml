@@ -14,10 +14,11 @@
             android:orientation="horizontal"
              >
             <ImageView
+                android:background="@drawable/ripple_title"
                 android:scaleType="center"
                 android:id="@+id/img_back"
                 android:layout_width="@dimen/px_96"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@mipmap/nav_back" />
             <TextView
                 android:layout_marginLeft="@dimen/px_10"
@@ -26,9 +27,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
+                android:text="加载中"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:textColor="#fff"
                 android:textSize="@dimen/font_size_38" />
+            <ImageView
+                android:id="@+id/img_refresh"
+                android:background="@drawable/ripple_title"
+                android:padding="@dimen/px_8"
+                android:scaleType="centerInside"
+                android:layout_width="@dimen/px_96"
+                android:layout_height="match_parent"
+                android:src="@mipmap/refresh" />
+
         </LinearLayout>
 
     <ProgressBar

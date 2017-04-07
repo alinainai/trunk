@@ -1,6 +1,7 @@
 package anjuyi.cc.edeco.view.badgeview;
 
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 /**
@@ -14,6 +15,10 @@ public interface Badge {
 
     int getBadgeNumber();
 
+    Badge setBadgeText(String badgeText);
+
+    String getBadgeText();
+
     Badge setExactMode(boolean isExact);
 
     boolean isExactMode();
@@ -24,15 +29,23 @@ public interface Badge {
 
     Badge setBadgeBackgroundColor(int color);
 
+    Badge stroke(int color, float width, boolean isDpValue);
+
     int getBadgeBackgroundColor();
 
-    Badge setBadgeNumberColor(int color);
+    Badge setBadgeBackground(Drawable drawable);
 
-    int getBadgeNumberColor();
+    Badge setBadgeBackground(Drawable drawable, boolean clip);
 
-    Badge setBadgeNumberSize(float size, boolean isSpValue);
+    Drawable getBadgeBackground();
 
-    float getBadgeNumberSize(boolean isSpValue);
+    Badge setBadgeTextColor(int color);
+
+    int getBadgeTextColor();
+
+    Badge setBadgeTextSize(float size, boolean isSpValue);
+
+    float getBadgeTextSize(boolean isSpValue);
 
     Badge setBadgePadding(float padding, boolean isDpValue);
 
@@ -44,15 +57,21 @@ public interface Badge {
 
     int getBadgeGravity();
 
-    Badge setGravityOffset(int offset, boolean isDpValue);
+    Badge setGravityOffset(float offset, boolean isDpValue);
 
-    int getGravityOffset(boolean isDpValue);
+    Badge setGravityOffset(float offsetX, float offsetY, boolean isDpValue);
+
+    float getGravityOffsetX(boolean isDpValue);
+
+    float getGravityOffsetY(boolean isDpValue);
 
     Badge setOnDragStateChangedListener(OnDragStateChangedListener l);
 
     PointF getDragCenter();
 
     Badge bindTarget(View view);
+
+    View getTargetView();
 
     void hide(boolean animate);
 

@@ -3,7 +3,9 @@ package anjuyi.cc.edeco.ui.fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -48,7 +50,7 @@ public class CartFragment extends BaseFragment {
     }
 
     @Override
-    public void initView() {
+    public void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mStatusBar.setVisibility(View.VISIBLE);

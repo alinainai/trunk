@@ -3,6 +3,7 @@ package anjuyi.cc.edeco.ui.activity.mine;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -63,6 +64,14 @@ public class SettingActivity extends BaseActivity  {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Fade mFade = new Fade();
+            mFade.setDuration(500);
+            getWindow().setExitTransition(mFade);
+            getWindow().setEnterTransition(mFade);
+        }
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0 全透明状态栏
@@ -202,12 +211,12 @@ public class SettingActivity extends BaseActivity  {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        finish();
+//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//    }
 
 
 }

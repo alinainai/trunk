@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,7 +59,7 @@ public class ClassifyFragment extends BaseFragment {
     }
 
     @Override
-    public void initView() {
+    public void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mainCartTitle.setText("分类");
         llBack.setVisibility(View.GONE);
         mTitles= AppUtils.stringArrayToList(context, R.array.gank);

@@ -3,13 +3,17 @@ package anjuyi.cc.edeco.view.badgeview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.Rect;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -28,8 +32,13 @@ import java.util.List;
 
 public class QBadgeView extends View implements Badge {
     protected int mColorBackground;
-    protected int mColorBadgeNumber;
-    protected float mBadgeNumberSize;
+    protected int mColorBackgroundBorder;
+    protected int mColorBadgeText;
+    protected Drawable mDrawableBackground;
+    protected Bitmap mBitmapClip;
+    protected boolean mDrawableBackgroundClip;
+    protected float mBackgroundBorderWidth;
+    protected float mBadgeTextSize;
     protected float mBadgePadding;
     protected int mBadgeNumber;
     protected String mBadgeText;
@@ -38,16 +47,19 @@ public class QBadgeView extends View implements Badge {
     protected boolean mExact;
     protected boolean mShowShadow;
     protected int mBadgeGravity;
-    protected int mGravityOffset;
+    protected float mGravityOffsetX;
+    protected float mGravityOffsetY;
 
     protected float mDefalutRadius;
     protected float mFinalDragDistance;
     protected int mDragQuadrant;
     protected boolean mDragOutOfRange;
 
-    protected Rect mBadgeNumberRect;
+    protected RectF mBadgeTextRect;
     protected RectF mBadgeBackgroundRect;
     protected Path mDragPath;
+
+    protected Paint.FontMetrics mBadgeTextFontMetrics;
 
     protected PointF mBadgeCenter;
     protected PointF mDragCenter;
@@ -61,8 +73,9 @@ public class QBadgeView extends View implements Badge {
     protected int mWidth;
     protected int mHeight;
 
-    protected TextPaint mBadgeNumberPaint;
+    protected TextPaint mBadgeTextPaint;
     protected Paint mBadgeBackgroundPaint;
+    protected Paint mBadgeBackgroundBorderPaint;
 
     protected BadgeAnimator mAnimator;
 
@@ -84,8 +97,8 @@ public class QBadgeView extends View implements Badge {
     }
 
     private void init() {
-        setLayerType(View.LAYER_TYPE_SOFTWARE, mBadgeBackgroundPaint);
-        mBadgeNumberRect = new Rect();
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        mBadgeTextRect = new RectF();
         mBadgeBackgroundRect = new RectF();
         mDragPath = new Path();
         mBadgeCenter = new PointF();
@@ -93,29 +106,35 @@ public class QBadgeView extends View implements Badge {
         mRowBadgeCenter = new PointF();
         mControlPoint = new PointF();
         mInnertangentPoints = new ArrayList<>();
-        mBadgeNumberPaint = new TextPaint();
-        mBadgeNumberPaint.setAntiAlias(true);
-        mBadgeNumberPaint.setSubpixelText(true);
-        mBadgeNumberPaint.setFakeBoldText(true);
+        mBadgeTextPaint = new TextPaint();
+        mBadgeTextPaint.setAntiAlias(true);
+        mBadgeTextPaint.setSubpixelText(true);
+        mBadgeTextPaint.setFakeBoldText(true);
+        mBadgeTextPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         mBadgeBackgroundPaint = new Paint();
         mBadgeBackgroundPaint.setAntiAlias(true);
         mBadgeBackgroundPaint.setStyle(Paint.Style.FILL);
+        mBadgeBackgroundBorderPaint = new Paint();
+        mBadgeBackgroundBorderPaint.setAntiAlias(true);
+        mBadgeBackgroundBorderPaint.setStyle(Paint.Style.STROKE);
         mColorBackground = 0xFFE84E40;
-        mColorBadgeNumber = 0xFFFFFFFF;
-        mBadgeNumberSize = DisplayUtil.dp2px(getContext(), 10);
-        mBadgePadding = DisplayUtil.dp2px(getContext(), 4f);
+        mColorBadgeText = 0xFFFFFFFF;
+        mBadgeTextSize = DisplayUtil.dp2px(getContext(), 11);
+        mBadgePadding = DisplayUtil.dp2px(getContext(), 5);
         mBadgeNumber = 0;
         mBadgeGravity = Gravity.END | Gravity.TOP;
-        mGravityOffset = DisplayUtil.dp2px(getContext(), 5);
-        mFinalDragDistance = DisplayUtil.dp2px(getContext(), 100);
+        mGravityOffsetX = DisplayUtil.dp2px(getContext(), 5);
+        mGravityOffsetY = DisplayUtil.dp2px(getContext(), 5);
+        mFinalDragDistance = DisplayUtil.dp2px(getContext(), 90);
         mShowShadow = true;
+        mDrawableBackgroundClip = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setTranslationZ(1000);
         }
     }
 
     @Override
-    public Badge bindTarget(View targetView) {
+    public Badge bindTarget(final View targetView) {
         if (targetView == null) {
             throw new IllegalStateException("targetView can not be null");
         }
@@ -125,30 +144,28 @@ public class QBadgeView extends View implements Badge {
         ViewParent targetParent = targetView.getParent();
         if (targetParent != null && targetParent instanceof ViewGroup) {
             mTargetView = targetView;
-            if (targetParent instanceof FrameLayout) {
-                ((FrameLayout) targetParent).addView(this, new FrameLayout.LayoutParams(((FrameLayout) targetParent).getWidth(),
-                        ((FrameLayout) targetParent).getHeight()));
+            if (targetParent instanceof BadgeContainer) {
+                ((BadgeContainer) targetParent).addView(this);
             } else {
                 ViewGroup targetContainer = (ViewGroup) targetParent;
                 int index = targetContainer.indexOfChild(targetView);
                 ViewGroup.LayoutParams targetParams = targetView.getLayoutParams();
                 targetContainer.removeView(targetView);
-                final FrameLayout badgeContainer = new FrameLayout(getContext());
+                final BadgeContainer badgeContainer = new BadgeContainer(getContext());
+                badgeContainer.setId(targetView.getId());
                 targetContainer.addView(badgeContainer, index, targetParams);
-                badgeContainer.addView(targetView, new FrameLayout.LayoutParams(
-                        FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-                badgeContainer.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        badgeContainer.addView(QBadgeView.this, new FrameLayout.LayoutParams(badgeContainer.getWidth(),
-                                badgeContainer.getHeight()));
-                    }
-                });
+                badgeContainer.addView(targetView);
+                badgeContainer.addView(this);
             }
         } else {
             throw new IllegalStateException("targetView must have a parent");
         }
         return this;
+    }
+
+    @Override
+    public View getTargetView() {
+        return mTargetView;
     }
 
     @Override
@@ -170,9 +187,12 @@ public class QBadgeView extends View implements Badge {
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
+                float x = event.getX();
+                float y = event.getY();
                 if (mDraggable && event.getPointerId(event.getActionIndex()) == 0
-                        && getPointDistance(mBadgeCenter, new PointF(event.getX(), event.getY()))
-                        <= DisplayUtil.dp2px(getContext(), 10) && mBadgeNumber != 0) {
+                        && (x > mBadgeBackgroundRect.left && x < mBadgeBackgroundRect.right &&
+                        y > mBadgeBackgroundRect.top && y < mBadgeBackgroundRect.bottom)
+                        && mBadgeText != null) {
                     initRowBadgeCenter();
                     mDragging = true;
                     updataListener(OnDragStateChangedListener.STATE_START);
@@ -213,13 +233,10 @@ public class QBadgeView extends View implements Badge {
     }
 
     protected Bitmap createBadgeBitmap() {
-        Rect rect = new Rect();
-        mBadgeNumberPaint.getTextBounds(mBadgeText.toCharArray(), 0, mBadgeText.length(), rect);
-        Bitmap bitmap = Bitmap.createBitmap((int) (rect.width() + mBadgePadding * 2),
-                (int) (rect.width() + mBadgePadding * 2), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap((int) mBadgeBackgroundRect.width() + DisplayUtil.dp2px(getContext(), 3),
+                (int) mBadgeBackgroundRect.height() + DisplayUtil.dp2px(getContext(), 3), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-        canvas.drawCircle(canvas.getWidth() / 2f, canvas.getHeight() / 2f, canvas.getWidth() / 2f, mBadgeBackgroundPaint);
-        canvas.drawText(mBadgeText, canvas.getWidth() / 2f, canvas.getHeight() / 2f + rect.height() / 2f, mBadgeNumberPaint);
+        drawBadge(canvas, new PointF(canvas.getWidth() / 2f, canvas.getHeight() / 2f), getBadgeCircleRadius());
         return bitmap;
     }
 
@@ -235,7 +252,7 @@ public class QBadgeView extends View implements Badge {
         }
     }
 
-    private void showShadowImp(boolean showShadow) {
+    private void showShadowImpl(boolean showShadow) {
         int x = DisplayUtil.dp2px(getContext(), 1);
         int y = DisplayUtil.dp2px(getContext(), 1.5f);
         switch (mDragQuadrant) {
@@ -273,13 +290,14 @@ public class QBadgeView extends View implements Badge {
             mAnimator.draw(canvas);
             return;
         }
-        if (mBadgeNumber != 0) {
-            showShadowImp(mShowShadow);
+        if (mBadgeText != null) {
+            initPaints();
             float badgeRadius = getBadgeCircleRadius();
-            float startCircleRadius = mDefalutRadius * (1 - getPointDistance(mRowBadgeCenter, mDragCenter) / mFinalDragDistance);
+            float startCircleRadius = mDefalutRadius * (1 - MathUtil.getPointDistance
+                    (mRowBadgeCenter, mDragCenter) / mFinalDragDistance);
             if (mDraggable && mDragging) {
-                mDragQuadrant = getQuadrant(mDragCenter, mRowBadgeCenter);
-                showShadowImp(mShowShadow);
+                mDragQuadrant = MathUtil.getQuadrant(mDragCenter, mRowBadgeCenter);
+                showShadowImpl(mShowShadow);
                 if (mDragOutOfRange = startCircleRadius < DisplayUtil.dp2px(getContext(), 1.5f)) {
                     updataListener(OnDragStateChangedListener.STATE_DRAGGING_OUT_OF_RANGE);
                     drawBadge(canvas, mDragCenter, badgeRadius);
@@ -290,9 +308,18 @@ public class QBadgeView extends View implements Badge {
                 }
             } else {
                 findBadgeCenter();
-                drawBadge(canvas, mBadgeCenter, getBadgeCircleRadius());
+                drawBadge(canvas, mBadgeCenter, badgeRadius);
             }
         }
+    }
+
+    private void initPaints() {
+        showShadowImpl(mShowShadow);
+        mBadgeBackgroundPaint.setColor(mColorBackground);
+        mBadgeBackgroundBorderPaint.setColor(mColorBackgroundBorder);
+        mBadgeBackgroundBorderPaint.setStrokeWidth(mBackgroundBorderWidth);
+        mBadgeTextPaint.setColor(mColorBadgeText);
+        mBadgeTextPaint.setTextAlign(Paint.Align.CENTER);
     }
 
     private void drawDragging(Canvas canvas, float startRadius, float badgeRadius) {
@@ -302,11 +329,11 @@ public class QBadgeView extends View implements Badge {
         if (dx != 0) {
             double k1 = dy / dx;
             double k2 = -1 / k1;
-            getInnertangentPoints(mDragCenter, badgeRadius, k2);
-            getInnertangentPoints(mRowBadgeCenter, startRadius, k2);
+            MathUtil.getInnertangentPoints(mDragCenter, badgeRadius, k2, mInnertangentPoints);
+            MathUtil.getInnertangentPoints(mRowBadgeCenter, startRadius, k2, mInnertangentPoints);
         } else {
-            getInnertangentPoints(mDragCenter, badgeRadius, 0d);
-            getInnertangentPoints(mRowBadgeCenter, startRadius, 0d);
+            MathUtil.getInnertangentPoints(mDragCenter, badgeRadius, 0d, mInnertangentPoints);
+            MathUtil.getInnertangentPoints(mRowBadgeCenter, startRadius, 0d, mInnertangentPoints);
         }
         mDragPath.reset();
         mDragPath.addCircle(mRowBadgeCenter.x, mRowBadgeCenter.y, startRadius,
@@ -319,75 +346,209 @@ public class QBadgeView extends View implements Badge {
         mDragPath.quadTo(mControlPoint.x, mControlPoint.y, mInnertangentPoints.get(3).x, mInnertangentPoints.get(3).y);
         mDragPath.lineTo(mInnertangentPoints.get(2).x, mInnertangentPoints.get(2).y);
         mDragPath.close();
-        mBadgeBackgroundPaint.setColor(mColorBackground);
         canvas.drawPath(mDragPath, mBadgeBackgroundPaint);
+
+        //draw dragging border
+        if (mColorBackgroundBorder != 0 && mBackgroundBorderWidth > 0) {
+            mDragPath.reset();
+            mDragPath.moveTo(mInnertangentPoints.get(2).x, mInnertangentPoints.get(2).y);
+            mDragPath.quadTo(mControlPoint.x, mControlPoint.y, mInnertangentPoints.get(0).x, mInnertangentPoints.get(0).y);
+            mDragPath.moveTo(mInnertangentPoints.get(1).x, mInnertangentPoints.get(1).y);
+            mDragPath.quadTo(mControlPoint.x, mControlPoint.y, mInnertangentPoints.get(3).x, mInnertangentPoints.get(3).y);
+            float startY;
+            float startX;
+            if (mDragQuadrant == 1 || mDragQuadrant == 2) {
+                startX = mInnertangentPoints.get(2).x - mRowBadgeCenter.x;
+                startY = mRowBadgeCenter.y - mInnertangentPoints.get(2).y;
+            } else {
+                startX = mInnertangentPoints.get(3).x - mRowBadgeCenter.x;
+                startY = mRowBadgeCenter.y - mInnertangentPoints.get(3).y;
+            }
+            float startAngle = 360 - (float) MathUtil.radianToAngle(MathUtil.getTanRadian(Math.atan(startY / startX),
+                    mDragQuadrant - 1 == 0 ? 4 : mDragQuadrant - 1));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mDragPath.addArc(mRowBadgeCenter.x - startRadius, mRowBadgeCenter.y - startRadius,
+                        mRowBadgeCenter.x + startRadius, mRowBadgeCenter.y + startRadius, startAngle,
+                        180);
+            } else {
+                mDragPath.addArc(new RectF(mRowBadgeCenter.x - startRadius, mRowBadgeCenter.y - startRadius,
+                        mRowBadgeCenter.x + startRadius, mRowBadgeCenter.y + startRadius), startAngle, 180);
+            }
+            canvas.drawPath(mDragPath, mBadgeBackgroundBorderPaint);
+        }
     }
 
     private void drawBadge(Canvas canvas, PointF center, float radius) {
         if (center.x == -1000 && center.y == -1000) {
             return;
         }
-        mBadgeBackgroundPaint.setColor(mColorBackground);
-        mBadgeNumberPaint.setColor(mColorBadgeNumber);
-        mBadgeNumberPaint.setTextAlign(Paint.Align.CENTER);
-        if (mBadgeNumber < 0) {
-            canvas.drawCircle(center.x, center.y, mBadgePadding, mBadgeBackgroundPaint);
-        } else if (mBadgeNumber <= 9) {//draw circle badge
-            canvas.drawCircle(center.x, center.y, radius, mBadgeBackgroundPaint);
-            canvas.drawText(mBadgeText, center.x, center.y + mBadgeNumberRect.height() / 2f, mBadgeNumberPaint);
-        } else {//>9draw rect badge
-            float padding = mBadgeNumber <= 99 ? 1.2f : 1.0f;
-            mBadgeBackgroundRect.left = center.x - (mBadgeNumberRect.width() / 2f + mBadgePadding);
-            mBadgeBackgroundRect.top = center.y - (mBadgeNumberRect.height() / 2f + mBadgePadding / padding);
-            mBadgeBackgroundRect.right = center.x + (mBadgeNumberRect.width() / 2f + mBadgePadding);
-            mBadgeBackgroundRect.bottom = center.y + (mBadgeNumberRect.height() / 2f + mBadgePadding / padding);
-            canvas.drawRoundRect(mBadgeBackgroundRect,
-                    DisplayUtil.dp2px(getContext(), 10), DisplayUtil.dp2px(getContext(), 10),
-                    mBadgeBackgroundPaint);
-            canvas.drawText(mBadgeText, center.x, center.y + mBadgeNumberRect.height() / 2f, mBadgeNumberPaint);
+        if (mBadgeText.isEmpty() || mBadgeText.length() == 1) {
+            mBadgeBackgroundRect.left = center.x - (int) radius;
+            mBadgeBackgroundRect.top = center.y - (int) radius;
+            mBadgeBackgroundRect.right = center.x + (int) radius;
+            mBadgeBackgroundRect.bottom = center.y + (int) radius;
+            if (mDrawableBackground != null) {
+                drawBadgeBackground(canvas);
+            } else {
+                canvas.drawCircle(center.x, center.y, radius, mBadgeBackgroundPaint);
+                if (mColorBackgroundBorder != 0 && mBackgroundBorderWidth > 0) {
+                    canvas.drawCircle(center.x, center.y, radius, mBadgeBackgroundBorderPaint);
+                }
+            }
+        } else {
+            mBadgeBackgroundRect.left = center.x - (mBadgeTextRect.width() / 2f + mBadgePadding);
+            mBadgeBackgroundRect.top = center.y - (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f);
+            mBadgeBackgroundRect.right = center.x + (mBadgeTextRect.width() / 2f + mBadgePadding);
+            mBadgeBackgroundRect.bottom = center.y + (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f);
+            radius = mBadgeBackgroundRect.height() / 2f;
+            if (mDrawableBackground != null) {
+                drawBadgeBackground(canvas);
+            } else {
+                canvas.drawRoundRect(mBadgeBackgroundRect, radius, radius, mBadgeBackgroundPaint);
+                if (mColorBackgroundBorder != 0 && mBackgroundBorderWidth > 0) {
+                    canvas.drawRoundRect(mBadgeBackgroundRect, radius, radius, mBadgeBackgroundBorderPaint);
+                }
+            }
+        }
+        if (!mBadgeText.isEmpty()) {
+            canvas.drawText(mBadgeText, center.x,
+                    (mBadgeBackgroundRect.bottom + mBadgeBackgroundRect.top
+                            - mBadgeTextFontMetrics.bottom - mBadgeTextFontMetrics.top) / 2f,
+                    mBadgeTextPaint);
+        }
+    }
+
+    private void drawBadgeBackground(Canvas canvas) {
+        mBadgeBackgroundPaint.setShadowLayer(0, 0, 0, 0);
+        int left = (int) mBadgeBackgroundRect.left;
+        int top = (int) mBadgeBackgroundRect.top;
+        int right = (int) mBadgeBackgroundRect.right;
+        int bottom = (int) mBadgeBackgroundRect.bottom;
+        if (mDrawableBackgroundClip) {
+            right = left + mBitmapClip.getWidth();
+            bottom = top + mBitmapClip.getHeight();
+            canvas.saveLayer(left, top, right, bottom, null, Canvas.ALL_SAVE_FLAG);
+        }
+        mDrawableBackground.setBounds(left, top, right, bottom);
+        mDrawableBackground.draw(canvas);
+        if (mDrawableBackgroundClip) {
+            mBadgeBackgroundPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+            canvas.drawBitmap(mBitmapClip, left, top, mBadgeBackgroundPaint);
+            canvas.restore();
+            mBadgeBackgroundPaint.setXfermode(null);
+            if (mBadgeText.isEmpty() || mBadgeText.length() == 1) {
+                canvas.drawCircle(mBadgeBackgroundRect.centerX(), mBadgeBackgroundRect.centerY(),
+                        mBadgeBackgroundRect.width() / 2f, mBadgeBackgroundBorderPaint);
+            } else {
+                canvas.drawRoundRect(mBadgeBackgroundRect,
+                        mBadgeBackgroundRect.height() / 2, mBadgeBackgroundRect.height() / 2,
+                        mBadgeBackgroundBorderPaint);
+            }
+        } else {
+            canvas.drawRect(mBadgeBackgroundRect, mBadgeBackgroundBorderPaint);
+        }
+    }
+
+    private void createClipLayer() {
+        if (mBadgeText == null) {
+            return;
+        }
+        if (!mDrawableBackgroundClip) {
+            return;
+        }
+        if (mBitmapClip != null && !mBitmapClip.isRecycled()) {
+            mBitmapClip.recycle();
+        }
+        float radius = getBadgeCircleRadius();
+        if (mBadgeText.isEmpty() || mBadgeText.length() == 1) {
+            mBitmapClip = Bitmap.createBitmap((int) radius * 2, (int) radius * 2,
+                    Bitmap.Config.ARGB_4444);
+            Canvas srcCanvas = new Canvas(mBitmapClip);
+            srcCanvas.drawCircle(srcCanvas.getWidth() / 2f, srcCanvas.getHeight() / 2f,
+                    srcCanvas.getWidth() / 2f, mBadgeBackgroundPaint);
+        } else {
+            mBitmapClip = Bitmap.createBitmap((int) (mBadgeTextRect.width() + mBadgePadding * 2),
+                    (int) (mBadgeTextRect.height() + mBadgePadding), Bitmap.Config.ARGB_4444);
+            Canvas srcCanvas = new Canvas(mBitmapClip);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                srcCanvas.drawRoundRect(0, 0, srcCanvas.getWidth(), srcCanvas.getHeight(), srcCanvas.getHeight() / 2f,
+                        srcCanvas.getHeight() / 2f, mBadgeBackgroundPaint);
+            } else {
+                srcCanvas.drawRoundRect(new RectF(0, 0, srcCanvas.getWidth(), srcCanvas.getHeight()),
+                        srcCanvas.getHeight() / 2f, srcCanvas.getHeight() / 2f, mBadgeBackgroundPaint);
+            }
         }
     }
 
     private float getBadgeCircleRadius() {
-        float radius = mBadgeBackgroundRect.height() / 2f;
-        if (mBadgeNumber < 0) {
-            radius = mBadgePadding;
-        } else if (mBadgeNumber <= 9) {
-            radius = mBadgeNumberRect.height() > mBadgeNumberRect.width() ?
-                    mBadgeNumberRect.height() / 2f + mBadgePadding : mBadgeNumberRect.width() / 2f + mBadgePadding;
+        if (mBadgeText.isEmpty()) {
+            return mBadgePadding;
+        } else if (mBadgeText.length() == 1) {
+            return mBadgeTextRect.height() > mBadgeTextRect.width() ?
+                    mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f :
+                    mBadgeTextRect.width() / 2f + mBadgePadding * 0.5f;
+        } else {
+            return mBadgeBackgroundRect.height() / 2f;
         }
-        return radius;
     }
 
     private void findBadgeCenter() {
-        mBadgeNumberPaint.setTextSize(mBadgeNumberSize);
-        char[] chars = mBadgeText.toCharArray();
-        mBadgeNumberPaint.getTextBounds(chars, 0, chars.length, mBadgeNumberRect);
-        int rectWidth = mBadgeNumberRect.height() > mBadgeNumberRect.width() ?
-                mBadgeNumberRect.height() : mBadgeNumberRect.width();
+        float rectWidth = mBadgeTextRect.height() > mBadgeTextRect.width() ?
+                mBadgeTextRect.height() : mBadgeTextRect.width();
         switch (mBadgeGravity) {
             case Gravity.START | Gravity.TOP:
-                mBadgeCenter.x = mGravityOffset + mBadgePadding + rectWidth / 2f;
-                mBadgeCenter.y = mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f;
-                break;
-            case Gravity.END | Gravity.TOP:
-                mBadgeCenter.x = mWidth - (mGravityOffset + mBadgePadding + rectWidth / 2f);
-                mBadgeCenter.y = mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f;
+                mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f;
+                mBadgeCenter.y = mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f;
                 break;
             case Gravity.START | Gravity.BOTTOM:
-                mBadgeCenter.x = mGravityOffset + mBadgePadding + rectWidth / 2f;
-                mBadgeCenter.y = mHeight - (mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f);
+                mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f;
+                mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
+                break;
+            case Gravity.END | Gravity.TOP:
+                mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f);
+                mBadgeCenter.y = mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f;
                 break;
             case Gravity.END | Gravity.BOTTOM:
-                mBadgeCenter.x = mWidth - (mGravityOffset + mBadgePadding + rectWidth / 2f);
-                mBadgeCenter.y = mHeight - (mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f);
+                mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f);
+                mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
                 break;
             case Gravity.CENTER:
                 mBadgeCenter.x = mWidth / 2f;
                 mBadgeCenter.y = mHeight / 2f;
                 break;
+            case Gravity.CENTER | Gravity.TOP:
+                mBadgeCenter.x = mWidth / 2f;
+                mBadgeCenter.y = mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f;
+                break;
+            case Gravity.CENTER | Gravity.BOTTOM:
+                mBadgeCenter.x = mWidth / 2f;
+                mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
+                break;
+            case Gravity.CENTER | Gravity.START:
+                mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f;
+                mBadgeCenter.y = mHeight / 2f;
+                break;
+            case Gravity.CENTER | Gravity.END:
+                mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f);
+                mBadgeCenter.y = mHeight / 2f;
+                break;
         }
         initRowBadgeCenter();
+    }
+
+    private void measureText() {
+        mBadgeTextRect.left = 0;
+        mBadgeTextRect.top = 0;
+        if (TextUtils.isEmpty(mBadgeText)) {
+            mBadgeTextRect.right = 0;
+            mBadgeTextRect.bottom = 0;
+        } else {
+            mBadgeTextPaint.setTextSize(mBadgeTextSize);
+            mBadgeTextRect.right = mBadgeTextPaint.measureText(mBadgeText);
+            mBadgeTextFontMetrics = mBadgeTextPaint.getFontMetrics();
+            mBadgeTextRect.bottom = mBadgeTextFontMetrics.descent - mBadgeTextFontMetrics.ascent;
+        }
+        createClipLayer();
     }
 
     private void initRowBadgeCenter() {
@@ -398,12 +559,13 @@ public class QBadgeView extends View implements Badge {
     }
 
     protected void animateHide(PointF center) {
-        if (mBadgeNumber == 0) {
+        if (mBadgeText == null) {
             return;
         }
         if (mAnimator == null || !mAnimator.isRunning()) {
             screenFromWindow(true);
-            mAnimator = BadgeAnimator.start(createBadgeBitmap(), center, this);
+            mAnimator = new BadgeAnimator(createBadgeBitmap(), center, this);
+            mAnimator.start();
             setBadgeNumber(0);
         }
     }
@@ -419,7 +581,7 @@ public class QBadgeView extends View implements Badge {
 
     @Override
     public void hide(boolean animate) {
-        if (animate) {
+        if (animate && mActivityRoot != null) {
             animateHide(mRowBadgeCenter);
         } else {
             setBadgeNumber(0);
@@ -438,7 +600,10 @@ public class QBadgeView extends View implements Badge {
             mBadgeText = mExact ? String.valueOf(mBadgeNumber) : "99+";
         } else if (mBadgeNumber > 0 && mBadgeNumber <= 99) {
             mBadgeText = String.valueOf(mBadgeNumber);
+        } else if (mBadgeNumber == 0) {
+            mBadgeText = null;
         }
+        measureText();
         invalidate();
         return this;
     }
@@ -449,9 +614,25 @@ public class QBadgeView extends View implements Badge {
     }
 
     @Override
+    public Badge setBadgeText(String badgeText) {
+        mBadgeText = badgeText;
+        mBadgeNumber = 1;
+        measureText();
+        invalidate();
+        return this;
+    }
+
+    @Override
+    public String getBadgeText() {
+        return mBadgeText;
+    }
+
+    @Override
     public Badge setExactMode(boolean isExact) {
         mExact = isExact;
-        setBadgeNumber(mBadgeNumber);
+        if (mBadgeNumber > 99) {
+            setBadgeNumber(mBadgeNumber);
+        }
         return this;
     }
 
@@ -475,6 +656,19 @@ public class QBadgeView extends View implements Badge {
     @Override
     public Badge setBadgeBackgroundColor(int color) {
         mColorBackground = color;
+        if (mColorBackground == Color.TRANSPARENT) {
+            mBadgeTextPaint.setXfermode(null);
+        } else {
+            mBadgeTextPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        }
+        invalidate();
+        return this;
+    }
+
+    @Override
+    public Badge stroke(int color, float width, boolean isDpValue) {
+        mColorBackgroundBorder = color;
+        mBackgroundBorderWidth = isDpValue ? DisplayUtil.dp2px(getContext(), width) : width;
         invalidate();
         return this;
     }
@@ -485,32 +679,53 @@ public class QBadgeView extends View implements Badge {
     }
 
     @Override
-    public Badge setBadgeNumberColor(int color) {
-        mColorBadgeNumber = color;
+    public Badge setBadgeBackground(Drawable drawable) {
+        return setBadgeBackground(drawable, false);
+    }
+
+    @Override
+    public Badge setBadgeBackground(Drawable drawable, boolean clip) {
+        mDrawableBackgroundClip = clip;
+        mDrawableBackground = drawable;
+        createClipLayer();
         invalidate();
         return this;
     }
 
     @Override
-    public int getBadgeNumberColor() {
-        return mColorBadgeNumber;
+    public Drawable getBadgeBackground() {
+        return mDrawableBackground;
     }
 
     @Override
-    public Badge setBadgeNumberSize(float size, boolean isSpValue) {
-        mBadgeNumberSize = isSpValue ? DisplayUtil.dp2px(getContext(), size) : size;
+    public Badge setBadgeTextColor(int color) {
+        mColorBadgeText = color;
         invalidate();
         return this;
     }
 
     @Override
-    public float getBadgeNumberSize(boolean isSpValue) {
-        return isSpValue ? DisplayUtil.px2dp(getContext(), mBadgeNumberSize) : mBadgeNumberSize;
+    public int getBadgeTextColor() {
+        return mColorBadgeText;
+    }
+
+    @Override
+    public Badge setBadgeTextSize(float size, boolean isSpValue) {
+        mBadgeTextSize = isSpValue ? DisplayUtil.dp2px(getContext(), size) : size;
+        measureText();
+        invalidate();
+        return this;
+    }
+
+    @Override
+    public float getBadgeTextSize(boolean isSpValue) {
+        return isSpValue ? DisplayUtil.px2dp(getContext(), mBadgeTextSize) : mBadgeTextSize;
     }
 
     @Override
     public Badge setBadgePadding(float padding, boolean isDpValue) {
         mBadgePadding = isDpValue ? DisplayUtil.dp2px(getContext(), padding) : padding;
+        createClipLayer();
         invalidate();
         return this;
     }
@@ -527,7 +742,9 @@ public class QBadgeView extends View implements Badge {
 
     /**
      * @param gravity only support Gravity.START | Gravity.TOP , Gravity.END | Gravity.TOP ,
-     *                Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM , Gravity.CENTER
+     *                Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM ,
+     *                Gravity.CENTER , Gravity.CENTER | Gravity.TOP , Gravity.CENTER | Gravity.BOTTOM ,
+     *                Gravity.CENTER | Gravity.START , Gravity.CENTER | Gravity.END
      */
     @Override
     public Badge setBadgeGravity(int gravity) {
@@ -535,12 +752,18 @@ public class QBadgeView extends View implements Badge {
                 gravity == (Gravity.END | Gravity.TOP) ||
                 gravity == (Gravity.START | Gravity.BOTTOM) ||
                 gravity == (Gravity.END | Gravity.BOTTOM) ||
-                gravity == (Gravity.CENTER)) {
+                gravity == (Gravity.CENTER) ||
+                gravity == (Gravity.CENTER | Gravity.TOP) ||
+                gravity == (Gravity.CENTER | Gravity.BOTTOM) ||
+                gravity == (Gravity.CENTER | Gravity.START) ||
+                gravity == (Gravity.CENTER | Gravity.END)) {
             mBadgeGravity = gravity;
             invalidate();
         } else {
             throw new IllegalStateException("only support Gravity.START | Gravity.TOP , Gravity.END | Gravity.TOP , " +
-                    "Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM , Gravity.CENTER");
+                    "Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM , Gravity.CENTER" +
+                    " , Gravity.CENTER | Gravity.TOP , Gravity.CENTER | Gravity.BOTTOM ," +
+                    "Gravity.CENTER | Gravity.START , Gravity.CENTER | Gravity.END");
         }
         return this;
     }
@@ -551,59 +774,28 @@ public class QBadgeView extends View implements Badge {
     }
 
     @Override
-    public Badge setGravityOffset(int offset, boolean isDpValue) {
-        mGravityOffset = isDpValue ? DisplayUtil.dp2px(getContext(), offset) : offset;
+    public Badge setGravityOffset(float offset, boolean isDpValue) {
+        return setGravityOffset(offset, offset, isDpValue);
+    }
+
+    @Override
+    public Badge setGravityOffset(float offsetX, float offsetY, boolean isDpValue) {
+        mGravityOffsetX = isDpValue ? DisplayUtil.dp2px(getContext(), offsetX) : offsetX;
+        mGravityOffsetY = isDpValue ? DisplayUtil.dp2px(getContext(), offsetY) : offsetY;
         invalidate();
         return this;
     }
 
     @Override
-    public int getGravityOffset(boolean isDpValue) {
-        return isDpValue ? DisplayUtil.px2dp(getContext(), mGravityOffset) : mGravityOffset;
+    public float getGravityOffsetX(boolean isDpValue) {
+        return isDpValue ? DisplayUtil.px2dp(getContext(), mGravityOffsetX) : mGravityOffsetX;
     }
 
-    private float getPointDistance(PointF p1, PointF p2) {
-        return (float) Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+    @Override
+    public float getGravityOffsetY(boolean isDpValue) {
+        return isDpValue ? DisplayUtil.px2dp(getContext(), mGravityOffsetY) : mGravityOffsetY;
     }
 
-    public static int getQuadrant(PointF p, PointF center) {
-        if (p.x > center.x) {
-            if (p.y > center.y) {
-                return 4;
-            } else if (p.y < center.y) {
-                return 1;
-            }
-        } else if (p.x < center.x) {
-            if (p.y > center.y) {
-                return 3;
-            } else if (p.y < center.y) {
-                return 2;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * this formula is designed by mabeijianxi
-     * website : http://blog.csdn.net/mabeijianxi/article/details/50560361
-     *
-     * @param circleCenter The circle center point.
-     * @param radius       The circle radius.
-     * @param slopeLine    The slope of line which cross the pMiddle.
-     */
-    private void getInnertangentPoints(PointF circleCenter, float radius, Double slopeLine) {
-        float radian, xOffset, yOffset;
-        if (slopeLine != null) {
-            radian = (float) Math.atan(slopeLine);
-            xOffset = (float) (Math.cos(radian) * radius);
-            yOffset = (float) (Math.sin(radian) * radius);
-        } else {
-            xOffset = radius;
-            yOffset = 0;
-        }
-        mInnertangentPoints.add(new PointF(circleCenter.x + xOffset, circleCenter.y + yOffset));
-        mInnertangentPoints.add(new PointF(circleCenter.x - xOffset, circleCenter.y - yOffset));
-    }
 
     private void updataListener(int state) {
         if (mDragStateChangedListener != null)
@@ -621,5 +813,43 @@ public class QBadgeView extends View implements Badge {
     public PointF getDragCenter() {
         if (mDraggable && mDragging) return mDragCenter;
         return null;
+    }
+
+    private class BadgeContainer extends ViewGroup {
+
+        public BadgeContainer(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onLayout(boolean changed, int l, int t, int r, int b) {
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
+            }
+        }
+
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            View targetView = null, badgeView = null;
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                if (!(child instanceof QBadgeView)) {
+                    targetView = child;
+                } else {
+                    badgeView = child;
+                }
+            }
+            if (targetView == null) {
+                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            } else {
+                targetView.measure(widthMeasureSpec, heightMeasureSpec);
+                if (badgeView != null) {
+                    badgeView.measure(MeasureSpec.makeMeasureSpec(targetView.getMeasuredWidth(), MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(targetView.getMeasuredHeight(), MeasureSpec.EXACTLY));
+                }
+                setMeasuredDimension(targetView.getMeasuredWidth(), targetView.getMeasuredHeight());
+            }
+        }
     }
 }

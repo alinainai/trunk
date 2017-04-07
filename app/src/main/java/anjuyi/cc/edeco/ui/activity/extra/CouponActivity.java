@@ -20,19 +20,14 @@ public class CouponActivity extends BaseActivity {
 
     @BindView(R.id.img_back)
     ImageView imgBack;// 返回键
-
     @BindView(R.id.main_cart_title)
     TextView mainCartTitle; //标题
-
     @BindView(R.id.tvRight)
     TextView tvRight;  //标题右侧文本
-
     @BindView(R.id.rl_anju)
     RelativeLayout rlAnju; //安居券
-
     @BindView(R.id.rl_yi)
     RelativeLayout rlYi; //易券
-
     @BindView(R.id.rl_dui)
     RelativeLayout rlDui;//兑换优惠券
 

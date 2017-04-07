@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,79 +18,33 @@ import anjuyi.cc.edeco.base.BaseApplication;
 import anjuyi.cc.edeco.base.BaseFragment;
 import anjuyi.cc.edeco.base.Const;
 import anjuyi.cc.edeco.bean.user.User;
-import anjuyi.cc.edeco.ui.activity.extra.CollectionActivity;
-import anjuyi.cc.edeco.ui.activity.extra.CouponActivity;
-import anjuyi.cc.edeco.ui.activity.login.GuesterActivity;
-import anjuyi.cc.edeco.ui.activity.login.LoginActivity;
-import anjuyi.cc.edeco.ui.activity.mine.MessageCenterActivity;
-import anjuyi.cc.edeco.ui.activity.mine.MineDetailActivity;
 import anjuyi.cc.edeco.ui.activity.mine.SettingActivity;
-import anjuyi.cc.edeco.ui.activity.order.OrderManagerActivity;
 import anjuyi.cc.edeco.util.SPUtils;
+import anjuyi.cc.edeco.util.ToastUtils;
+import anjuyi.cc.edeco.view.badgeview.Badge;
 import anjuyi.cc.edeco.view.badgeview.QBadgeView;
+import anjuyi.cc.edeco.view.pulltozoomview.PullToZoomScrollViewEx;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by ly on 2016/5/30 11:07.
  * 我的fragment
  */
-public class MineFragment extends BaseFragment implements View.OnClickListener {
-    public static final String TAG ="MineFragment";
+public class MineFragment extends BaseFragment implements View.OnClickListener{
+    public static final String TAG = "MineFragment";
 
-    @BindView(R.id.mine_setting_tv)
-    TextView mineSettingTv;//设置
-    @BindView(R.id.mine_detail_ll)
-    LinearLayout mineDetailLl;//我的账户
-    @BindView(R.id.ll_detail)
-    LinearLayout llDetail;//登录显示
-    @BindView(R.id.mine_user_icon_img)
-    ImageView mineUserIconImg;//头像图标
-    @BindView(R.id.mine_nickName_tv)
-    TextView mineNickNameTv;//姓名
-    @BindView(R.id.mine_nameType_tv)
-    TextView mineNameTypeTv;//账号类别
-    @BindView(R.id.mine_collection_service_tv)
-    TextView mineCollectionServiceTv;//收藏服务
-    @BindView(R.id.mine_collection_shop_tv)
-    TextView mineCollectionShopTv;//收藏商品
-    @BindView(R.id.mine_browse_history_tv)
-    TextView mineBrowseHistoryTv;//浏览历史
-    @BindView(R.id.mine_title_bar_rl)
-    LinearLayout mineTitleBarRl;
-    @BindView(R.id.mine_order_tv)
-    TextView mineOrderTv;//我的订单
-    @BindView(R.id.mine_obligation_tv)
-    TextView mineObligationTv;
-    @BindView(R.id.obligation_num)
-    TextView obligationNum;
-    @BindView(R.id.mine_service_tv)
-    TextView mineServiceTv;//我的服务
-    @BindView(R.id.service_num)
-    TextView serviceNum;//服务订单的数量
-    @BindView(R.id.mine_evaluate_tv)
-    TextView mineEvaluateTv;
-    @BindView(R.id.evaluate_num)
-    TextView evaluateNum;
-    @BindView(R.id.mine_assist_tv)
-    TextView mineAssistTv;
-    @BindView(R.id.assist_num)
-    TextView assistNum;
-    @BindView(R.id.mine_subscribe_tv)
-    TextView mineSubscribeTv;
-    @BindView(R.id.mine_coupons_tv)
-    TextView mineCouponsTv;
-    @BindView(R.id.mine_sharemoney_tv)
-    TextView mineSharemoneyTv;//分享赚钱
-    @BindView(R.id.mine_collection_tv)
-    TextView mineCollectionTv;//我的收藏
-    @BindView(R.id.mine_message_tv)
-    TextView mineMessageTv;//我的消息
     @BindView(R.id.main_title_tv)
     TextView mainTitleTv;//我的标题
-    @BindView(R.id.main_right_img)
-    ImageView mainRightImg;//消息界面
+    @BindView(R.id.scrollView)
+    PullToZoomScrollViewEx scrollView;
 
+    private ImageView mineUserIconImg;//头像图标
+    private TextView mineNickNameTv;//姓名
+    private TextView mineNameTypeTv;//账号类别
+    private TextView mine_obligation_tv;//账号类别
+    private TextView mine_service_tv;//账号类别
+    private TextView mine_evaluate_tv;//账号类别
+    private TextView mine_assist_tv;//账号类别
 
     private User user;
     private QBadgeView badge;
@@ -99,22 +54,49 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
 
-
     @Override
     protected int initLayoutId() {
         return R.layout.fragment_mine;
     }
 
     @Override
-    public void initView() {
+    public void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStae) {
+        View headerview = inflater.inflate(R.layout.view_mine_header, null);
+        View zoomview = inflater.inflate(R.layout.view_mine_bg, null);
+        View contentview = inflater.inflate(R.layout.view_mine_con, null);
+        scrollView.setHeaderView(headerview);
+        scrollView.setZoomView(zoomview);
+        scrollView.setScrollContentView(contentview);
+
+        mineUserIconImg = (ImageView) scrollView.findViewById(R.id.mine_user_icon_img);
+        mineNickNameTv = (TextView) scrollView.findViewById(R.id.mine_nickName_tv);
+        mineNameTypeTv = (TextView) scrollView.findViewById(R.id.mine_nameType_tv);
+
+        scrollView.findViewById(R.id.mine_setting_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_order_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_message_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_collection_tv).setOnClickListener(this); //我的收藏
+        scrollView.findViewById(R.id.mine_sharemoney_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_coupons_tv).setOnClickListener(this); //我的优惠券
+        scrollView.findViewById(R.id.mine_title_bar_rl).setOnClickListener(this); //个人信息
+        scrollView.findViewById(R.id.mine_obligation_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_subscribe_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_service_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_evaluate_tv).setOnClickListener(this);
+        scrollView.findViewById(R.id.mine_assist_tv).setOnClickListener(this);
+
+        mine_service_tv=(TextView) scrollView.findViewById(R.id.mine_service_tv);
+        mine_evaluate_tv=(TextView) scrollView.findViewById(R.id.mine_evaluate_tv);
+        mine_obligation_tv=(TextView) scrollView.findViewById(R.id.mine_obligation_tv);
+        mine_assist_tv=(TextView) scrollView.findViewById(R.id.mine_assist_tv);
 
         //如果有账号登录
-        if(SPUtils.loadBoolean(context, Const.LOGIN_STATE,false)&& null!=BaseApplication.instance.getUser()){
+        if (SPUtils.loadBoolean(context, Const.LOGIN_STATE, false) && null != BaseApplication.instance.getUser()) {
 
-            user=BaseApplication.instance.getUser();
+            user = BaseApplication.instance.getUser();
             mineNickNameTv.setText(user.getNickname());
             mineNameTypeTv.setText("高级用户");
-            if(!TextUtils.isEmpty(user.getIconImg())){
+            if (!TextUtils.isEmpty(user.getIconImg())) {
                 Glide.with(context)
                         .load(user.getIconImg())
                         .asBitmap()
@@ -126,16 +108,19 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         .into(mineUserIconImg);
             }
             //如果没有账号登录
-        }else{
+        } else {
             mineNickNameTv.setText("未登录");
             mineNameTypeTv.setText("普通用户");
         }
 
+        new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_evaluate_tv);
+        new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_obligation_tv);
+        new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).setExactMode(true).setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+            @Override
+            public void onDragStateChanged(int dragState, Badge badge, View targetView) {
 
-        badge= new QBadgeView(getContext());
-        badge.bindTarget(mainRightImg);
-        badge.setBadgeGravity(Gravity.END | Gravity.TOP);
-        badge.setBadgeNumber(3);
+            }
+        }).bindTarget(mine_assist_tv);
 
     }
 
@@ -144,91 +129,61 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
 
     }
+
     @Override
     public void initData(Bundle savedInstanceState) {
         mainTitleTv.setText("我的信息");
     }
 
 
-    @OnClick({R.id.mine_collection_tv,R.id.mine_setting_tv, R.id.mine_detail_ll, R.id.ll_detail,
-            R.id.mine_user_icon_img,R.id.mine_collection_service_tv, R.id.mine_collection_shop_tv,
-            R.id.mine_browse_history_tv, R.id.mine_order_tv, R.id.mine_obligation_tv, R.id.obligation_num,
-            R.id.mine_service_tv, R.id.mine_evaluate_tv, R.id.mine_assist_tv, R.id.mine_subscribe_tv,
-            R.id.mine_coupons_tv, R.id.mine_sharemoney_tv, R.id.mine_message_tv, R.id.main_right_img})
     @Override
     public void onClick(View v) {
         Intent intent;
-        switch (v.getId()) {
-            case R.id.mine_setting_tv://设置
-                intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                break;
-            case R.id.mine_detail_ll://我的账户
-            case R.id.ll_detail://登录显示
-            case R.id.mine_user_icon_img://头像图标
-                if(SPUtils.loadBoolean(context, Const.LOGIN_STATE,false)&& null!=user){
-                    intent = new Intent(getActivity(), MineDetailActivity.class);
-                    startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }else{
-                    intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
-                    getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                }
-                break;
-            case R.id.mine_collection_service_tv://收藏服务
-                intent = new Intent(getActivity(), CollectionActivity.class);
-                intent.putExtra("collection_type",0);
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                break;
-            case R.id.mine_collection_shop_tv://收藏商品
+        switch (v.getId()){
+            case R.id.mine_setting_tv: //设置
+
+                intent=new Intent(getActivity(), SettingActivity.class);
+               // getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), scrollView.findViewById(R.id.tv_setting), "share").toBundle());
 
                 break;
-            case R.id.mine_browse_history_tv://浏览历史
+            case R.id.mine_order_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_order_tv");
+                break;
+            case R.id.mine_message_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_message_tv");
+                break;
+            case R.id.mine_collection_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_collection_tv");
+                break;
+            case R.id.mine_sharemoney_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_sharemoney_tv");
+                break;
+            case R.id.mine_coupons_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_coupons_tv");
+                break;
+            case R.id.mine_title_bar_rl: //设置
+                ToastUtils.showShort(getActivity(),"mine_title_bar_rl");
+                break;
+            case R.id.mine_obligation_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_obligation_tv");
+                break;
+            case R.id.mine_subscribe_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_subscribe_tv");
+                break;
+            case R.id.mine_service_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_service_tv");
+                break;
+            case R.id.mine_evaluate_tv: //设置
+                ToastUtils.showShort(getActivity(),"mine_evaluate_tv");
+                break;
+            case R.id.mine_assist_tv: //设置
+
 
                 break;
-            case R.id.mine_order_tv://我的订单
-                intent = new Intent(getActivity(), OrderManagerActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                break;
-            case R.id.mine_obligation_tv:
-                break;
-            case R.id.obligation_num:
-                break;
-            case R.id.mine_service_tv:
-                break;
-            case R.id.mine_evaluate_tv:
-                break;
-            case R.id.mine_assist_tv://进入测试界面
-                intent = new Intent(getActivity(), GuesterActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                break;
-            case R.id.mine_subscribe_tv:
-                break;
-            case R.id.mine_coupons_tv://优惠券
-                intent = new Intent(getActivity(), CouponActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                break;
-            case R.id.mine_sharemoney_tv://分享赚钱
 
-                break;
-            case R.id.mine_message_tv://我的消息
-            case R.id.main_right_img:
-                intent = new Intent(getActivity(), MessageCenterActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                break;
-            case R.id.mine_collection_tv:
-
-                break;
         }
+
+
+
     }
-
-
-
 }

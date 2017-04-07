@@ -3,7 +3,9 @@ package anjuyi.cc.edeco.ui.activity.utils;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
@@ -71,7 +73,7 @@ public class ImageZoomFragment extends BaseFragment {
         return R.layout.fragment_image_zoom;
     }
     @Override
-    public void initView() { }
+    public void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { }
     @Override
     public void setListener(View view, Bundle savedInstanceState) {}
     @Override

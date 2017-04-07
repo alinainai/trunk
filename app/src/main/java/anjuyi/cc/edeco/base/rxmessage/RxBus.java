@@ -1,4 +1,4 @@
-package anjuyi.cc.edeco.bean.rxmessage;
+package anjuyi.cc.edeco.base.rxmessage;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;

@@ -2,7 +2,9 @@ package anjuyi.cc.edeco.ui.fragment.order;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseFragment;
@@ -31,7 +33,7 @@ public class OrderFragment extends BaseFragment {
 	}
 
 	@Override
-	public void initView() {
+	public void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 	}
 

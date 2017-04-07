@@ -1,12 +1,13 @@
 package anjuyi.cc.edeco.ui.fragment.classify;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class GankItemFragment extends BaseMvpFragment<GankItemView, GankItemPres
     }
 
     @Override
-    public void initView() {
+    public void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mGankItemAdapter = new GankItemAdapter(context, new ArrayList<GankItemData>(), true);
         mGankItemAdapter.setLoadingView(R.layout.view_loading_layout);
@@ -65,7 +66,7 @@ public class GankItemFragment extends BaseMvpFragment<GankItemView, GankItemPres
                 Intent intent = new Intent(context, WebViewActivity.class);
                 intent.putExtra("url", gankItemData.getUrl());
                 startActivity(intent);
-                ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 

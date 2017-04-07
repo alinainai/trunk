@@ -4,7 +4,9 @@
     android:interpolator="@android:anim/decelerate_interpolator"
     android:zAdjustment="top">
     <translate
-        android:duration="500"
+        android:duration="@android:integer/config_mediumAnimTime"
         android:fromXDelta="0.0"
         android:toXDelta="-30.0%p" />
+    <alpha android:fromAlpha="1.0" android:toAlpha="1.0"
+        android:duration="@android:integer/config_mediumAnimTime" />
 </set>

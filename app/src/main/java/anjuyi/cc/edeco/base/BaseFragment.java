@@ -39,7 +39,7 @@ public abstract class BaseFragment extends Fragment {
        // initLayoutId();
         rootView = inflater.inflate(initLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
-        initView();
+        initView( inflater, container,savedInstanceState);
         // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
 //        ViewGroup parent = (ViewGroup) rootView.getParent();
 //        if (parent != null) {
@@ -54,7 +54,7 @@ public abstract class BaseFragment extends Fragment {
         setListener(view, savedInstanceState);
     }
 
-    public abstract void initView();
+    public abstract void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     public abstract void setListener(View view, Bundle savedInstanceState);
 

@@ -1,4 +1,4 @@
-package anjuyi.cc.edeco.bean.rxmessage;
+package anjuyi.cc.edeco.base.rxmessage;
 
 /**
  * 作者：Mr.Lee on 2017-1-5 10:11

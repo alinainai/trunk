@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import anjuyi.cc.edeco.bean.rxmessage.RxBus;
+import anjuyi.cc.edeco.base.rxmessage.RxBus;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,30 +1,35 @@
 package anjuyi.cc.edeco.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.JsonSyntaxException;
 import com.jude.rollviewpager.RollPagerView;
+import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
 import anjuyi.cc.edeco.R;
-import anjuyi.cc.edeco.adapter.MyPagerAdapter;
 import anjuyi.cc.edeco.adapter.commonadapter.CommonAdapter;
 import anjuyi.cc.edeco.adapter.commonadapter.CommonViewHolder;
 import anjuyi.cc.edeco.base.BaseFragment;
@@ -104,7 +109,7 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
 
 
     @Override
-    public void initView() {
+    public void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         strs.add("《侠客行》 " + "\n" + "             --李白");
         strs.add("赵客缦胡缨， 吴钩霜雪明。银鞍照白马， 飒沓如流星。");
@@ -322,4 +327,41 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
                 break;
         }
     }
+
+    public class MyPagerAdapter extends LoopPagerAdapter {
+
+
+        private RollPagerView viewPager;
+        private ArrayList<String> imgs;
+        private Context context;
+
+        public MyPagerAdapter(RollPagerView viewPager, ArrayList<String> imgs,Context context) {
+            super(viewPager);
+
+            this.viewPager=viewPager;
+            this.imgs=imgs;
+            this.context=context;
+
+        }
+
+        @Override
+        public View getView(ViewGroup container, int position) {
+            ImageView img = new ImageView(context);
+            Glide.with(context).load(imgs.get(position)).centerCrop().placeholder(R.mipmap.loading_image).error(R.mipmap.loading_image).diskCacheStrategy(DiskCacheStrategy.NONE).into(img);
+            ViewPager.LayoutParams lp = new ViewPager.LayoutParams();
+            lp.width=ViewPager.LayoutParams.MATCH_PARENT;
+            lp.height=ViewPager.LayoutParams.MATCH_PARENT;
+            img.setScaleType(ImageView.ScaleType.FIT_XY);
+            img.setLayoutParams(lp);
+            return img;
+        }
+
+        @Override
+        public int getRealCount() {
+            return imgs.size();
+        }
+
+    }
+
+
 }

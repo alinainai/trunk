@@ -3,9 +3,11 @@ package anjuyi.cc.edeco.ui.activity.login;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -21,7 +23,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import anjuyi.cc.edeco.R;
-import anjuyi.cc.edeco.adapter.ViewPaperAdapter;
 import anjuyi.cc.edeco.base.BaseActivity;
 import anjuyi.cc.edeco.base.Const;
 import anjuyi.cc.edeco.ui.MainActivity;
@@ -141,14 +142,9 @@ public class AdActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
-
-
     }
-
     @Override
     protected void initData() {
-
-
 
     }
 
@@ -182,6 +178,38 @@ public class AdActivity extends BaseActivity {
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
 
+        }
+    }
+    public class ViewPaperAdapter extends PagerAdapter {
+        private ArrayList<View> views;
+
+        public ViewPaperAdapter(ArrayList<View> views) {
+            this.views = views;
+        }
+
+        @Override
+        public int getCount() {
+            if (views != null) {
+                return views.size();
+            } else
+                return 0;
+        }
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            return (arg0 == arg1);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
+            container.removeView(views.get(position));
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            container.addView(views.get(position));
+            return views.get(position);
         }
     }
 
