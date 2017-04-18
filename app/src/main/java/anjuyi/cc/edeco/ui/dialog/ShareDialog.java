@@ -11,12 +11,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 
 import anjuyi.cc.edeco.R;
 import butterknife.BindView;
@@ -47,11 +41,9 @@ public abstract class ShareDialog {
     protected Dialog dialog;
 
     public abstract void sure(String a);
-    public  UMImage image;
 
     public ShareDialog(Activity activity, int style) {
         this.context = activity;
-        image = new UMImage(context,R.drawable.icon_logo);
         if (dialog == null) {
             View view = activity.getLayoutInflater().inflate(
                     R.layout.dialog_product_view, null);
@@ -76,27 +68,8 @@ public abstract class ShareDialog {
         }
 
     }
-    private UMShareListener umShareListener = new UMShareListener() {
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
-            sure("分享成功");
-            dismiss();
-        }
 
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(context,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
-            if(t!=null){
 
-            }
-        }
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(context,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
-        }
-    };
-
-     //   UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     public void show() {
 
         if(isShowing()){
@@ -125,50 +98,20 @@ public abstract class ShareDialog {
                 break;
             case R.id.ll_share_moments:
 
-                new ShareAction((Activity) context)
-                        .setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                        .setCallback(umShareListener)
-                        .withText("hello umeng video")
-                        .withTargetUrl("http://www.baidu.com")
-                        .withMedia(image)
-                        .share();
+
 
                 break;
             case R.id.ll_share_wechat:
-                new ShareAction((Activity) context)
-                        .setPlatform(SHARE_MEDIA.WEIXIN)
-                        .setCallback(umShareListener)
-                        .withText("hello umeng video")
-                        .withTargetUrl("http://www.baidu.com")
-                        .withMedia(image)
-                        .share();
+
                 break;
             case R.id.ll_share_sina:
-                new ShareAction((Activity) context)
-                        .setPlatform(SHARE_MEDIA.SINA)
-                        .setCallback(umShareListener)
-                        .withText("hello umeng video")
-                        .withTargetUrl("http://www.baidu.com")
-                        .withMedia(image)
-                        .share();
+
                 break;
             case R.id.ll_share_qq:
-                new ShareAction((Activity) context)
-                        .setPlatform(SHARE_MEDIA.QQ)
-                        .setCallback(umShareListener)
-                        .withText("hello umeng video")
-                        .withTargetUrl("http://www.baidu.com")
-                        .withMedia(image)
-                        .share();
+
                 break;
             case R.id.ll_share_qzone:
-                new ShareAction((Activity) context)
-                        .setPlatform(SHARE_MEDIA.QZONE)
-                        .setCallback(umShareListener)
-                        .withText("hello umeng video")
-                        .withTargetUrl("http://www.baidu.com")
-                        .withMedia(image)
-                        .share();
+
                 break;
         }
     }

@@ -21,6 +21,8 @@ import java.util.TimerTask;
 
 import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseActivity;
+import anjuyi.cc.edeco.base.rxmessage.MainEvent;
+import anjuyi.cc.edeco.base.rxmessage.RxBus;
 import anjuyi.cc.edeco.ui.fragment.AccountFragment;
 import anjuyi.cc.edeco.ui.fragment.BlankFragment;
 import anjuyi.cc.edeco.ui.fragment.CartFragment;
@@ -28,6 +30,11 @@ import anjuyi.cc.edeco.ui.fragment.ClassifyFragment;
 import anjuyi.cc.edeco.ui.fragment.MineFragment;
 import anjuyi.cc.edeco.util.ToastUtils;
 import butterknife.BindView;
+import rx.Subscription;
+import rx.functions.Action1;
+
+import static anjuyi.cc.edeco.R.id.mine_btn;
+import static anjuyi.cc.edeco.R.id.shopping_btn;
 
 /**
  * Created by ly on 2016/5/27 13:36.
@@ -41,9 +48,9 @@ public class MainActivity extends BaseActivity  {
     RadioButton homeBtn;//首页
     @BindView(R.id.classify_btn)
     RadioButton classifyBtn;//分类
-    @BindView(R.id.shopping_btn)
+    @BindView(shopping_btn)
     RadioButton shoppingBtn;//购物车
-    @BindView(R.id.mine_btn)
+    @BindView(mine_btn)
     RadioButton mineBtn;//我的
     @BindView(R.id.rg_radio)
     RadioGroup rg_radio;
@@ -59,6 +66,8 @@ public class MainActivity extends BaseActivity  {
     private int index;
     // 当前fragment的index
     public int currentTabIndex;
+
+    private Subscription rxSbscription;
 
     private void setStatusColor(int color){
 
@@ -124,11 +133,11 @@ public class MainActivity extends BaseActivity  {
                         index = 2;
                         setStatusColor(R.color.cff3e19);
                         break;
-                    case R.id.shopping_btn:
+                    case shopping_btn:
                         index = 3;
                         setStatusColor(R.color.cff3e19);
                         break;
-                    case R.id.mine_btn:
+                    case mine_btn:
                         index = 4;
                         setStatusColor(R.color.trans);
                         break;
@@ -138,6 +147,32 @@ public class MainActivity extends BaseActivity  {
                 currentTabIndex = index;
             }
         });
+
+        rxSbscription= RxBus.getDefault().toObservable(MainEvent.class)
+                .subscribe(new Action1<MainEvent>() {
+                    @Override
+                    public void call(MainEvent event) {
+
+                        switch (event.getId()){
+                            case 0:
+                                changeFragment(currentTabIndex, 0);
+                                break;
+                            case 1:
+                                changeFragment(currentTabIndex, 1);
+                                break;
+                            case 2:
+                                changeFragment(currentTabIndex, 2);
+                                break;
+                            case 3:
+                                changeFragment(currentTabIndex, 3);
+                                break;
+                            case 4:
+                                changeFragment(currentTabIndex, 4);
+                                break;
+                        }
+                        ((RadioButton) rg_radio.getChildAt(event.getId())).setChecked(true);
+                    }
+                });
 
     }
 
@@ -157,7 +192,7 @@ public class MainActivity extends BaseActivity  {
     public void changeFragment(int from, int to) {
         FragmentTransaction transaction = mFragManager.beginTransaction();
         //Fragment切换时的动画
-        //transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+      //  transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         Fragment tofragment = mFragManager.findFragmentByTag(FRAGMENS.get(to));
 
         if (tofragment == null) {

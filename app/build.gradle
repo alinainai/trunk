@@ -33,12 +33,10 @@ android {
         }
     }
 
-
 }
 
 dependencies {
 
-    //汉字转拼音
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/glide-3.7.0.jar')
     compile files('libs/jpush-android-2.1.7.jar')
@@ -72,8 +70,12 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.5'
     compile 'com.airbnb.android:lottie:1.0.1'
+    // 用于Java编写执行Java测试用例。
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     provided 'com.android.databinding:baseLibrary:2.3.0'
     provided 'org.projectlombok:lombok:1.12.6'
+    compile 'com.google.zxing:core:3.3.0'
+    //https://github.com/ZeroBrain/AndroidPermissions
+    compile 'com.nobrain.android.permissions:library:1.1.0'
 }

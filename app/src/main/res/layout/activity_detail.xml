@@ -14,7 +14,7 @@
         android:id="@+id/detail_headIcon_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_100"
-        android:background="@drawable/layout_selector_bg" >
+        android:background="@drawable/layout_selector_bg">
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,9 +32,9 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/px_60"
-            app:civ_border_width="1dp"
+            android:src="@mipmap/user_icon"
             app:civ_border_color="@color/base_background"
-            android:src="@mipmap/user_icon" />
+            app:civ_border_width="1dp" />
 
     </RelativeLayout>
     <!-- 分割线 -->

@@ -79,9 +79,7 @@ public class MineDetailActivity extends BaseActivity {
     @BindView(R.id.detail_service_address_rl)
     RelativeLayout detailServiceAddressRl;
 
-
     private User user;
-
     private File tempFile;//图片文件
 
 

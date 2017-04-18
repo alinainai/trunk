@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,7 +57,7 @@ public class ImageZoomActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         viewPager.setPageMargin((int) getResources().getDisplayMetrics().density * 10);
         urls = getIntent().getStringArrayListExtra("imgpath");
         current = getIntent().getIntExtra("current", 0);
@@ -101,8 +102,14 @@ public class ImageZoomActivity extends BaseActivity {
         adapter=new TypePageAdapter(getSupportFragmentManager());
         adapter.setData(mFragments,urls);
         viewPager.setAdapter(adapter);
-
         viewPager.setCurrentItem(current);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        super.onBackPressed();
     }
 
     @OnClick({R.id.ll_back,R.id.tv_share,R.id.tv_save})
@@ -110,6 +117,7 @@ public class ImageZoomActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.ll_back:
                 finish();
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.tv_share:
 

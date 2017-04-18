@@ -69,7 +69,6 @@ public class LoginActivity extends BaseActivity {
 
 
     private  File videoFile;
-
     public static final String VIDEO_NAME = "welcome_video.mp4";
 
     @Override

@@ -36,6 +36,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,6 +94,13 @@ public class ImageZoomFragment extends BaseFragment {
                 mBmtp=bitmap;
             }
         });
+        photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+            @Override
+            public void onPhotoTap(View view, float x, float y) {
+                getActivity().finish();
+               getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+            }
+        });
     }
 
     public void saveDrawble(){
@@ -103,7 +111,7 @@ public class ImageZoomFragment extends BaseFragment {
             ToastUtils.show(getContext(),"已保存"+BaseApplication.AJYFILE_IMG,0);
             return;
         }
-        Observable.create(new Observable.OnSubscribe<String>() {
+        Observable.unsafeCreate(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> sub) {
                 String path = BaseApplication.AJYFILE_IMG+ File.separator+name;

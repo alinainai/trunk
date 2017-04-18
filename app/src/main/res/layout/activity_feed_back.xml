@@ -9,9 +9,10 @@
 
     <!-- 反馈类型 -->
     <RelativeLayout
+        android:id="@+id/rl_type"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_80"
-        android:background="@drawable/layout_selector_bg">
+        android:background="@drawable/ripple_shadow">
 
         <!-- 反馈类型的字 -->
         <TextView
@@ -101,6 +102,7 @@
         android:layout_marginTop="@dimen/px_120"
         android:padding="0dp"
         android:text="提交"
+        android:background="@drawable/ripple_button"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_32" />
 

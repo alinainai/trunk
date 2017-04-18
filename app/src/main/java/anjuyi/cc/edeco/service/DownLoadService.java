@@ -68,8 +68,6 @@ public class DownLoadService extends Service {
      */
     private void loadFile() {
         initNotification();
-    //    CustomOkHttpUtils.downloadFile( Const.APKDOWNLOAD, f);
-
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder();
@@ -113,7 +111,6 @@ public class DownLoadService extends Service {
 
     /**
      * 安装软件
-     *
      * @param file
      */
     private void installApk(File file) {
@@ -126,7 +123,6 @@ public class DownLoadService extends Service {
     }
     /**
      * 初始化OkHttpClient
-     *
      * @return
      */
     private OkHttpClient initOkHttpClient() {

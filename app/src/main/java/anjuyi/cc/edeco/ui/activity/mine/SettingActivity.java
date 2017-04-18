@@ -1,9 +1,9 @@
 package anjuyi.cc.edeco.ui.activity.mine;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Fade;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,6 +15,10 @@ import com.adorkable.iosdialog.AlertDialog;
 
 import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseActivity;
+import anjuyi.cc.edeco.base.rxmessage.MainEvent;
+import anjuyi.cc.edeco.base.rxmessage.RxBus;
+import anjuyi.cc.edeco.service.DownLoadService;
+import anjuyi.cc.edeco.ui.activity.utils.WebViewActivity;
 import anjuyi.cc.edeco.util.CacheUtils;
 import anjuyi.cc.edeco.util.ScreenUtils;
 import anjuyi.cc.edeco.util.ToastUtils;
@@ -57,6 +61,7 @@ public class SettingActivity extends BaseActivity  {
     // 本地缓存大小
     private String size = "";
 
+
     @Override
     protected int initLayoutId() {
         return R.layout.activity_setting;
@@ -66,12 +71,12 @@ public class SettingActivity extends BaseActivity  {
     public void initView(Bundle savedInstanceState) {
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Fade mFade = new Fade();
-            mFade.setDuration(500);
-            getWindow().setExitTransition(mFade);
-            getWindow().setEnterTransition(mFade);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Fade mFade = new Fade();
+//            mFade.setDuration(500);
+//            getWindow().setExitTransition(mFade);
+//            getWindow().setEnterTransition(mFade);
+//        }
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0 全透明状态栏
@@ -92,7 +97,6 @@ public class SettingActivity extends BaseActivity  {
         } else {
             mStatusBar.setVisibility(View.GONE);
         }
-        rlTitle.setBackgroundResource(R.color.cff3e19);
         mainCartTitle.setText("设置");
 
 
@@ -100,6 +104,9 @@ public class SettingActivity extends BaseActivity  {
 
     @Override
     public void setListener() {
+
+
+
 
     }
 
@@ -128,27 +135,29 @@ public class SettingActivity extends BaseActivity  {
             case R.id.setting_feedback_tv://意见反馈
                 intent=new Intent(SettingActivity.this,FeedBackActivity.class);
                 startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.setting_recommend_friends_tv://推荐好友
                 ToastUtils.showShort(this,"推荐好友,第三方分享");
                 break;
             case R.id.setting_service_terms_tv://服务条款
-                ToastUtils.showShort(this,"服务条款,内容等待接口");
+                startActivity(new Intent(this, WebViewActivity.class).putExtra("url", "file:///android_asset/fuwuxieyi.html").putExtra("title", "《服务协议》"));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             case R.id.setting_about_us_tv://关于我们
-
-
+                intent=new Intent(SettingActivity.this,AboutActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.setting_exit_login_btn://退出登录
-
-
                 new AlertDialog(context).builder().setTitle("退出登录")
                         .setMsg("是否退出登录")
                         .setPositiveButton("确认", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
-
+                                RxBus.getDefault().post(new MainEvent(0,""));
+                                finish();
+                                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                             }
                         }).setNegativeButton("取消", new View.OnClickListener() {
                     @Override
@@ -156,27 +165,23 @@ public class SettingActivity extends BaseActivity  {
 
                     }
                 }).show();
-
-
-
 
                 break;
             case R.id.setting_check_update_rl://检测更新
 
-                new AlertDialog(context).builder().setTitle("检测更新")
-                        .setMsg("发现现版本是否更新")
-                        .setPositiveButton("确认", new View.OnClickListener() {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                builder.setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(View v) {
+                            public void onClick(DialogInterface dialog, int which) {
 
-
+                                Intent int_ser=new Intent(context, DownLoadService.class);
+                                int_ser.putExtra("url","`12345678");
+                                context.startService(int_ser);
                             }
-                        }).setNegativeButton("取消", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                }).show();
+                        })
+                        .setTitle("版本检测")
+                        .setMessage("发现现版本是否更新")
+                        .show();
 
                 break;
             case R.id.ll_back://返回
@@ -185,12 +190,11 @@ public class SettingActivity extends BaseActivity  {
                 break;
             case R.id.setting_clear_cache_rl://清除缓存
 
-                new AlertDialog(context).builder().setTitle("清除缓存")
+                new AlertDialog(context).builder()
                         .setMsg("是否要清除缓存")
                         .setPositiveButton("确认", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
                                 CacheUtils.clearAllCache(getApplicationContext());
                                 try {
                                     size = CacheUtils.getTotalCacheSize(getApplicationContext());
@@ -211,12 +215,12 @@ public class SettingActivity extends BaseActivity  {
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        finish();
-//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    }
 
 
 }

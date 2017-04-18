@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -41,7 +42,6 @@ import anjuyi.cc.edeco.https.rx.RxManager;
 import anjuyi.cc.edeco.ui.activity.utils.ImageZoomActivity;
 import anjuyi.cc.edeco.util.ScreenUtils;
 import anjuyi.cc.edeco.util.ToastUtils;
-import anjuyi.cc.edeco.view.CircleImageView;
 import anjuyi.cc.edeco.view.GridViewForScrollView;
 import anjuyi.cc.edeco.view.JDAdverView;
 import anjuyi.cc.edeco.view.JDViewAdapter;
@@ -74,6 +74,15 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
     NavigationView mNavView;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+    @BindView(R.id.main_cart_title)
+    TextView mainCartTitle;
+    @BindView(R.id.ll_back)
+    LinearLayout ll_back;
+    @BindView(R.id.tvRight)
+    TextView tvRight;
+    @BindView(R.id.img_cart_right)
+    ImageView img_cart_right;
+
 
     private int PAGE_COUNT = 1;//页数
     private boolean isRefresh = true;//是否在刷新中
@@ -132,7 +141,11 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
                 R.color.blue, R.color.yellow);
         mSwipeRefreshWidget.setOnRefreshListener(this);
         tv_loadmore.setVisibility(View.GONE);
-
+        ll_back.setVisibility(View.GONE);
+        tvRight.setVisibility(View.GONE);
+        tvRight.setVisibility(View.GONE);
+        img_cart_right.setVisibility(View.VISIBLE);
+        img_cart_right.setImageResource(R.mipmap.setting);
 
         jdapter = new JDViewAdapter<String>(strs, context, R.layout.view_nom_t) {
             @Override
@@ -142,27 +155,11 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
         };
         toutiao.setAdapter(jdapter);
         toutiao.start();
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //将侧边栏顶部延伸至status bar
-            mDrawerLayout.setFitsSystemWindows(true);
-            //将主页面顶部延伸至status bar
-            mDrawerLayout.setClipToPadding(false);
-        }
-
-        CircleImageView icon = (CircleImageView) mNavView.getHeaderView(0).findViewById(R.id.mine_user_icon_img);
-        TextView name = (TextView) mNavView.getHeaderView(0).findViewById(R.id.nav_head_name);
-        name.setText(R.string.app_name);
-        mNavView.setCheckedItem(R.id.nav_gank);//设置默认选中
         //设置NavigationView对应menu item的点击事情
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.nav_gank:
-                        break;
-                    case R.id.nav_girl:
-                        break;
                     case R.id.nav_set:
                         break;
                     case R.id.nav_about:
@@ -173,6 +170,8 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
                 return true;
             }
         });
+        mainCartTitle.setText("Mr.Lee");
+
     }
 
     @Override
@@ -246,7 +245,6 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     private void loadGoods(final boolean refresh) {
 
-
         if (refresh) {
             tv_loadmore.setVisibility(View.GONE);
             beaties.clear();
@@ -256,7 +254,6 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
         //正在加载中
         isRefresh = true;
         RxManager.getInstance().doSubscribe(NetManager.getInstance().create(BeautyService.class).getGankBeautyData("data/" + "福利" + "/12/" + PAGE_COUNT), new Subscriber<BeautyResult<List<Beauty>>>() {
-
 
             @Override
             public void onCompleted() {
@@ -313,10 +310,14 @@ public class BlankFragment extends BaseFragment implements SwipeRefreshLayout.On
 
 
 
-    @OnClick({R.id.ll_back, R.id.tv_a_b, R.id.img_a_a, R.id.img_a_b})
+    @OnClick({ R.id.tv_a_b, R.id.img_a_a, R.id.img_a_b,R.id.ll_cart_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ll_back:
+            case R.id.ll_cart_right:
+                if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                    return;
+                }
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.tv_a_b:

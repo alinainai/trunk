@@ -11,4 +11,6 @@
     <dimen name="font_size_38">19.0sp</dimen>
     <dimen name="font_size_40">20.0sp</dimen>
     <dimen name="font_size_18">9.0sp</dimen>
+    <dimen name="font_title">14.0sp</dimen>
+
 </resources>

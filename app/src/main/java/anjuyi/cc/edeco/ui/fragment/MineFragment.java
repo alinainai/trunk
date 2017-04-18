@@ -17,6 +17,8 @@ import anjuyi.cc.edeco.R;
 import anjuyi.cc.edeco.base.BaseApplication;
 import anjuyi.cc.edeco.base.BaseFragment;
 import anjuyi.cc.edeco.base.Const;
+import anjuyi.cc.edeco.base.rxmessage.MineEvent;
+import anjuyi.cc.edeco.base.rxmessage.RxBus;
 import anjuyi.cc.edeco.bean.user.User;
 import anjuyi.cc.edeco.ui.activity.mine.SettingActivity;
 import anjuyi.cc.edeco.util.SPUtils;
@@ -25,6 +27,9 @@ import anjuyi.cc.edeco.view.badgeview.Badge;
 import anjuyi.cc.edeco.view.badgeview.QBadgeView;
 import anjuyi.cc.edeco.view.pulltozoomview.PullToZoomScrollViewEx;
 import butterknife.BindView;
+import qrcode.QrCodeActivity;
+import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * Created by ly on 2016/5/30 11:07.
@@ -47,7 +52,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     private TextView mine_assist_tv;//账号类别
 
     private User user;
-    private QBadgeView badge;
+    private Badge badge_evaluate;
+    private Badge badge_assist;
+    private Badge badge_obligation;
+    private Badge badge_service;
+
+    private Subscription rxSbscription;
+
+
 
     public static MineFragment newInstance() {
         return new MineFragment();
@@ -112,22 +124,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
             mineNickNameTv.setText("未登录");
             mineNameTypeTv.setText("普通用户");
         }
-
-        new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_evaluate_tv);
-        new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_obligation_tv);
-        new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).setExactMode(true).setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
-            @Override
-            public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-
-            }
-        }).bindTarget(mine_assist_tv);
+        badge_evaluate=  new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_evaluate_tv);
+        badge_obligation= new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_obligation_tv);
+        badge_assist=  new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_assist_tv);
+        badge_service=  new QBadgeView(getActivity()).setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeNumber(3).bindTarget(mine_service_tv);
 
     }
 
     @Override
     public void setListener(View view, Bundle savedInstanceState) {
+        rxSbscription= RxBus.getDefault().toObservable(MineEvent.class)
+                .subscribe(new Action1<MineEvent>() {
+                    @Override
+                    public void call(MineEvent studentEvent) {
+                        badge_evaluate.setBadgeNumber(0);
+                        badge_obligation.setBadgeNumber(0);
+                        badge_assist.setBadgeNumber(0);
+                        badge_service.setBadgeNumber(0);
 
-
+                    }
+                });
     }
 
     @Override
@@ -141,10 +157,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         Intent intent;
         switch (v.getId()){
             case R.id.mine_setting_tv: //设置
-
                 intent=new Intent(getActivity(), SettingActivity.class);
-               // getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), scrollView.findViewById(R.id.tv_setting), "share").toBundle());
-
+                startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.mine_order_tv: //设置
                 ToastUtils.showShort(getActivity(),"mine_order_tv");
@@ -167,8 +182,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
             case R.id.mine_obligation_tv: //设置
                 ToastUtils.showShort(getActivity(),"mine_obligation_tv");
                 break;
-            case R.id.mine_subscribe_tv: //设置
-                ToastUtils.showShort(getActivity(),"mine_subscribe_tv");
+            case R.id.mine_subscribe_tv:
+                intent=new Intent(getActivity(), QrCodeActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 break;
             case R.id.mine_service_tv: //设置
                 ToastUtils.showShort(getActivity(),"mine_service_tv");
@@ -185,5 +202,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
 
 
+    }
+
+    @Override
+    public void onDestroy() {
+
+        if (!rxSbscription.isUnsubscribed()){
+            rxSbscription.unsubscribe();
+        }
+        super.onDestroy();
     }
 }

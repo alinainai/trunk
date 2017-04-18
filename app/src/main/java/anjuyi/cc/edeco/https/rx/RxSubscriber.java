@@ -11,7 +11,6 @@ import anjuyi.cc.edeco.base.BaseApplication;
 import anjuyi.cc.edeco.util.Loading;
 import rx.Subscriber;
 
-import static com.umeng.socialize.utils.DeviceConfig.context;
 
 /**
  * Author: Othershe
@@ -37,9 +36,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
         cancelLoading();
         //统一处理请求异常的情况
         if (e instanceof SocketTimeoutException) {
-            Toast.makeText(context, "网络连接超时，请稍后再试", Toast.LENGTH_SHORT).show();
         } else if (e instanceof ConnectException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else if (e instanceof IOException) {
             Toast.makeText(mContext, "网络链接异常...", Toast.LENGTH_SHORT).show();
         } else {

@@ -26,8 +26,8 @@
     <TextView
         android:id="@+id/setting_feedback_tv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_96"
-        android:background="@drawable/layout_selector_bg"
+        android:layout_height="@dimen/px_85"
+        android:background="@drawable/ripple_shadow"
         android:gravity="center_vertical"
         android:drawableRight="@drawable/con_btn_right"
         android:text="@string/setting_feedback"
@@ -40,15 +40,14 @@
     <View style="@style/divider"
         android:layout_marginLeft="@dimen/px_32"
         android:layout_marginRight="@dimen/px_32"
-
         />
 
     <!-- 推荐好友 -->
     <TextView
         android:id="@+id/setting_recommend_friends_tv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_96"
-        android:background="@drawable/layout_selector_bg"
+        android:layout_height="@dimen/px_85"
+        android:background="@drawable/ripple_shadow"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/px_32"
         android:paddingRight="@dimen/px_32"
@@ -66,7 +65,7 @@
         android:drawableRight="@drawable/con_btn_right"
         android:id="@+id/setting_service_terms_tv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_96"
+        android:layout_height="@dimen/px_85"
         android:background="@drawable/layout_selector_bg"
         android:gravity="center_vertical"
         android:text="@string/setting_service_terms"
@@ -84,7 +83,7 @@
     <TextView
         android:id="@+id/setting_about_us_tv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_96"
+        android:layout_height="@dimen/px_85"
         android:background="@drawable/layout_selector_bg"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/px_32"
@@ -103,7 +102,7 @@
     <RelativeLayout
         android:id="@+id/setting_clear_cache_rl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_96"
+        android:layout_height="@dimen/px_85"
         android:clickable="true"
         android:background="@drawable/layout_selector_bg"
         android:paddingLeft="@dimen/px_32"
@@ -139,7 +138,7 @@
         <RelativeLayout
             android:id="@+id/setting_check_update_rl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px_96"
+            android:layout_height="@dimen/px_85"
             android:background="@drawable/layout_selector_bg"
             android:paddingLeft="@dimen/px_32"
             android:paddingRight="@dimen/px_32"
@@ -174,7 +173,7 @@
         android:layout_marginLeft="@dimen/px_30"
         android:layout_marginRight="@dimen/px_30"
         android:layout_marginTop="@dimen/px_20"
-        android:background="@drawable/select_btn_login"
+        android:background="@drawable/ripple_button"
         android:padding="0dp"
         android:text="@string/setting_exit_login"
         android:textColor="@color/white"
