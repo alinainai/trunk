@@ -1,5 +1,5 @@
 # trunk
-李佳星的个人项目，不定期更新
+个人项目，不定期更新
     //依赖框架
     compile 'com.jakewharton:butterknife:+'
     compile 'com.google.android.gms:play-services-gcm:+'
